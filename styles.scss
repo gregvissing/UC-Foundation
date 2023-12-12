@@ -149,25 +149,6 @@ admin;
 }
 
 @layer typography {
-	@font-face {
-		font-family: "rift-italic";
-		src: url("https://res.cloudinary.com/gvissing/raw/upload/v1694695066/fonts/Rift-Italic_x2zc6q.woff")
-				format("woff"),
-			url("https://res.cloudinary.com/gvissing/raw/upload/v1628608775/fonts/Rift-Italic_npdf11.ttf")
-				format("truetype"),
-			url("https://res.cloudinary.com/gvissing/raw/upload/v1628608758/fonts/rift-italic_kjnmyj.otf")
-				format("opentype");
-		font-display: swap;
-		letter-spacing: 0.3px !important;
-	}
-
-	@font-face {
-		font-family: "rift-italicbold";
-		src: url("https://res.cloudinary.com/gvissing/raw/upload/v1678909777/fonts/rift-bolditalic_dobahs.otf")
-			format("opentype");
-		font-display: swap;
-		letter-spacing: 0.3px !important;
-	}
 
 	a,
 	p,
@@ -198,7 +179,6 @@ admin;
 	}
 
 	h1 {
-		/* font-family: "rift-italicbold"; */
 		font-family: "Jost", sans-serif;
 		/* font-size: 5rem !important; */
 		font-size: calc(3.75em * var(--text-multiplier, 1)) !important;
@@ -216,7 +196,6 @@ admin;
 	h3,
 	h4,
 	h5 {
-		font-family: "rift-italic";
 		font-family: "Jost", sans-serif;
 	}
 
@@ -952,6 +931,7 @@ admin;
 		width: 1665px;
 		max-width: 100%;
 		margin: 0 auto;
+		overflow: hidden;
 		// min-height: 100vh;
 	}
 
