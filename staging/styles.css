@@ -417,7 +417,7 @@
 
 	nav.enhanced ul {
     	margin: 0;
-    	background: rgba(255, 255, 255, 0.95);
+    	background: rgba(255, 255, 255, 0.97);
     	min-width: -webkit-max-content;
     	min-width: -moz-max-content;
     	min-width: max-content;
@@ -1018,6 +1018,14 @@
         gap: 2em;
     }
 
+	.imgLeft {
+		margin: 0 1em 1em 0;
+	}
+
+	.imgRight {
+		margin: 0 0 1em 1em;
+	}
+
     .sr-only {
         color: var(--color-white);
     }
@@ -1156,6 +1164,13 @@
 }
 
 @layer block {
+
+	.youtube-video {
+		margin: 0 auto !important;
+		display: block;
+		border-radius: 16px;
+		box-shadow: 0 7px 15px 5px rgba(0, 0, 0, 0.2);
+	}
 
     main a {
         color: var(--color-brand-red);
@@ -2239,6 +2254,7 @@
 		color: var(--color-white);
 		border-radius: 20px;
 		padding: 5px 10px;
+		line-height: 2;
 	}
 
 	.related-story.story {
