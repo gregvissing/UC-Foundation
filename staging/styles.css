@@ -220,6 +220,7 @@
 		margin: 0 auto;
 		background-color: var(--color-white);
 		z-index: 99;
+		box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.65);
 	}
 
 	header a:hover {
@@ -314,6 +315,11 @@
 		line-height: 26px;
 	}
 
+	header li.search:before {
+		color: var(--color-text);
+		font-weight: 700;
+	}
+
 	header ul.nav > li > a {
 		text-align: center;
 		text-transform: uppercase;
@@ -381,6 +387,7 @@
 		font-weight: 700 !important;
 		font-style: normal !important;
 		font-size: 1em !important;
+		letter-spacing: 0.25px !important;
 	}
 
 	nav#site-nav li.parent button > svg {
@@ -596,6 +603,10 @@
 			border-bottom: 1px solid var(--color-brand-black);
 		}
 
+		header nav ul.nccUlMenuSub1 > li:not(:last-child) {
+			border-bottom: none !important;
+		}
+
 		nav#site-nav li.parent > button {
 			width: 100%;
 			display: flex;
@@ -608,6 +619,10 @@
 			padding: 15px 10px !important;
 			line-height: 26px !important;
 			order: -1;
+		}
+
+		header li.search {
+			display: none !important;
 		}
 
 		header ul.search-give {
@@ -688,7 +703,7 @@
 		}
 		
 		header nav ul.main {
-			margin-top: 10px !important;
+			margin: 0 0 1.5em !important;
 		}
 
 		header nav ul li > ul li a {
@@ -727,10 +742,6 @@
 			background-size: contain;
 			width: 150px;
 			height: 30px;
-		}
-
-		header li.search {
-			display: none !important;
 		}
 	}
 
@@ -1135,7 +1146,11 @@
 	}
 
 	.list-title {
-		font-size: 1.1rem !important;
+		font-family: "Jost", sans-serif;
+    	font-size: 1.2em !important;
+    	font-weight: 550;
+    	margin-bottom: 10px;
+		letter-spacing: 0.25px;
 	}
 
 }
@@ -1890,7 +1905,7 @@
 		padding: 0 15px !important;
 		margin: 0 !important;
 		font-size: 1em !important;
-		font-weight: 500 !important;
+		font-weight: 700 !important;
 		background: var(--color-brand-red) !important;
 		position: relative;
 		color: var(--color-white) !important;
