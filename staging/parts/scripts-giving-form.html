@@ -1,0 +1,2205 @@
+<script src="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/js/jquery.blockUI.js" type="text/javascript"></script>
+<script src="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/moment.min.js" type="text/javascript"></script>
+<link href="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/css/select2.min.css" rel="stylesheet" />
+<script src="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/js/select2.min.js"></script>
+
+<script type="text/javascript">
+(function ($) {
+	moment().format();
+
+    var giftAmount; // tracks current gift amt
+
+    /* Google Analytics Event Functions */
+    /*
+  	window.onload = function() { // 1. session_start
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+			event: "session_start"
+		});
+    } */
+	window.onclick = function() { // 2. view_item
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		if ($('#designationId option:selected') && (($('.amount').val() >= 1) || ($('#otherAmtInput').val() >= 1))) {
+            if ($('.amount').val() >= 1) {
+                giftAmount = $('.amount').val();
+            }
+            if ($('#otherAmtInput').val() >= 1) {
+                giftAmount = $('#otherAmtInput').val();
+            }
+			dataLayer.push({
+				event: "view_item", 
+				ecommerce: {
+					currency: "USD",
+					value: giftAmount,
+					items: [
+						{
+							item_id: ("" + $('#designationId option:selected').val()),
+							item_name: ("" + $('#designationId option:selected').text())
+						}
+					]
+				}
+				
+			})	
+		}
+	}
+	$("#addLineItem").on('click', function() { // 3. add_to_cart
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        if ($('.amount').val() >= 1) {
+            giftAmount = $('.amount').val();
+        }
+        if ($('#otherAmtInput').val() >= 1) {
+            giftAmount = $('#otherAmtInput').val();
+        }
+		dataLayer.push({
+			event: "add_to_cart",
+			ecommerce: {
+				currency: "USD",
+            	value: giftAmount,
+            	items: [
+                {
+                    item_id: "" + $('#designationId option:selected').val() + "",
+                    item_name: "" + $('#designationId option:selected').text() + ""
+                }
+            	]
+			}
+		})
+	})
+	$("#donate").on('click', function() { // 4. begin_checkout
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		dataLayer.push({
+			event: "begin_checkout",
+			ecommerce: {
+				currency: "USD",
+				value: giftAmount,
+				items: [
+					{
+						item_id: "" + $('#designationId option:selected').val() + "",
+						item_name: "" + $('#designationId option:selected').text() + ""
+					}
+				]
+			}
+		})
+	})
+			
+	// Enable navigation prompt
+	window.onbeforeunload = function() {
+	    //return true;
+	    return 'Navigating away from this page or reloading will cancel the current donation session.  Are you sure you want to leave/reload?';
+	};
+	// Remove navigation prompt
+	//window.onbeforeunload = null;
+	
+	// Form-specific variables	
+	var productName = 'Online Donation'; // For ecommerce analytics
+	var checkoutDescription = 'Commit to UGA'; // Appears on Checkout popup. No HTML allowed.
+		
+	// get domain, for easy switching between environments, if necessary
+	var domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+	
+	// PartId of external ADF part, to use if donor selects the "can't find your fund" option and submits a description of a fund
+	// The integer below is the 'DFJ - Redesigned Giving Form - Donor Specified Fund' part - *MAY BE DIFFERENT BETWEEN PRODUCTION AND STAGING*.
+	//var altPartId = 8727; 	
+	var altPartId = 5261;  // Part ID for alternate confirmation message for donor-specified fund
+	// Indicator for whether to use altPartId - use if donor selects "can't find your fund" option.
+	var useAltPartId = false;
+
+	// variables for source code, finder number, category, subcategory, designation, amount, search, and funderTransactionId from URL
+	var sourceCode;
+	var finderNumber;
+	var cat;
+	var subcat;
+	var des;
+	var urlAmount;
+	var urlSearch;
+	var recurring;
+	var hideack;
+	var funderTransactionId;
+	var urlDesignationGuid;
+	
+	var myGift = {};
+	
+	// Array to hold the donation amounts, if applicable.  Radio button inputs for amounts are dynamically created from this array.
+	var amtArray = [50, 100, 250, 500, 1000, 1500, 2500, 5000];
+	
+	// Variables for the attribute GUIDs (add, subtract, rename as necessary)
+	var otherDesignationGuid = "7f924538-ac30-4fa0-96c6-e243a2fddb12";  // generic attribute - use for "can't find your fund" functionality	
+	var giftTypeGuid = "406f92fb-0dea-43df-88e6-3f7c0f7d6dcb";  // Online Gift Type
+	var donorTypeGuid = "f5c0424e-f97e-438b-a7e5-8201634bb98f";  // Online Gift Donor Type
+	var businessNameGuid = "562152e0-b70b-4080-9270-0e9cdc7a8b1e";  // Online Donation - Organization Name
+	var repNameGuid = "9f7369d0-a6ca-4faf-bf04-b2e8cc992f1a";  // Online Donation - Organization Representative Name
+	var repTitleGuid = "e533e43d-e96c-4277-929f-449d178b3b8c";  // Online Donation - Organization Title
+	var instagramId = "955C9619-67A5-460A-99E6-11CC39E73D1B"; // Instagram social media handle
+	var twitterId = "C0DF4726-8B2D-4D55-BCD2-7C5555CFBB6B"; // Twitter social media handle
+	var funderTransactionGuid = "9AD6ADE3-6342-4DC7-AE21-2EDBA8984530"; // Georgia Funder Transaction ID
+	
+	// global array for designations
+	var designationArray = [];
+	
+	// Set Select2 options
+	var select2options = {
+			width: '100%',
+	};
+	
+	// Gift Session class
+	var GiftSession = function(paymentMethod, merchantAcct, finderNumber, sourceCode) {
+		// counter for number of gifts currently in session
+		this.giftCount = 0;
+	
+		// properties:
+		this.donation = {
+			giftRecurrence: false,
+			giftTribute: false,
+			giftAcknowledgee: false,
+			
+			// Donor information
+			Donor: {
+				//Title: $(".donor .title").val(),
+				FirstName: $(".donor .firstName").val(),
+				LastName: $(".donor .lastName").val(),
+				Address: {
+					StreetAddress: $(".donor .address .streetAddress").val(),
+					City: $(".donor .address .city").val(),
+					State: $(".donor .address .state :selected").text(),
+					PostalCode: $(".donor .address .postalCode").val(),
+					Country: $(".donor .address .country :selected").text()
+				},
+				EmailAddress: $(".donor .emailAddress").val(),
+				Phone: $(".donor .phone").val(),
+				OrganizationName: $(".donor .organizationName").val()
+			},
+			// Gift information
+			Gift: {
+				Attributes: [
+					{ // Gift Type
+						AttributeId: '406f92fb-0dea-43df-88e6-3f7c0f7d6dcb',
+						Value: 'New Gift',
+						Name: 'Gift Type'
+					},
+					{ // Donor type
+						AttributeId: 'f5c0424e-f97e-438b-a7e5-8201634bb98f',
+						Value: 'Individual',
+						Name: 'Donor Type'
+					}						
+				],
+				Designations: [], // designation/amount pairs (a JS object for each... Ex. {Amount: 35, DesignationId: "3439a5c7-9977-4f9c-ba11-fadfb8144d35"}) will be added/removed dynamically when update is run
+				FinderNumber: finderNumber,
+				SourceCode: sourceCode,
+				IsAnonymous: false,
+				IsCorporate: false,
+				PaymentMethod: paymentMethod, // pass this to instance, default to 0.
+				Comments: "",
+				CreateGiftAidDeclaration: false,
+				Recurrence: {
+					Frequency: $(".gift .recurrence .frequency").val(),
+					Month: $(".gift .recurrence .month").val(),
+					DayOfMonth: $(".gift .recurrence .dayOfMonth").val(),
+					StartDate: $(".gift .recurrence .startDate").val(),
+					EndDate: $(".gift .recurrence .endDate").val()
+				},
+				// Tribute information
+				Tribute: {
+					Acknowledgee: {
+						AddressLines: $(".gift .tribute .acknowledgee .addressLines").val(),
+						City: $(".gift .tribute .acknowledgee .city").val(),
+						Country: $(".gift .tribute .acknowledgee .country").val(), 
+						Email: $(".gift .tribute .acknowledgee .email").val(), 
+						FirstName: $(".gift .tribute .acknowledgee .firstName").val(), 
+						LastName: $(".gift .tribute .acknowledgee .lastName").val(),
+						Phone: $(".gift .tribute .acknowledgee .phone").val(), 
+						PostalCode: $(".gift .tribute .acknowledgee .postalCode").val(), 
+						State: $(".gift .tribute .acknowledgee .state").val(), 
+					},
+					TributeDefinition: {
+						FirstName: $(".gift .tribute .tributeDefinition .firstName").val(),
+						LastName: $(".gift .tribute .tributeDefinition .lastName").val(),
+						Type: $(".gift .tribute .tributeDefinition .type").val(),
+						Description: $(".gift .tribute .tributeDefinition .description").val(),
+						Name: ($(".gift .tribute .tributeDefinition .firstName").val()) ? ($(".gift .tribute .tributeDefinition .firstName").val() + ' ' + $(".gift .tribute .tributeDefinition .lastName").val()) : ($(".gift .tribute .tributeDefinition .lastName").val())
+					},
+					TributeId: null
+				}
+			},
+			PartId: $('.BBDonationApiContainer').data('partid'),
+			Origin: {
+				AppealId: "",
+				PageId: BLACKBAUD.api.pageInformation.pageId,
+				PageName: "Commit to UGA Donation Form"
+			},
+			BBSPReturnUri: window.location.href,
+			BBSPTemplateSitePageId: BLACKBAUD.api.pageInformation.pageId,
+			MerchantAccountId: merchantAcct
+		};			
+	};
+
+	/* Begin GiftSession functions */
+	GiftSession.prototype.update = function() {
+		if ($("#recurringGift").prop("checked") == true) {
+			this.donation.giftRecurrence = true;
+		} else {
+			this.donation.giftRecurrence = false;
+		}			
+		if ($(".gift #tributeCheckbox").prop("checked") == true) {
+			this.donation.giftTribute = true;
+		} else {
+			this.donation.giftTribute = false;
+			$(".gift #chkAcknowledge").prop("checked",false);
+			this.donation.giftAcknowledgee = false;
+		}
+		if ($(".gift #chkAcknowledge").prop("checked") == true) {
+			this.donation.giftAcknowledgee = true;
+		} else {
+			this.donation.giftAcknowledgee = false;
+		}			
+		
+		// Donor data
+		this.donation.Donor = {
+				//Title: $(".donor #title").val(),
+				FirstName: $(".donor .firstName").val(),
+				LastName: $(".donor .lastName").val(),
+				Address: {
+					StreetAddress: $(".donor .address .streetAddress").val(),
+					City: $(".donor .address .city").val(),
+					State: $(".donor .address .state :selected").text(),
+					PostalCode: $(".donor .address .postalCode").val(),
+					Country: $(".donor .address .country :selected").text()
+				},
+				EmailAddress: $(".donor .emailAddress").val(),
+				Phone: $(".donor .phone").val(),
+				OrganizationName: $(".donor .organizationName").val()
+			};
+		
+		// Gift Attributes, etc.
+		this.donation.Gift.Attributes = [
+			{
+				AttributeId: '406f92fb-0dea-43df-88e6-3f7c0f7d6dcb',							
+				Value: $(".gift .attributes .giftTypeTxt").val(),
+				Name: 'Gift Type'
+			},
+			{
+				AttributeId: 'f5c0424e-f97e-438b-a7e5-8201634bb98f',
+				Value: $(".gift .attributes .donorTypeTxt").val(),
+				Name: 'Donor Type'
+			}
+		];
+		
+		if ($(".gift .attributes .donorTypeTxt").val() == "Business") {
+			this.donation.Gift.Attributes.push({
+					AttributeId: "562152e0-b70b-4080-9270-0e9cdc7a8b1e",
+					Value: $(".gift .attributes .orgNameTxt").val(),
+					Name: 'Organization Name'
+				},
+				{
+					AttributeId: "9f7369d0-a6ca-4faf-bf04-b2e8cc992f1a",
+					Value: $(".gift .attributes .orgRepTxt").val(),
+					Name: 'Representative Name'
+				},
+				{	
+					AttributeId: "e533e43d-e96c-4277-929f-449d178b3b8c",
+					Value: $(".gift .attributes .orgTitleTxt").val(),
+					Name: 'Representative Title'
+				}
+			);
+			this.donation.Gift.IsCorporate = true;
+			this.donation.Donor.OrganizationName = $(".gift .attributes .orgNameTxt").val();
+		} else {
+			this.donation.Gift.IsCorporate = false;
+			this.donation.Donor.OrganizationName = null;
+		}
+		
+		// social media handles
+		var twitterValue = $("#twitter").val();
+		var instagramValue = $("#instagram").val();
+        
+        if(twitterValue) {
+        	this.donation.Gift.Attributes.push({
+										AttributeId: twitterId,
+										Value: $("#twitter").val()
+									  });	            
+          }
+          if(instagramValue) {
+        	  this.donation.Gift.Attributes.push({
+										AttributeId: instagramId,
+										Value: $("#instagram").val()
+									  });	            
+          }
+          if (funderTransactionId) {
+      		this.donation.Gift.Attributes.push({
+      			AttributeId : funderTransactionGuid,
+      			Value : funderTransactionId,
+      			Name : 'Georgia Funder Transaction ID'
+      		});
+      	}        
+		
+		this.donation.Gift.Comments = $(".gift #comments").val();
+		this.donation.Gift.FinderNumber = finderNumber;
+		this.donation.Gift.SourceCode = sourceCode;
+		
+		// Gift data			
+		// update radio button for 'other' with what's in the input field
+		$(".gift .designations input[name='amount'][id='otherAmount']").val($(".gift .designations #otherAmountInput").val());
+					
+		// add recurrence info, if "recurring gift" is chosen
+		if (this.donation.giftRecurrence) { 
+			this.donation.Gift.Recurrence = {
+				Frequency: $(".gift .recurrence .frequency").val(),
+				Month: $(".gift .recurrence .month").val(),
+				DayOfMonth: $(".gift .recurrence .dayOfMonth").val(),
+				StartDate: $(".gift .recurrence .startDate").val()
+			};
+		} else {
+			this.donation.Gift.Recurrence = null;
+		}			
+		if (document.getElementById('endDateCheckbox').checked && $("#endDate").val() && this.donation.giftRecurrence) {
+			this.donation.Gift.Recurrence.EndDate = $(".gift .recurrence .endDate").val();
+		}
+		
+		// add tribute info, if tribute checkbox is checked
+		if (this.donation.giftTribute) {
+			this.donation.Gift.Tribute = {};
+			this.donation.Gift.Tribute.TributeDefinition = {
+				FirstName: $(".gift .tribute .tributeDefinition .firstName").val(),
+				LastName: $(".gift .tribute .tributeDefinition .lastName").val(),
+				Type: $(".gift .tribute .tributeDefinition .type").val(),
+				Description: $(".gift .tribute .tributeDefinition .description").val(),
+				Name: ($(".gift .tribute .tributeDefinition .firstName").val()) ? ($(".gift .tribute .tributeDefinition .firstName").val() + ' ' + $(".gift .tribute .tributeDefinition .lastName").val()) : ($(".gift .tribute .tributeDefinition .lastName").val())
+			};
+			
+			// add acknowledgee info, if acknowledgee checkbox is checked
+			if (this.donation.giftAcknowledgee) {
+				this.donation.Gift.Tribute.Acknowledgee = {						
+					FirstName: $(".gift .tribute .acknowledgee .firstName").val(),
+					LastName: $(".gift .tribute .acknowledgee .lastName").val(),
+					Country: $(".gift .tribute .acknowledgee .country :selected").text(), 
+					AddressLines: $(".gift .tribute .acknowledgee .addressLines").val(),
+					City: $(".gift .tribute .acknowledgee .city").val(),
+					State: $(".gift .tribute .acknowledgee .state :selected").val(),
+					PostalCode: $(".gift .tribute .acknowledgee .postalCode").val(),
+					Phone: $(".gift .tribute .acknowledgee .phone").val(),
+					Email: $(".gift .tribute .acknowledgee .email").val()						
+				};
+			} else {
+				this.donation.Gift.Tribute.Acknowledgee = null;
+			}
+		} else {
+			this.donation.Gift.Tribute = null;
+		}		
+		/* Check to see if the donor has used the "Can't find your fund" option.
+		   If so, set an attribute with the donor's fund description, 
+		   and switch to the alternate part ID, so that the onscreen 
+		   and email confirmation text will show the designation as "donor specified." */
+		   var desObj = this.donation.Gift.Designations;
+		//console.log(desObj);
+			for (var i = 0; i < this.donation.Gift.Designations.length; i++) { //console.log(this.donation.Gift.Designations[i].Description);
+				if (typeof this.donation.Gift.Designations[i].Description != 'undefined' && this.donation.Gift.Designations[i].Description.replace(' ', '').length > 1) { //console.log(desObj[i].Name);
+					this.donation.Gift.Attributes.push({ AttributeId: otherDesignationGuid, Value: this.donation.Gift.Designations[i].Description + ' - $' + this.donation.Gift.Designations[i].Amount });
+					//useAltPartId = true;
+					// specify alternate PartId in gift object - must also be specified in call to Donation API
+					this.donation.PartId = altPartId;
+				} else {
+					this.donation.PartId = $('.BBDonationApiContainer').data('partid');
+				}
+			}			
+		//console.log("this.donation...");console.log(this.donation);
+	};
+
+	GiftSession.prototype.validate = function(step, amt, designation, descr) { //console.log('validate step ' + step);
+		$("#otherAmtInstr").hide();			
+        var errs = "";			
+		$(".validation-message").remove();			
+		if (step == 1) {
+			// step 1 - validation for amount								
+			amt = Number(amt);
+			
+			if (amt < 1 || isNaN(amt)) {
+				errs += "Gift amount is not valid.<br/>";
+				$(".amounts").after('<div class="validation-message">Gift amount is not valid.</div>');
+			}				
+			if (!designation || designation == '') {
+				errs += "You must choose a designation.<br/>";
+				$(".designation-select").after('<div class="validation-message">You must choose a designation.</div>');
+			}				
+			var desDescrCount = 0;
+			for (var i = 0; i < this.donation.Gift.Designations.length; i++) {
+				if (this.donation.Gift.Designations[i].Description) {
+					desDescrCount++;
+				}
+			}				
+			if (descr.replace(' ', '').length > 0 && desDescrCount > 0) {
+				errs += 'Only one alternate fund may be added.';
+				$("#otherDesignation").after('<div class="validation-message">Only one alternate fund may be added.</div>');
+			}
+			if ($("#designationId option:selected").attr("data-other") == 'true' && !$("#otherDesignationInput").val()) { 
+				errs += 'Please enter a description of the area you\'d like to support.';
+				$("#otherDesignation").after('<div class="validation-message">Please enter a description of the area you\'d like to support.</div>');	
+			} 
+			
+			/* Validate recurrence info */
+			if (this.donation.giftRecurrence) {
+				if (!this.donation.Gift.Recurrence.StartDate) {
+					errs += "Starting Date is required for recurring gifts.<br />";
+					$(".start-input").after('<div class="validation-message">Starting Date is required for recurring gifts.</div>');
+				}
+				if (this.donation.Gift.Recurrence.Frequency == "select a value") {
+					errs += "Recurrence Frequency required.<br />";
+					$(".frequency-select").after('<div class="validation-message">Recurrence Frequency required.</div>');
+				}					
+				if (this.donation.Gift.Recurrence.DayOfMonth == "select a value") {
+					//errs += "Day of Month is required for recurring gifts.<br />";						
+				}
+				if (this.donation.Gift.Recurrence.Frequency == 4) {
+					if (this.donation.Gift.Recurrence.Month == "select a value") {
+						errs += "Month is required for annual recurring gifts.<br />";
+						$(".month-select").after('<div class="validation-message">Month is required for annual recurring gifts.</div>');
+					}
+				}
+			}				
+		}			
+		
+		if (step == 2) {
+			// step 2 - validation for recurrence, business, and tribue/acknowledgee info				
+			
+			var giftType = this.donation.Gift.Attributes.filter(function(obj) { return obj.Name == 'Gift Type';})[0];
+			var donorType = this.donation.Gift.Attributes.filter(function(obj) { return obj.Name == 'Donor Type';})[0];
+			var orgName = this.donation.Gift.Attributes.filter(function(obj) { return obj.Name == 'Organization Name';})[0];
+			var repName = this.donation.Gift.Attributes.filter(function(obj) { return obj.Name == 'Representative Name';})[0];
+			var repTitle = this.donation.Gift.Attributes.filter(function(obj) { return obj.Name == 'Representative Title';})[0];
+			var comments = this.donation.Gift.Comments;
+			
+			/* Validate gift items */
+			// check for at least one designation/amount
+			if (this.donation.Gift.Designations.length < 1) {
+				errs += 'At least one gift (amount and designation) needs to be added before checking out.<br />';	
+				$("#lineItems").after('<div class="validation-message">At least one gift (amount and designation) needs to be added before checking out.</div>');
+			}
+			
+			/* Validate business info */
+			if (donorType.Value == "Business") {
+				if (!orgName.Value) {
+					errs += "Business Name is required.<br />";
+					$(".business-name-input").after('<div class="validation-message">Business Name is required.</div>');
+				}
+				if (!repName.Value) {
+					errs += "Representative Name is required.<br />";
+					$(".business-rep-input").after('<div class="validation-message">Representative Name is required.</div>');
+				}
+				if (!repTitle.Value) {
+					errs += "Representative Title is required.<br />";
+					$(".business-title-input").after('<div class="validation-message">Representative Title is required.</div>');
+				}
+				if (!comments) {
+					errs += "Please enter your organization's contact information in the special Instructions/Comments area.<br />";
+					$(".comments-input").after('<div class="validation-message">Please enter your organization\'s contact information in the special Instructions/Comments area.</div>');
+				}
+			}
+			
+			/* Validate tribute info */
+			if (this.donation.giftTribute) {
+				// Honoree
+				/*if(!$("#txtTribute").val()) {
+					errs += "Honoree is required.<br />";
+				}*/
+				// First name
+				/*if(!$("#txtTributeFirstName").val()) {
+					errs += "Honoree first name is required.<br />";
+				}*/
+				// Last name
+				if(!this.donation.Gift.Tribute.TributeDefinition.LastName) {
+					errs += "Honoree last name is required.<br />";
+					$(".tribute-lname-input").after('<div class="validation-message">Honoree last name is required.</div>');
+				}
+				// Type
+				if(this.donation.Gift.Tribute.TributeDefinition.Type == 0) {
+					errs += "Honoree type is required.<br />";
+					$(".tribute-type-input").after('<div class="validation-message">Honoree type is required.</div>');
+				}
+				// Special instructions
+				/*if(!this.donation.Gift.Tribute.TributeDefinition.Description) {
+					errs += "Special instructions/description required.<br />";
+					$(".tribute-instr-input").after('<div class="validation-message">Special instructions/description required.</div>');
+				}*/
+			}
+			
+			/* Validate acknowledgee info */
+			if (this.donation.giftAcknowledgee) {
+				// Message recipient (acknowledgee)
+				/*if(!$("#txtTributeAcknFullName").val()) {
+					errs += "Message recipient is required.<br />";
+				}*/
+				// First name
+				/*if(!$("#txtAcknowledgeeFirstName").val()) {
+					errs += "Acknowledgee first name is required.<br />";
+				}*/
+				// Last name
+				if(!this.donation.Gift.Tribute.Acknowledgee.LastName) {
+					errs += "Acknowledgee last name is required.<br />";
+					$(".ackn-lname-input").after('<div class="validation-message">Acknowledgee last name is required.</div>');
+				}
+				// Street address
+				if(!this.donation.Gift.Tribute.Acknowledgee.AddressLines) {
+					errs += "Acknowledgee street address is required.<br />";
+					$(".ackn-address-input").after('<div class="validation-message">Acknowledgee street address is required.</div>');
+				}
+				// City
+				if(!this.donation.Gift.Tribute.Acknowledgee.City) {
+					errs += "Acknowledgee city is required.<br />";
+					$(".ackn-city-input").after('<div class="validation-message">Acknowledgee city is required.</div>');
+				}
+				// ZIP/Postal code
+				if(!this.donation.Gift.Tribute.Acknowledgee.PostalCode) {
+					errs += "Acknowledgee ZIP/Postal code is required.<br />";
+					$(".ackn-zip-input").after('<div class="validation-message">Acknowledgee ZIP/Postal code is required.</div>');
+				}
+				// State
+				if(!this.donation.Gift.Tribute.Acknowledgee.State) {
+					errs += "Acknowledgee state is required.<br />";
+					$(".ackn-state-input").after('<div class="validation-message">Acknowledgee state is required.</div>');
+				}
+				// Country
+				if(!this.donation.Gift.Tribute.Acknowledgee.Country) {
+					errs += "Acknowledgee country is required.<br />";
+					$(".ackn-country-input").after('<div class="validation-message">Acknowledgee country is required.</div>');
+				}
+				//Email Address
+              /*if (!validateEmail(this.donation.Gift.Tribute.Acknowledgee.Email)) {
+					errs += "Acknowledgee email is not valid.<br/>";
+					$(".ackn-email-input").after('<div class="validation-message">Acknowledgee email is not valid.</div>');
+				}*/
+				//Phone
+              /*if (!validatePhone(this.donation.Gift.Tribute.Acknowledgee.Phone)){
+					errs += "Acknowledgee phone is not valid.<br/>";
+					$(".ackn-phone-input").after('<div class="validation-message">Acknowledgee phone number is not valid.</div>');
+				}*/			
+			}
+		}
+		
+		if (step == 3) {
+			// step 3 - Validate billing info
+			
+			//First Name
+			if (!this.donation.Donor.FirstName) {
+				errs += "First name is required.<br/>";
+				$(".fname-input").after('<div class="validation-message">First name is required.</div>');
+			}
+			//Last Name
+			if (!this.donation.Donor.LastName) {
+				errs += "Last name is required.<br/>";
+				$(".lname-input").after('<div class="validation-message">Last name is required.</div>');
+			}
+			//Street Address
+			if (!this.donation.Donor.Address.StreetAddress) {
+				errs += "Address is required.<br/>";
+				$(".address-input").after('<div class="validation-message">Address is required.</div>');
+			}
+			//City
+			if (!this.donation.Donor.Address.City) {
+				errs += "City is required.<br/>";
+				$(".city-input").after('<div class="validation-message">City is required.</div>');
+			}
+			// State
+			if (!this.donation.Donor.Address.State) {
+				errs += "State is required.<br/>";
+				$(".state-input").after('<div class="validation-message">State is required.</div>');
+			}				
+			//Postal Code
+			if (!this.donation.Donor.Address.PostalCode) {
+				errs += "ZIP/Postal code is required.<br/>";
+				$(".zip-input").after('<div class="validation-message">ZIP/Postal code is required.</div>');
+			}
+			//Postal Code
+			if (!this.donation.Donor.Address.Country) {
+				errs += "Country is required.<br/>";
+				$(".country-input").after('<div class="validation-message">Country is required.</div>');
+			}
+			//Email Address
+            this.donation.Donor.EmailAddress = this.donation.Donor.EmailAddress.replace(/\s/g, '');
+			if (!validateEmail(this.donation.Donor.EmailAddress)) {
+				errs += "Email is not valid.<br/>";
+				$(".email-input").after('<div class="validation-message">Email is not valid.</div>');
+			}
+			//Phone
+			if (!validatePhone(this.donation.Donor.Phone)){
+				errs += "Phone is not valid.<br/>";
+				$(".phone-input").after('<div class="validation-message">Phone number is not valid.</div>');
+			}				
+			// check for at least one designation/amount
+			if (this.donation.Gift.Designations.length < 1) {
+				errs += 'At least one gift (amount and designation) needs to be added before checking out.<br />';
+				$(".billingInformation .donor").before('<div class="validation-message">At least one gift (amount and designation) needs to be added before checking out.</div>');
+			}				
+		}
+		
+        if (errs === "") {
+            return true;
+        } else { //console.log('errs!');
+			errs += "<br />";
+			if ($(".validation-message").first()) {
+				$('html, body').animate({ scrollTop: $(".validation-message").first().offset().top - 100 }, 'fast');
+			} else {
+				$('html, body').animate({ scrollTop: $(".validation").offset().top - 100 }, 'fast');
+			}
+            
+			return false;
+        }
+    };
+	
+    GiftSession.prototype.addLineItem = function(amount, designationId, name, descr) {
+		// push a designation/amount pair object into Designations array; also push Name, so that we have the fund name to display
+		if (this.validate(1, amount, designationId, descr)) {
+			var tempObj = {
+				Amount: amount,
+				DesignationId: designationId,
+				Name: name
+			};				
+			if (descr.length > 1) {
+				tempObj.Description = descr;
+				tempObj.Name = descr;
+			}
+		
+			//this.donation.Gift.Designations.push({ Amount: amount, DesignationId: designationId, Name: name });
+			this.donation.Gift.Designations.push(tempObj);
+			this.displayLineItems();
+			stepUpdate(this, 2);
+		}			
+		this.giftCount = this.donation.Gift.Designations.length;
+		$(".gift-count").text(this.giftCount);
+		this.update();
+	};
+
+	GiftSession.prototype.removeLineItem = function(arrayIndex) {			
+		// remove a designation/amount pair object from Designations array
+		// this.donation.Gift.Designations.splice(arrayIndex, 1); the '1' just means how many items to remove.
+		// We could also use this, or something similar, to remove all line items.
+		
+		if (this.donation.Gift.Designations[arrayIndex] !== undefined) {
+			this.donation.Gift.Designations.splice(arrayIndex, 1);
+		}
+		this.displayLineItems();
+		this.giftCount = this.donation.Gift.Designations.length;
+		$(".gift-count").text(this.giftCount);
+		this.update();
+	};		
+
+
+	GiftSession.prototype.displayLineItems = function() {
+		//$(".lineItems").append("");
+		var giftSession = this;			
+		var lineItems = document.getElementById('lineItems');
+		
+		if (this.donation.Gift.Designations.length < 1) {
+			lineItems.style.display = 'block';
+			$("#lineItems").html('<div style="text-align:center;"><p style="color: #666">Your gift cart is currently empty.</p><p><a style="color:#69C;font-size:.8em;padding:5px;" href="#" class="add-gift">+ Add a gift</a></p></div>');				
+			$(".add-gift").on('click', function() {
+				// If a designation is passed in the URL, load that, else load default
+				if (urlSearch) {
+					updateCategories("search");
+					filterDesignations(urlSearch, "search");
+				} else if (des) {
+					updateCategories("search");
+					filterDesignations(des, "search");
+				} else {
+					filterDesignations("Unrestricted", "tag", "d68341c5-71e8-4362-b8ab-1ecb3b192432");
+					setCategories("default");
+				}						
+				stepUpdate(giftSession, 1);					
+			});
+			return;
+		} else {
+			lineItems.innerHTML = '<h3>Gifts</h3>';
+		}			
+		var giftTotal = 0;
+		
+		for (var i = 0; i < this.donation.Gift.Designations.length; i++) {
+			var lineItem = document.createElement('div');
+			lineItem.id = 'lineItem' + (i+1);
+			lineItem.className = 'line-item';
+			
+			// create amount div
+			var lineItemAmount = document.createElement('div');
+			lineItemAmount.className = 'line-item-amount';
+			
+			// check if recurring donation and recurrence option to amount div
+			if (this.donation.giftRecurrence) {
+				var lineItemAmountText = document.createTextNode('$'+Number(this.donation.Gift.Designations[i].Amount).formatMoney(2, '.', ',') + " " + $("#frequency option:selected").text());
+			}
+				else {
+				var lineItemAmountText = document.createTextNode('$'+Number(this.donation.Gift.Designations[i].Amount).formatMoney(2, '.', ','));
+			}				
+			lineItemAmount.appendChild(lineItemAmountText);
+			lineItem.appendChild(lineItemAmount);
+			
+			// create name div
+			var lineItemName = document.createElement('div');
+			lineItemName.className = 'line-item-name';
+			var lineItemNameText = document.createTextNode(this.donation.Gift.Designations[i].Name);
+			lineItemName.appendChild(lineItemNameText);
+			lineItem.appendChild(lineItemName);				
+			
+			// create edit & remove buttons
+			var lineItemButtons = document.createElement('div');
+			lineItemButtons.className = 'line-item-buttons';
+			
+			/*var lineItemEditButton = document.createElement('a');
+			lineItemEditButton.className = 'line-item-edit';
+			var lineItemEditButtonText = document.createTextNode('Edit');
+			lineItemEditButton.appendChild(lineItemEditButtonText);*/
+			
+			var lineItemRemoveButton = document.createElement('a');
+			lineItemRemoveButton.className = 'line-item-remove';
+			lineItemRemoveButton.setAttribute('data-index', i);
+			var lineItemRemoveButtonText = document.createTextNode('x Remove');
+			lineItemRemoveButton.appendChild(lineItemRemoveButtonText);				
+			lineItemButtons.appendChild(lineItemRemoveButton);				
+			lineItem.appendChild(lineItemButtons);
+			
+			// add line item to line-items section and show section
+			lineItems.appendChild(lineItem);				
+			giftTotal += Number(this.donation.Gift.Designations[i].Amount);
+		}			
+		$("#lineItems").append('<div class="line-item" style="text-align:right;font-size:1.5em;color:#777;line-height:1.8;">Total: $'+ giftTotal.formatMoney(2, '.', ',') +'</div>');
+		
+		// Put "add another gift" link at the bottom, which can probably just go to previous step			
+		if ($("#recurringGift").prop("checked") != true && this.donation.Gift.Designations.length > 0) {
+		$("#lineItems").append('<div style="text-align:center;"><a style="color:#fff;background-color:#333;font-size:.8em;padding:5px;" href="#" class="add-gift">+ Add another gift</a></div>');
+		}
+		else {
+		}			
+		$(".add-gift").on('click', function(e) {
+			// If a designation is passed in the URL, load that, else load default
+			if (urlSearch) {
+				updateCategories("search");
+				filterDesignations(urlSearch, "search");
+			} else if (des) {
+				updateCategories("search");
+				filterDesignations(des, "search");
+			} else {
+				filterDesignations("Unrestricted", "tag", "d68341c5-71e8-4362-b8ab-1ecb3b192432");
+				updateCategories("school");
+				setCategories("default");
+			}	
+			stepUpdate(giftSession, 1);				
+		});			
+		$(".line-item-remove").on('click', function(e) {
+			giftSession.removeLineItem(e.target.getAttribute('data-index'));
+			if ($("#recurringGift").prop("checked") == true && myGift.donation.Gift.Designations.length  < 1)  {
+				$("#returnToGiftDetail").show();
+			}
+			else {
+			}
+		});
+	}		
+	/* End GiftSession functions */
+	
+	// Create an instance of the DonationService
+	 var ds = new BLACKBAUD.api.DonationService(
+  $('.BBDonationApiContainer').data('partid')),
+		 //ClientSitesID = $(".BBDonationApiContainer").attr("ClientSitesID"),
+         CheckoutModel = JSON.parse(checkoutData),
+         serverMonth = $(".BBDonationApiContainer").attr("serverMonth") - 1,
+         serverDay = $(".BBDonationApiContainer").attr("serverDay"),
+         serverYear = $(".BBDonationApiContainer").attr("serverYear"),
+         ServerDate = new Date(serverYear, serverMonth, serverDay); 
+		 InitializeBBCheckout();
+	
+	  // Create our success handler
+	  var success = function (returnedDonation) {
+	  	//console.log(returnedDonation);
+	  };   
+
+	  // Create our error handler
+	  var error = function (returnedErrors) {
+	  	//console.log('Error!');
+		  setValidationMessage(convertErrorsToHtml(error));
+	  };
+	 
+	//Checkout Payment popup is loaded in this form.
+	    if ($('form[data-formtype="bbCheckout"]').length <= 0) {
+	        var form = '<form method=\'get\' id=\"paymentForm\" data-formtype=\'bbCheckout\' data-disable-submit=\'false\' novalidate><\/form>';
+	        $('body').append(form);
+	    }
+
+	    $("#paymentForm").submit(function paymentComplete(e) {
+	        // prevent form from refreshing and show the transaction token
+	        e.preventDefault();
+	    });		
+		 var  SrtDt, publicKey, donationData, EditorContent, ServerDate, checkoutGenericError = "There was an error while performing the operation.The page will be refreshed";
+	
+	// Get data part data and public key for checkout
+	getCountries();
+	//getDesignations();
+	
+	var blocked = false; // To block the form from being used while Query API is loading data
+		
+	// global array for designations
+	//var designationArray = [];	
+
+	    //#region CCCheckoutPayment
+		//return which payment method is selected on the page
+	    function GetPaymentType() {
+	        paymentMethod = $("[name='paymentMethod']:checked").val();
+	        //return paymentMethod;
+	        return 0;
+	    }		
+		
+		// get all URL vars by URL
+	    function getUrlVars(url) {
+	        var vars = [], hash;
+	        var hashes = url.slice(url.indexOf('?') + 1).split('&');
+	        for (var i = 0; i < hashes.length; i++) {
+	            hash = hashes[i].split('=');
+	            vars.push(hash[0]);
+	            vars[hash[0]] = hash[1];
+	        }
+	        return vars;
+	    }
+	    
+		// get a specific URL var by name
+	    function getURLParameter(name) {
+			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+		}
+		
+		function getUrlValues() {
+			// Get values from URL parameters
+			sourceCode = getURLParameter('sourcecode');
+			finderNumber = getURLParameter('efndnum');
+			cat = getURLParameter('cat');
+			subcat = getURLParameter('subcat');
+			des = getURLParameter('des');
+			urlAmount = getURLParameter('amt');
+			urlSearch = getURLParameter('search');
+			recurring = getURLParameter('recurring');
+			hideack = getURLParameter('hideack');
+			funderTransactionId = getURLParameter('transid');
+			urlDesignationGuid = getURLParameter('id');
+			
+			if (urlDesignationGuid && !urlSearch) urlSearch = urlDesignationGuid;
+			
+			// Fix for Honors renaming, to make sure old URLs still find the correct funds.
+			if (subcat == "honors program" || subcat == "honors") {
+				cat = "school";
+			}			
+			if (subcat == 'honors program') subcat = 'honors';			
+			
+			if (recurring) {
+				$("#recurringGift").prop("checked", true);
+				//recurringHandler();
+			}
+			if (hideack) {
+				$("#chkAcknowledge").parent().css("display", "none");
+				$("#acknowledgeeInfoSub").css("display","none");
+				//recurringHandler();
+			}
+			recurringHandler();			
+			if (urlSearch) {
+				updateCategories("search");
+				$("#designationSearch").val(urlSearch);
+				//filterDesignations(urlSearch, "search");  // move to querySuccess function.  Designations not yet loaded here.
+			} else if (des) {
+				updateCategories("search");
+				$("#designationSearch").val(des);
+			}			
+			if (urlAmount) {
+				urlAmount = parseFloat(Math.round(urlAmount * 100) / 100).toFixed(2); // restrict to 2 decimal places, for display purposes
+				$("#otherAmtInput").val(urlAmount);
+				$("label.otherAmt").addClass("selected");
+				$("input#otherAmtInput").addClass("selected");
+			}
+		}
+
+		//this is the function that calls the payment api to open the checkout pop up with all the parameters
+	    this.makePayment = function () { 
+	        //opened = false;
+	        //var checkout = new SecureCheckout(handleCheckoutComplete, handleCheckoutError, handleCheckoutCancelled, handleCheckoutLoaded);
+	        var donor = data.Donor;
+			var selectedCountry=$("#country :selected").attr("value");
+			var selectedState=$("#state :selected").attr("value");
+			if(selectedCountry && selectedCountry.toLowerCase() =="gb")
+			{
+				selectedCountry="UK";
+			}			
+			// get total amount from gift object
+			var totalAmount = 0;
+			
+			for (var i = 0; i < myGift.donation.Gift.Designations.length; i++) {
+				totalAmount += Number(myGift.donation.Gift.Designations[i].Amount);
+			}
+	        
+	        bbcheckout.Configuration.Data.Amount = totalAmount;            
+            bbcheckout.Configuration.Data.BillingAddressCity = donor.Address.City;
+            bbcheckout.Configuration.Data.BillingAddressCountry = selectedCountry;
+            bbcheckout.Configuration.Data.BillingAddressLine = donor.Address.StreetAddress;
+            bbcheckout.Configuration.Data.BillingAddressPostCode = donor.Address.PostalCode;
+            bbcheckout.Configuration.Data.BillingAddressState = selectedState;
+            bbcheckout.Configuration.Data.BillingAddressEmail = donor.EmailAddress;
+            bbcheckout.Configuration.Data.BillingAddressFirstName = donor.FirstName + " " + (donor.MiddleName ? donor.MiddleName:"");
+            bbcheckout.Configuration.Data.BillingAddressLastName = donor.LastName;
+            bbcheckout.Configuration.Data.Cardholder = donor.FirstName + " " + donor.LastName;
+			bbcheckout.Configuration.Data.UseVisaCheckout = (data.Gift && !data.Gift.Recurrence);
+			bbcheckout.Configuration.Data.UseMasterpass = (data.Gift && !data.Gift.Recurrence);
+			bbcheckout.Configuration.Data.UseApplePay = (data.Gift && !data.Gift.Recurrence);
+            bbcheckout.Configuration.TransactionType = bbcheckout.TransactionType.Card_Not_Present;
+            bbcheckout.Configuration.Data.CardToken = null;
+            bbcheckout.Configuration.Data.Note = productName;
+            //bbcheckout.Configuration.Data.Description = checkoutDescription;
+	        
+	        //console.log("donationData...");console.log(donationData);
+          /*if (data.Gift && data.Gift.Recurrence )
+			{
+	    	   bbcheckout.Configuration.Data.CardToken = CheckoutModel.DataKey;
+}*/
+
+	        //check server date and start date here -- if same then make transaction today
+	        if (data.Gift && data.Gift.Recurrence && !isProcessNow()) {
+	        	bbcheckout.Configuration.Data.CardToken = CheckoutModel.DataKey;
+	            bbcheckout.Configuration.TransactionType = bbcheckout.TransactionType.Store_Card; //Store card transactions
+	        }
+	        else if (data.Gift && data.Gift.Recurrence ) {
+	        	bbcheckout.Configuration.Data.CardToken = CheckoutModel.DataKey;
+	        }
+	        
+	      //Set Donor Info so that it will be passed to finish the transaction at the end.
+			data.DonationSource = bbcheckout.Configuration.DonationSource.ADF;
+			data.Type=bbcheckout.Configuration.TranType.Donation;
+	        bbcheckout.DonorInfo = data;
+	        bbcheckout.openCheckout();
+	    }
+		
+	    function InitializeBBCheckout() {
+			bbcheckout = new BBCheckoutProcessor(checkoutFunctions(),
+					CheckoutModel.APIControllerName, CheckoutModel.TokenId,
+					'[class*="donationForm"]');
+			bbcheckout.Configuration.Data.Key = CheckoutModel.PublicKey;
+			bbcheckout.Configuration.TransactionType = CheckoutModel.TransactionType;
+			bbcheckout.Configuration.Data.ClientAppName = CheckoutModel.ClientAppName;
+			bbcheckout.Configuration.Data.MerchantAccountId = CheckoutModel.MerchantAccountId;
+			bbcheckout.Configuration.Data.IsEmailRequired = CheckoutModel.IsEmailRequired;
+			bbcheckout.Configuration.Data.IsNameVisible = CheckoutModel.IsNameVisible;
+			bbcheckout.Configuration.Data.PrimaryColor = CheckoutModel.PrimaryColor;
+			bbcheckout.Configuration.Data.SecondaryColor = CheckoutModel.SecondaryColor;
+			bbcheckout.Configuration.Data.FontFamily = CheckoutModel.FontFamily;
+			bbcheckout.Configuration.Data.UseCaptcha = CheckoutModel.UseCaptcha;
+			bbcheckout.Configuration.WorkflowType = CheckoutModel.WorkFlowType;
+			bbcheckout.Configuration.HandleBrowserClosing = (CheckoutModel.HandleBrowserClosing === true ? "True" : "False");
+			bbcheckout.Configuration.APITokenID = CheckoutModel.TokenId;
+			// You can add your own message to display on screen, after checkout pop-up close
+			bbcheckout.Configuration.TempConfirmationHtml = "Thank you for your contribution, please wait while we process your transaction.";
+			bbcheckout.intializeCheckout();
+			
+			/* Init functions */
+			// create new gift object instance
+            myGift = new GiftSession(0, CheckoutModel.MerchantAccountId);
+            getUrlValues();
+            //recurringHandler();
+            getDesignations();
+		}
+	    
+	    function checkoutFunctions() {
+			//  If you don't have anything to do then you don't add any events from below mentioned checkoutEvents 
+			checkoutEvents = {
+				checkoutComplete : function(e) {
+					//Place any code if you want to do anything on checkout complete.					
+					bbcheckout.postCheckoutFinish();
+					submitAnalytics();
+				},
+				checkoutError : function(data) {
+					//Place any code if you want to do anything on error.
+					console.log('checkoutError() called from checkoutFunctions().  Data: ');console.log(data);
+				},
+				checkoutExpired : function() {
+					//Place any code if you want to do anything on Checkout expired.
+					console.log("Checkout expired");
+				},
+				checkoutReady : function() {
+					//Place any code if you want to do anything on Checkout Ready.
+				},
+				browserClose : function() {
+					//Place any code if you want to do anything on Checkout Browser closing.
+				},
+				checkoutCancel : function() {
+					//Place any code if you want to do anything on Checkout cancel.
+				},
+				checkoutLoaded : function() {
+					//Place any code if you want to do anything on Checkout loaded.
+				}
+			}
+			return checkoutEvents;
+		}
+
+		//to check for recurring gift that is to be processed today or not (this is check for call stored card payment api)
+	    function isProcessNow() {	        
+	        var recStartDate = data.Gift.Recurrence.StartDate;
+	        var frequency = data.Gift.Recurrence.Frequency;
+	        var dayOfMonth = data.Gift.Recurrence.DayOfMonth;
+	        var month = data.Gift.Recurrence.Month;
+	        var startDateIsTodayDate = false;
+	        var recurrentStartDate = new Date(recStartDate);
+	        var isProcessedNow = false;
+	        var serverDate = new Date(ServerDate);
+	        if (
+	        		recurrentStartDate.getFullYear() === serverDate.getFullYear() &&
+	        		recurrentStartDate.getMonth() === serverDate.getMonth() &&
+	        		recurrentStartDate.getDate() === serverDate.getDate()
+	        ) {
+	            startDateIsTodayDate = true;
+	        }
+	        else {
+	            return false;
+	        }
+
+	        //Weekly Frequency
+	        /*if (frequency == 1) {
+	            isProcessedNow = startDateIsTodayDate && dayOfWeek == serverDate.getDay();
+	        }*/
+	        //Mothly and Quarterly frequency
+	        //else 
+	        if (frequency == 2 || frequency == 3) {
+	            isProcessedNow = startDateIsTodayDate && dayOfMonth == serverDate.getDate();
+	        }
+	        //Annually frequency
+	        else if (frequency == 4) {
+	            isProcessedNow =
+	                startDateIsTodayDate
+	                && dayOfMonth == serverDate.getDate()
+	                && month == serverDate.getMonth() + 1;
+	        }
+	        //Every 4 weeks
+	        else if (frequency == 7) {
+	            isProcessedNow = startDateIsTodayDate;
+	        }
+	        else {
+	            isProcessedNow = false;
+	        }
+	        return isProcessedNow;
+	    };
+		
+		function sendData() { //console.log(bbcheckout.Configuration);
+	        if (CheckoutModel && CheckoutModel.MACheckoutSupported && GetPaymentType() == 0) {
+	            ProcessCCPayment();
+	        } else {
+	        	console.log('send data failed...');
+	        }
+	    }
+		
+		 //use this method for credit card payment through popup
+	    function ProcessCCPayment() {  //console.log('donation object');console.log(myGift.donation);
+		    myGift.donation.MerchantAccountId = bbcheckout.Configuration.Data.MerchantAccountId;
+		    myGift.donation.CMSID = bbcheckout.Configuration.Data.CMSID;
+		    myGift.donation.TokenId = bbcheckout.Configuration.APITokenID;
+			
+	        data = myGift.donation;
+	        
+	     	// submit "tribute" as placeholder for tribute description, so that the donor can leave it blank
+			if (myGift.donation.Gift.Tribute && !myGift.donation.Gift.Tribute.TributeDefinition.Description) {
+				//console.log(myGift.donation.Gift.Tribute);
+				myGift.donation.Gift.Tribute.TributeDefinition.Description = "tribute";
+			}
+	        
+	        //console.log(data);
+
+	        onValidationSuccess = function (result) {
+	            makePayment();
+	            return false;
+	        };
+	        onValidationFailed = function (error) {  console.log('onValidationFailed');
+	            //console.log(error);
+	            //$(".validation").text(error);
+	            setValidationMessage(convertErrorsToHtml(error));
+	        };
+	        ds.validateDonationRequest(data, onValidationSuccess, onValidationFailed);
+	    }
+	
+	/* End Checkout Functions */
+	
+	// currency format function
+	Number.prototype.formatMoney = function(c, d, t){
+		var n = this, 
+			c = isNaN(c = Math.abs(c)) ? 2 : c, 
+			d = d == undefined ? "." : d, 
+			t = t == undefined ? "," : t, 
+			s = n < 0 ? "-" : "", 
+			i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+			j = (j = i.length) > 3 ? j % 3 : 0;
+		   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+	 };	
+	
+	/* GiftSession moved */	
+	
+	function setCategories(e, subcat) {
+		// Arrays of tags to use for filtering designations.  FIRST VALUE IS FOR FILTERING - SECOND VALUE IS DISPLAYED TEXT.
+		// Third value is for default designation.  If included, use this fund as the default choice.
+		var schoolList = [
+				["Unrestricted","University-wide","D68341C5-71E8-4362-B8AB-1ECB3B192432"], 
+				["Agricultural & Environmental Sciences","College of Agricultural & Environmental Sciences","327E1172-7A9D-412B-81B3-0C4B818B4FE7"],
+				["Art","Lamar Dodd School of Art",""], 
+				["Arts & Sciences","Franklin College of Arts & Sciences","520B0C18-0C5F-43E6-A423-15EC1C391281"], 
+				["Business","Terry College of Business","1BC6F137-A954-4102-BCA1-8A387D9A097F"],
+				["Ecology","Odum School of Ecology","1cb31da6-37ed-4a33-89fc-44d70a44228b"], 
+				["Education","Mary Frances Early College of Education","4b88944b-61f9-4677-bdee-f68473b09566"], 
+				["Engineering","College of Engineering","ccc1667e-baa4-4c8f-bad8-d0281dfdc489"], 
+				["Environment & Design","College of Environment & Design","F14E8564-D235-4987-A77E-1AD5C00F2B35"], 
+				["Family & Consumer Sciences","College of Family & Consumer Sciences","6C7806BF-F634-45A1-9F3B-2E82F2461BDD"], 
+				["Forestry & Natural Resources","Warnell School of Forestry & Natural Resources","9B2D39CD-E1A0-4CFC-B2F1-7BBF43C0B4E8"], 				
+				["Graduate School","Graduate School",""],
+				["Honors","Morehead Honors College","89589A70-F9DF-492C-887B-ED1375E302E1"], 
+				["Institute of Higher Education", "Louis McBee Institute of Higher Education", "1092c9a2-4b7e-4128-88f2-19fb7608046c"],
+			    ["Journalism & Mass Communication","Grady College of Journalism & Mass Communication","BB7F6A3B-EE15-403F-BEB5-CA56571E02E5"],
+				["Law","School of Law","26FEA993-C301-4F3D-BFD8-76AB751D4FA0"],
+				["Music","Hugh Hodgson School of Music","369174db-0b6a-45fd-a1d2-e60cee848f98"],
+				["Pharmacy","College of Pharmacy","044F4724-ED3D-4C06-A201-DF1B76405376"], 
+				["Public & International Affairs","School of Public and International Affairs","E24C17D4-3A7E-4D7B-9C20-52A88FE54635"], 
+				["Public Health","College of Public Health","165856FD-3E2D-4F77-8BD0-D10E59E157DC"], 
+				["Social Work","School of Social Work","F9EF229A-1FEC-4D88-8C8B-65F101B10E80"], 
+				["Veterinary Medicine","College of Veterinary Medicine","E182BE1A-2CBC-4637-A20C-A845C66F45AE"] 
+			];		
+		var campusList = [
+			["Unrestricted","University-wide","D68341C5-71E8-4362-B8AB-1ECB3B192432"], 
+			["Academic Affairs","Academic Affairs","69840CF7-C92D-4F62-A688-30AB4EE04179"],
+			//["Alumni Association","Alumni Association","D68341C5-71E8-4362-B8AB-1ECB3B192432"], 
+			["Athletics","Athletics","F76EF7B9-FE9F-44DF-BE29-DDE3EC0A496F"], 
+			["Botanical Garden","Botanical Garden","E7193632-CBF1-4B28-A287-93256F3E5976"], 
+			["Development and Alumni Relations","Development and Alumni Relations",""], 
+			["Finance & Administration","Finance & Administration",""],
+			["GA 4-H","Georgia 4-H",""],
+			["Georgia Museum of Art","Georgia Museum of Art","efc92e8a-9522-4057-bbe8-39fe1fe42737"], 
+			["Graduate School","Graduate School","B7A97B3E-A487-499D-BE63-02BCBBB029BC"], 
+			["Honors","Morehead Honors College","89589A70-F9DF-492C-887B-ED1375E302E1"], 
+      		["Institute of Higher Education", "Institute of Higher Education", "1092c9a2-4b7e-4128-88f2-19fb7608046c"],
+			["Instruction","Instruction","B7341668-FBB1-4DEC-804E-34C2245E32F5"], 
+            ["International Education","International Education","33235df9-cbee-44c2-9cd2-ccd77ca858af"], // previously 31B61FFF-CF0B-4382-8E9F-93D90F5CBB3C 
+			["Libraries","Libraries","8BE3F2A9-496D-4647-88FF-34692B1B2F9A"], 
+			["Medical Partnership","Medical Partnership","887BD6B1-B4E5-4593-B0E4-504F1B25D266"], 
+			["Performing Arts Center","Performing Arts Center","573BE834-8493-40D0-BA69-D8E29EFD71B6"], 
+			["President's Office","President's Office","3FCC3C1C-7465-4D8F-BDFE-5EF360EBBFD3"], 
+			["Public Service & Outreach","Public Service & Outreach","2DB1D4DD-0EF4-4534-8547-841811F6EAB4"], 
+			["Research","Research","50FB55F5-DB73-417A-BA81-CF1D6B708D83"], 
+			["Student Affairs","Student Affairs","ab10ed56-b3d9-418a-9352-f3658b7ef3df"], 
+            //["University of Georgia","University of Georgia",""], 
+			//["Unrestricted","Unrestricted",""], 
+			["WUGA","WUGA",""]
+		];		
+		var causeList = [
+      		["COVID19 Response","COVID19 Response",""],
+			["Campus-wide Support","Campus-wide Support",""], 
+			["Animal Welfare","Animal Welfare",""], 
+			["Arts & Humanities","Arts & Humanities",""],	
+          	["Between the Pages","Between the Pages",""],
+			["Community","Community",""], 
+      		["Diversity & Inclusion", "Diversity & Inclusion", ""],
+			["Economic Growth","Economic Growth",""], 
+			["Entrepreneurship","Entrepreneurship",""], 
+			["Environment","Environment",""], 
+			["Experiential Learning","Experiential Learning",""], 
+			["Faculty Support","Faculty Support",""], 
+			["Food safety & supply","Food safety & supply",""], 
+			["Georgia Coast","Georgia Coast",""], 
+			["Global Security","Global Security",""], 
+			["Health & Wellness","Health & Wellness",""], 
+			["Infectious Disease Research","Infectious Disease Research",""], 
+			["Leadership Development","Leadership Development",""], 
+      		["Social Justice","Social Justice",""],
+			["Student Life","Student Life",""],
+			["Student Scholarships","Student Scholarships",""],				
+			["Technology","Technology",""]				
+		];
+		
+		if (e == "default") {
+			var category = "school";			
+		} else {
+			if (typeof e == 'object') { // event object passed from selector click
+				var category = e.target.id;
+			} else { // category string passed, taken from URL parameter
+				var category = e;
+			}
+		}		
+		if (category.toLowerCase() == "otherarea") category = "campus";		
+		switch (category) {
+			case 'school':
+				selectList = schoolList;
+				break;
+			case 'campus':
+				selectList = campusList;
+				break;
+			case 'cause':
+				selectList = causeList;
+				break;
+			default:
+				selectList = schoolList;
+				break;
+		}		
+		var categorySelector = document.getElementById('categoryList');
+		categorySelector.innerHTML = '';		
+		if (category == 'cause') $("#categoryList").append('<option value selected="selected">Make a selection</option>');		
+		for (var i = 0; i < selectList.length; i++) {
+			var opt = document.createElement("option");
+			opt.value = selectList[i][0].toLowerCase().replace(/[\'\"]/g, "");
+			opt.innerHTML = selectList[i][1];
+			opt.setAttribute("data-default", selectList[i][2]);
+			categorySelector.appendChild(opt);			
+		}
+		
+		// If 'subcat' is passed, mark that category as selected
+		if (subcat) {
+			$("#categoryList option[value='" + subcat.toLowerCase().replace(/[\'\"]/g, '') + "']").attr("selected", "selected");
+		}
+		$('#categoryList').select2(select2options);
+	}
+		
+	function filterDesignations(txt, type, def) { // load designations based on category chosen
+		var desArray = [];				
+		desArray = designationArray; //console.log(desArray);
+		var desId = document.getElementById("designationId");
+		desId.innerHTML = "";
+		
+		// Counter for number of designations found
+		var desCount = 0;				
+		for (var i = 0; i < desArray.length; i++) {
+			for (var j = 0; j < desArray[i].length; j++) {
+				
+				if (type == "tag") { // Look for exact string match.
+					var compTxt = txt.toLowerCase().replace(/[\'\"]/g, "");						
+					comp = (compTxt == desArray[i][j].toLowerCase().replace(/[\'\"]/g, ""));
+					
+					// Accommodate the tag name change from "Honors Program" to "Honors".  If it's either one, it can match either one.
+					if (compTxt == 'honors program' || compTxt == 'honors') comp = ('honors' == desArray[i][j].toLowerCase().replace(/[\'\"]/g, "") || 'honors program' == desArray[i][j].toLowerCase().replace(/[\'\"]/g, "")); 
+				} else {
+					comp = (desArray[i][j].toLowerCase().search(txt.toLowerCase()) >= 0);
+				}				
+				if (comp) {
+					var opt = document.createElement("option");
+					opt.value = desArray[i][1];
+					opt.innerHTML = desArray[i][0] + " - " + desArray[i][2];
+					opt.setAttribute("data-description", desArray[i][3]);
+					desId.appendChild(opt);
+					desCount++; // add to designation count
+					break;
+				}
+			}
+		}
+		
+		var causeSelected = ($("#cause").hasClass("selected") == true); 
+		
+		// append "can't find your fund" option
+		var otherOpt = document.createElement("option");
+		otherOpt.value = 'D68341C5-71E8-4362-B8AB-1ECB3B192432'; // submit default designation (Georgia Fund)
+		otherOpt.innerHTML = 'Can\'t find your fund?';
+		if (causeSelected) {
+			otherOpt.setAttribute("data-description", 'Please enter a brief description of the area you would like to support below. \nHelp us improve our list by suggesting a "cause" area for your fund selection.');
+		} else {
+			otherOpt.setAttribute("data-description", 'Please enter a brief description of the area you would like to support below.');
+		}		
+		otherOpt.setAttribute("data-other", true);
+		desId.appendChild(otherOpt);
+		
+		if (desCount == 1) {
+			$("#designationCount").text(" (" + desCount + " result found)");
+			$("#designationId option").first().attr("selected", "selected");
+					
+			//$("#designationId").val($("#designationId option:first").val());
+			$("#designationId").val($("#designationId option").first().val());
+		} else {
+			$("#designationCount").text(" (" + desCount + " results found)");
+		}	
+		$("#designationCount").show();		
+		
+		if (def && def.length > 10) {
+			$("#designationId").val(def.toLowerCase());
+		} else {
+			var desId = $("#designationId option:contains('"+def+"')").val();
+			if (desId) $("#designationId").val(desId.toLowerCase());
+		}
+		$('#designationId').select2(select2options);
+		$("div[id*='designationId']").effect("highlight", {}, 700);		
+		setDescription();
+	}	
+		
+	function stepUpdate(gift, step) {
+		// remove 'active' class from all except the one passed in 'step' argument
+		$(".validation").html('');
+		$(".designations .amount, #otherAmtInput").removeClass('selected');
+		$("#otherAmtInstr").hide();
+		$(".designations #otherAmtInput").val('');		 
+		step = Number(step);		
+		
+		switch (step) { // conditional handling for different steps
+			case 1:
+				$(".steps").removeClass('active');
+				$(".step" + step).addClass('active');
+				$(".breadcrumb").removeClass("active");
+				$(".bc-designation").addClass("active");
+				if (gift.donation.Gift.Designations.length > 0) {
+					$("#cancelAddLineItem").show();
+				} else {
+					$("#cancelAddLineItem").hide();
+				}
+				break;			
+			case 2:				
+				$(".steps").removeClass('active');
+				$(".step" + step).addClass('active');
+				$(".breadcrumb").removeClass("active");
+				$(".bc-review").addClass("active");				
+				break;
+			case 3:
+				if (gift.validate(2)) {
+					$(".steps").removeClass('active');
+					$(".step" + step).addClass('active');
+					$(".breadcrumb").removeClass("active");
+					$(".bc-billing").addClass("active");
+				} else {
+					
+				}
+				break;
+			default:
+				break;
+		}		
+		if (!$('.validation-message').length) { //console.log('no validation message');
+			$('html, body').animate({ scrollTop: 0 }, 10);		
+		}
+	}	
+	
+	/* Helper functions */
+	
+	function renderAmountList(arr) {
+			for (var i = 0; i < arr.length; i++) {
+				$("#amountList").append('<li><input type="radio" id="amount'+ (i+1) + '" name="amount" class="amount" value="' + amtArray[i] + '" /><label for="amount'+ (i+1) + '">$' + amtArray[i].formatMoney(2) + '</label></li>');
+			}
+			$("#amountList").append('<li><input type="radio" id="otherAmount" name="amount" class="amount" value="" /><label for="otherAmount"><input id="otherAmountInput" type="text" placeholder="$" class="BBFormTextbox DonationCaptureTextbox" value=""></label></li>');
+		}	
+	
+	// update other amount value and disable if 'other' radio button is not checked
+	function updateAmountInputs() {
+		$("#otherAmount").val($("#otherAmountInput").val());
+		if ($("#otherAmount").prop("checked") == true) {
+			$("#otherAmountInput").prop("disabled", false);
+		} else {
+			$("#otherAmountInput").val("");
+			$("#otherAmountInput").prop("disabled", true);
+		}
+	}
+	
+	function setDescription() {
+		var descr = $("#designationId option:selected").attr("data-description");
+		if (descr && descr.replace(" ", "").length > 0) {
+			$("#desDescrText").text(descr);
+			$("#designationDescription").show().effect("highlight", {}, 700);
+		} else {
+			$("#desDescrText").text("");
+			$("#designationDescription").hide();
+		}		
+		if ($("#designationId option:selected").attr("data-other") == 'true') {
+			$("#otherDesignation").show();
+		} else {
+			$("#otherDesignation").hide();
+			$("#otherDesignationInput").val('');
+		}
+	}
+	
+	// Set the category button styles and run function(s) to load category tags, etc.
+	// (moved from .designation-categories click function)
+	function updateCategories(e, subcat) {		
+		$(".designation-categories a").removeClass("selected");			
+			
+		if (typeof e == 'object') {
+			var groupId = e.target.id;
+		} else {				
+			var groupId = e;
+		}		
+		if (groupId.toLowerCase() == "otherarea") groupId = "campus";		
+		if (groupId == "") groupId = "search";
+      	$(".designation-categories a[id='"+ groupId +"']").addClass("selected");
+		if (groupId != "search") setCategories(groupId, subcat);
+		
+		switch (groupId) {
+			case "school":
+				$(".designation-search").hide();
+				$(".category-select").show();
+				$("#categoryLabel").html('Which school or college?');
+				break;				
+			case "campus":
+				$(".designation-search").hide();
+				$(".category-select").show();
+				$("#categoryLabel").html('Which part of campus?');
+				break;			
+			case "cause":
+				$("#categoryLabel").html('Which cause?');
+				$(".category-select").show();
+				$(".designation-search").hide();
+				break;				
+			case "search":
+				$(".category-select").hide();
+				$(".designation-search").show();
+				break;				
+			default:
+				break;		
+		}
+	}
+	
+	// check recurring box when page loads, run recurring handler	
+	function recurringHandler() { 		
+			$(".gift-frequency").removeClass("selected");
+			$("#recurringGift").addClass("selected");			
+			
+			if ($("#recurringGift").prop("checked") == true) {
+				$("#returnToGiftDetail").hide();
+			
+				if ($("#tributeCheckbox").prop("checked") == true) {
+					var conf = confirm("A recurring gift cannot be made with a tribute. Do you want to change your gift to a recurring gift instead of a tribute?");
+			
+					if (conf == true) {
+						// uncheck and hide tribute section
+						$("#tributeCheckbox").removeAttr("checked");
+						$("#tributeCheckbox").prop("checked", false);
+						$("#tributeInfoSub").hide();
+						$("#returnToGiftDetail").hide();
+					} else { 
+						// check "one time gift" and hide recurrence section
+						$('#recurringGift').prop("checked", false);
+						//$("#chkAcknowledge").click();
+						$(".gift-frequency").removeClass("selected");
+						$("#oneTimeGift").addClass("selected");
+						$("#recurrenceSection").hide();
+						$("#returnToGiftDetail").show();
+						$("#giftType").parent().show();		
+						$('#giftType').select2(select2options);
+						return;
+					}
+			} else {
+			}
+				$("#recurrenceSection").show();
+				$("#giftType").parent().hide();
+				$("#giftType").val("New Gift");
+				$('#giftType').select2(select2options);
+				$('#frequency').select2(select2options);
+				
+				$("#dayOfMonth").parent().hide();
+				if ($("#frequency").val() == 4) {
+					$("#month").parent().show();
+					$('#month').select2(select2options);
+				} else {
+					$("#month").parent().hide();
+				}
+			} else {
+				$("#returnToGiftDetail").show();
+				$("#recurrenceSection").hide();
+				$("#giftType").parent().show();
+				$('#giftType').select2(select2options);
+			}			
+			myGift.update();
+			myGift.displayLineItems();
+	}
+	
+	function populateStartDate() {
+		var stDate = $("#startDate").val();
+			// change day of month value
+			var day = moment(stDate, "MM-DD-YYYY").date();
+			$("#dayOfMonth").val(day);
+			$('#dayOfMonth').select2(select2options);
+			
+			// if frequency is annual, change month value
+			if ($("#frequency").val() == 4) {
+				var month = moment(stDate, "MM-DD-YYYY").month();
+				$("#month").val(month + 1);
+				$('#month').select2(select2options);
+			}
+	}
+	
+	// Compare function to sort designationArray by titles
+	function compareDesignationLabels(a, b) {
+		var aLabel = removeArticles(a[0].toLowerCase()), bLabel= removeArticles(b[0].toLowerCase());
+		
+		if (aLabel < bLabel) {
+			return -1;
+		}		
+		if (aLabel > bLabel) {
+			return 1;
+		}
+		// a must be equal to b
+		return 0;
+	}
+	
+	function compare(a, b) {
+		if (a[0].replace('"', '') < b[0].replace('"', ''))
+		    return -1;
+		if (a[0].replace('"', '') > b[0].replace('"', ''))
+			return 1;
+		return 0;
+	}
+	
+	function removeArticles(str) {
+		  words = str.split(" ");
+		  if(words.length <= 1) return str;
+		  if( words[0] == 'a' || words[0] == 'the' || words[0] == 'an' )
+			return words.splice(1).join(" ");
+		  return str;
+		}
+	
+	function submitAnalytics() {
+			// Google Analytics
+			// add split amounts		
+			var total = 0;
+			var desString = '';
+			for (var i = 0; i < myGift.donation.Gift.Designations.length; i++) {
+			   total += Number(myGift.donation.Gift.Designations[i].Amount);
+			   
+			   // Create the designation string
+			   if (i >= 1) {
+				   desString += ', ' + myGift.donation.Gift.Designations[i].Name + ' ($' + Number(myGift.donation.Gift.Designations[i].Amount).toFixed(2) + ')';
+			   } else {
+				   desString += myGift.donation.Gift.Designations[i].Name + ' ($' + Number(myGift.donation.Gift.Designations[i].Amount).toFixed(2) + ')';
+			   }
+			}
+      
+      		// GA4/GTM data layer
+            var gaItems = [];
+            for (var i = 0; i < myGift.donation.Gift.Designations.length; i++) {
+                gaItems.push({
+                    item_id: myGift.donation.Gift.Designations[i].DesignationId,
+                    item_name: myGift.donation.Gift.Designations[i].Name,
+                    item_category: productName,
+                    price: myGift.donation.Gift.Designations[i].Amount,
+                    quantity: 1
+                });
+            }        
+           
+            dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+            dataLayer.push({
+                event: "purchase",
+                ecommerce: {
+                    transaction_id: myGift.donation.TokenId,
+                    value: total,
+                    currency: "USD",
+                    items: gaItems
+                }
+            });
+            // End GA4/GTM data layer
+      
+      
+			// add transaction
+			ga('ecommerce:addTransaction', {
+			  'id': myGift.donation.TokenId,
+			  'affiliation': '',
+			  'revenue': total,
+			  'shipping': '',
+			  'tax': ''
+			});
+			// add items
+			for (var i = 0; i < myGift.donation.Gift.Designations.length; i++) {
+				ga('ecommerce:addItem', {
+					'id': myGift.donation.TokenId,
+					'name': productName,
+					'sku': myGift.donation.Gift.Designations[i].Name + ' ($' + Number(myGift.donation.Gift.Designations[i].Amount).toFixed(2) + ')',
+					'category': productName,
+					'price': myGift.donation.Gift.Designations[i].Amount,
+					'quantity': 1
+				});
+			}
+			ga('ecommerce:send');
+			ga('ecommerce:clear');
+			// end google analytics
+			
+			 //console.log(total.toFixed(2));
+			// Disable FB tracking for testing purposes.  Add the following code back whe going live.
+      		//fbq('track', 'Purchase', { value: total, currency: 'USD' });
+		    //fbq('trackCustom', 'MyCustomEvent', { myParam: '' });
+			
+			// Match360 / Double the Donation code              	
+          	if (window.doublethedonation) { // Don't break your page if our plugin doesn't load for any reason               		              		
+          		var doublethedonation_company_id = $("input[name='doublethedonation_company_id']").val();
+          		var doublethedonation_status = $("input[name='doublethedonation_status']").val();
+          		var doublethedonation_entered_text = $("input[name='doublethedonation_entered_text']").val();            		
+          		var match360Object = {
+               		   "360matchpro_public_key": "42GI6s9PBStSvQRv",   //Replace this key with your 360MatchPro public key
+              		   "campaign": "Online Donation",
+              		   "donation_identifier": myGift.donation.TokenId,
+              		   "donation_amount": total,
+              		   "donor_first_name": myGift.donation.Donor.FirstName,
+              		   "donor_last_name": myGift.donation.Donor.LastName,
+              		   "donor_email": myGift.donation.Donor.EmailAddress,
+              		   "donor_address": {"zip": myGift.donation.Donor.Address.PostalCode,         //numeric, but string (eg. "30301", "30101-123") will work
+              		                     "city": myGift.donation.Donor.Address.City,
+              		                     "state": myGift.donation.Donor.Address.State,
+              		                     "address1": myGift.donation.Donor.Address.StreetAddress,
+              		                     //"address2": returnedGiftInfo.Donor.Address.,
+              		                     "country" : myGift.donation.Donor.Address.Country},   //ISO 3166-1 alpha-2 country code (eg. "US", "CA", "GB")
+              		   "donor_phone": myGift.donation.Donor.Phone,       //This is an example. Your phone number can be formatted differently.
+              		   "donation_datetime": moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), //"2018-12-25T10:15:30-05:00",
+              		   "doublethedonation_company_id": doublethedonation_company_id,     // only needed if using streamlined search
+              		   "doublethedonation_status": doublethedonation_status,    // only needed if using streamlined search
+              		   "doublethedonation_entered_text": doublethedonation_entered_text // only needed if streamlined search used on donation page 
+              		 };
+          			//console.log(match360Object);
+          			//if (doublethedonation_entered_text.replace(' ','').length >= 1) { // Only send if a value was entered.
+          				doublethedonation.integrations.core.register_donation(match360Object);
+          			//}
+          		};
+      }	
+	
+	function getCountries() {
+		var selectCountry = $('#country');
+		var selectAcknowledgeeCountry = $('#acknowledgeeCountry');		  
+		  var service = new BLACKBAUD.api.CountryService();
+		  var usVal = '';
+		  
+		  // Load Countries
+		  service.getCountries(function(countries) {
+		    for (var i = 0, j = countries.length; i < j; i++) {
+		    	if (countries[i].Description == "United States") {
+		    		selectCountry.append('<option value="' + countries[i].ISO + '" selected="selected" data-guid="' + countries[i].Id + '">' + countries[i].Description + '</option>');
+		    		selectAcknowledgeeCountry.append('<option value="' + countries[i].ISO + '" selected="selected" data-guid="' + countries[i].Id + '">' + countries[i].Description + '</option>');
+		    		usVal = countries[i].Id;
+		    		//console.log('usVal: ' + usVal);
+		    	} else {
+		    		selectCountry.append('<option value="' + countries[i].ISO + '" data-guid="' + countries[i].Id + '">' + countries[i].Description + '</option>');
+		    		selectAcknowledgeeCountry.append('<option value="' + countries[i].ISO + '" data-guid="' + countries[i].Id + '">' + countries[i].Description + '</option>');
+		    	}	      
+		    }
+		    getStates(usVal, $('#state'));
+		    getStates(usVal, $('#acknowledgeeState'));
+		    $('#country').select2(select2options);
+		    $('#acknowledgeeCountry').select2(select2options);
+		  });		  
+		  
+		  // Watch Countries Change
+		  $('#country').on('change', function() {
+		  	var selectedCountry = $(this).find("option:selected").attr("data-guid");
+		  	
+		    // Load States
+		    getStates(selectedCountry, $('#state'));
+		    //myGift.update();
+		  });
+		  
+		  $('#acknowledgeeCountry').on('change', function() {
+			 	var selectedCountry = $(this).find("option:selected").attr("data-guid");
+				
+			    // Load States
+			    getStates(selectedCountry, $('#acknowledgeeState'));
+			});
+	}
+	function getStates(country, selectState) { 
+		var service = new BLACKBAUD.api.CountryService();
+		
+		// Load States
+	    service.getStates(country, function(states) {
+	      selectState.html('');
+	      for (var i = 0, j = states.length; i < j; i++) {
+	    	  if (states[i].Description == "Georgia") {    	  
+	          	  selectState.append('<option value="' + states[i].ISO + '" selected="selected">' + states[i].Description + '</option>');
+		      } else if (states[i].Description == "N/A") {
+		    	  selectState.append('<option value="' + states[i].ISO + '" selected="selected">' + states[i].Description + '</option>');
+		      } else {
+		    	  selectState.append('<option value="' + states[i].ISO + '">' + states[i].Description + '</option>');
+		      }
+	      }
+		     selectState.select2(select2options);
+		     //if (myGift) myGift.update();
+		     if (myGift && 'update' in myGift) myGift.update();
+	    });
+	}
+	
+	function getDesignations() {
+		// See about putting everything in here instead of initializing the Query API in the form setup.
+		// Maybe pass the Query ID instead of hard-coding it inside the function.
+		blockForm($(".donationForm"));
+		
+		var queryInstanceId = "b0e28c08-4081-4328-91f5-8509243f5d79";
+      	//"aa7bb498-5129-4ec5-ac1b-9fd9e560449d"; // BBIS - Find a Fund Designations - Abridged 
+		var queryOptions = { crossDomain: false };
+		var filters = [];
+		var queryService = new BLACKBAUD.api.QueryService(queryOptions);	
+		
+		querySuccess = function(obj) {
+			designationArray = [];			
+			for (var i = 0; i < obj.Rows.length; i++) {
+				var tempArray = [obj.Rows[i].Values[0], obj.Rows[i].Values[1], obj.Rows[i].Values[2], obj.Rows[i].Values[3], obj.Rows[i].Values[4]];				
+				
+				if (i > 1 && obj.Rows[i].Values[0] == obj.Rows[i-1].Values[0]) {
+					designationArray[designationArray.length-1].push(obj.Rows[i].Values[4]);
+				} else {
+					designationArray.push(tempArray);
+				}
+			}
+			
+			// sort array results and remove duplicates
+			var sortedArray = designationArray.sort(compare);			
+			var tidiedArray = [];
+			
+			/* alternate designation process:
+			- create second array (tidiedArray)
+			- loop through first array and
+			-- push funds that aren't already in the array
+			-- if they are already in the array, push the tag */
+			for (var i = 0; i < sortedArray.length; i++) {
+				if (tidiedArray.indexOf(sortedArray[i]) < 0) {
+					tidiedArray.push(sortedArray[i]);
+				}				
+			}
+			
+			for (var i = 0; i < sortedArray.length - 1; i++) {
+				// need a way to check more than just the next, or previous, fund
+				// for each fund, loop through the upcoming funds until the name does NOT match the current name - grab and push the tags and delete the funds			
+								
+				if (sortedArray[i][0] == sortedArray[i+1][0]) {				
+					sortedArray[i+1].push(sortedArray[i][3]);
+					sortedArray.splice(i, 1);					
+				}
+			}			
+			designationArray = sortedArray;
+						
+			// Generate option elements for designation selectors, based on designationArray
+			for (var i = 0; i < designationArray.length; i++) {
+				var otherDes = document.getElementById("designationId");
+				var otherOpt = document.createElement("option");
+				otherOpt.value = designationArray[i][1];
+				otherOpt.innerHTML = designationArray[i][0] + " - " + designationArray[i][2];				
+				otherOpt.setAttribute("data-description", designationArray[i][4]);				
+				otherDes.appendChild(otherOpt);
+			}			
+			if (subcat) { // *** add des filter.  It should fail gracefully, if fund isn't found...
+				updateCategories(cat, subcat);
+				setCategories(cat, subcat);
+				if (des) {
+					filterDesignations(subcat, "tag", des);
+				} else {				
+					var def = $("#categoryList option[value='" + subcat.toLowerCase().replace(/[\'\"]/g, "") + "']").attr("data-default");
+					filterDesignations(subcat, "tag", def);
+				}				
+			} else if (des) {
+				setCategories("default");	
+				filterDesignations(des, "search", des);
+			} else if (urlSearch) {
+				setCategories("default");
+				filterDesignations(urlSearch, "search");
+			} else if (cat) {
+				// This should be run if a category is sent, but no subcategory.  Should work for all four categories.
+				updateCategories(cat);
+				setCategories(cat);
+			} else {
+				setCategories("default");
+				filterDesignations("Unrestricted", "tag", "d68341c5-71e8-4362-b8ab-1ecb3b192432");
+			}
+			$('#designationId').select2(select2options);
+			unblockForm($(".donationForm"));			
+		};
+		queryFailure = function(obj) {
+			unblockForm($(".donationForm"));
+		};		
+		var queryResults = queryService.getResults(queryInstanceId, querySuccess, queryFailure, filters);
+	}
+	
+	function setValidationMessage(html) { //console.log('setValidationMessage');
+        $(".validation").html(html);
+        $('html, body').animate({ scrollTop: $('.validation').offset().top - 200 }, 'fast');
+    }
+
+	function convertErrorToString(error) {
+		/*  Possible errors - might help to have cases for all:
+		
+			RecordNotFound (106)
+			RequiredFieldMissing (101)
+			InvalidFieldSupplied (102)
+			ValueBelowMinimum (103)
+			ValueExceedsMaximum (104)
+			ValueNotAllowed (105)
+			ExceedsMaximumLength (107)*/
+			
+        if (error) {
+            if (error.Message) return error.Message;
+            switch (error.ErrorCode) {
+                case 101:
+                    return error.Field + " is required.";
+				case 102:
+                    return error.Field + " is not valid.";	
+				case 103:
+                    return error.Field + " is below the minimum required.";	
+				case 104:
+                    return error.Field + " is above the maximum value.";	
+                case 105:
+                    return error.Field + " is not valid.";
+                case 106:
+                    return "Record for " + error.Field + " was not found.";
+				case 107:
+                    return error.Field + " exceeds the maximum character length.";	
+                case 203:
+					var url = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + location.pathname;
+                    return '<p>The donation was not completed. Click the link below to return to the donation form:</p><p><a href="' + url + '">' + url + '</a></p>';
+                default:
+                    return "Error code " + error.ErrorCode + ".";
+            }
+        }
+    }
+
+    function convertErrorsToHtml(errors) {
+        var i, message = "Unknown error.<br/>";
+        if (errors) {
+            message = "";
+            for (i = 0; i < errors.length; i++) {
+                message = message + convertErrorToString(errors[i]) + "<br/>";
+            }
+        }
+        return message;
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    function validatePhone(phone) {
+      if (phone) {
+        var re = /^[0-9 \+\)\(\-]{6,20}\s?((([xX]|[eE][xX][tT])\.?\s*(\d+))*)$/;			
+        return re.test(phone);
+      } else {
+        return false; // Was 'return true'. Changed to 'return false' to get it to work.
+      }
+    }	
+	
+	function blockForm(element) {
+        if (!blocked) {
+            BLACKBAUD.api.blockElement(element);
+            blocked = true;
+        }
+    }
+
+    function unblockForm(element) {
+        BLACKBAUD.api.unblockElement(element);
+        blocked = false;
+    }
+	/* End helper functions */	  
+		
+		 /* Set up form */
+		 
+		// Attach our event listener to the donate button
+	    $('.btn-donate').click(function(e) {
+	      // Stop the button from submitting the form
+	      e.preventDefault(); 	      
+	      setValidationMessage("");
+	      
+          if (myGift.validate(3)) {
+        	  sendData();
+          }
+		});
+		 		 
+		 $(".designation-categories a").on("click", function(e) {
+				e.preventDefault();				
+				updateCategories(e);
+			});
+		 $("#designationSearch").on("keyup", function(e) {
+				var txt = $(this).val();
+				if (e.which == 13) {
+					e.preventDefault();
+					if (txt != "") filterDesignations(txt, "search");
+				}
+			});
+			$("#designationSearchBtn").on('click', function(e) {
+				var txt = $("#designationSearch").val();
+				e.preventDefault();
+				if (txt != "") filterDesignations(txt, "search");
+			});
+			
+			// when designation selector changes, run function to set description
+			$(".designations").on("change", function(e) {
+				setDescription();
+				$(".validation-message").remove();
+			});
+			
+			$(".amounts a, .amounts .otherAmt").on("click", function(e) {
+				e.preventDefault();
+				$(".amounts a, .amounts .otherAmt, .amounts input").removeClass("selected");
+				$(this).addClass("selected");
+				
+				// if it's 'other', add 'selected' class to input and give that input focus
+				if ($(this).hasClass('otherAmt')) {
+					$(this).find("> input").addClass("selected").focus().select();
+					$("#otherAmtInstr").show();
+					$(".validation-message").hide();
+				} else {
+					$('.amounts #otherAmtInput').val($(this).attr('data-value'));
+					$("#otherAmtInstr").hide();
+				}
+			});
+			
+			$(".gift-count-indicator").on("click", function() {
+			if (parseInt($(".gift-count").text()) > 0) {
+				stepUpdate(myGift, 2);
+				}
+				else {
+				}
+			});
+			
+			$("#cancelAddLineItem").on("click", function() {
+				stepUpdate(myGift, 2);
+			});
+			$("#continueToYourInfo").on("click", function() {
+				stepUpdate(myGift, 3);
+			});
+			$("#returnToGiftDetail, .add-gift").on("click", function() {
+				// If a designation is passed in the URL, load that, else load default
+				if (urlSearch) { 
+					updateCategories("search");
+					filterDesignations(urlSearch, "search");
+				} else if (des) {
+					updateCategories("search");
+					filterDesignations(des, "search");
+				} else {
+					setCategories("default");
+					filterDesignations("Unrestricted", "tag", "d68341c5-71e8-4362-b8ab-1ecb3b192432");
+				}				
+				stepUpdate(myGift, 1);
+			});
+			$(".add-gift").on('click', function() {
+				// If a designation is passed in the URL, load that, else load default
+				if (urlSearch) { 
+					filterDesignations(urlSearch, "search");
+				} else if (des) {
+					filterDesignations(des, "search");
+				} else {
+					setCategories("default");
+					updateCategories("school");
+					filterDesignations("Unrestricted", "tag", "d68341c5-71e8-4362-b8ab-1ecb3b192432");
+				}				
+				stepUpdate(myGift, 1);
+			});
+			$("#returnToReview").on("click", function() {
+				stepUpdate(myGift, 2);
+			});
+			
+			$(".breadcrumbs a").on("click", function(e) {
+				e.preventDefault();
+				stepUpdate(myGift, $(this).attr("data-step"));
+			});
+			
+			$('#categoryList').select2(select2options);
+			$("#categoryList").change(function() {
+				filterDesignations($(this).val(), "tag", $("#categoryList option:selected").attr("data-default"));
+			});	
+			
+			$(".form").change(function() {				
+				myGift.update();
+			});
+			
+			$(".addLineItem").click(function() {
+				var id = $(".designations .designationId option:selected").val();
+				var name = $(".designations .designationId option:selected").text();
+				var descr = '';				
+				var amount = 0;
+				if ($('.designations #otherAmtInput').hasClass('selected')) {
+					amount = $('.designations #otherAmtInput').val();
+					amount = amount.toString();
+					amount = amount.replace(/[,$]+/g,'');					
+					amount = parseFloat(amount);
+				} else {
+					amount = $('.designations .amount.selected').attr('data-value');
+				}
+				
+				if ($("#designationId option:selected").attr("data-other") == 'true') {
+					descr = $("#otherDesignationInput").val();
+				} else {
+					descr = '';
+				}
+				myGift.addLineItem(amount, id, name, descr);
+				
+			});
+		 
+			// Create amount inputs from amtArray (top of code)
+			renderAmountList(amtArray);			
+			$("input[name='amount']:first").prop("checked",true);
+			
+			// run function to update amount inputs if radio buttons and/or other amount input change
+			$("input[name='amount']").change(function() {
+				updateAmountInputs()
+			});
+			$("#otherAmountInput").blur(function() {
+				updateAmountInputs()
+			});
+			updateAmountInputs();
+			
+			$("#recurringGift").on("change", function(e) {				
+				recurringHandler();
+			});
+			
+			$("#frequency").change(function() {
+				if ($("#frequency").val() == 4) {
+					$("#month").parent().show();
+					$('#month').select2(select2options);
+				} else {
+					$("#month").parent().hide();
+				}
+			});
+			
+			// auto populate start date
+			$("#startDate").val(moment().format("MM/DD/YYYY"));
+			populateStartDate();
+			// auto-populate day/month based on start date
+			$("#startDate").change(function() {
+				populateStartDate();				
+			});
+			
+			// toggle end date field
+			$("#endDateCheckbox").on('change', function(e) {
+				if (this.checked == true) {
+					$("#endDate").show();					
+				} else {
+					$("#endDate").hide();	
+				}
+			});
+			
+			// hide/show business section
+			$("#donorType").change(function() {
+				$(".validation-message").remove();
+				if($(this).val() == "Business") {
+					$("#businessSection").show();
+					$(".comments-input").append('<div id="commentInstr" class="input-helper">Please enter your organization\'s contact information in the Special Instructions/Comments area above.</div>'); // append instructions to comment field 
+				} else {
+					$("#businessSection").hide();
+					$("#commentInstr").remove();
+					
+				}
+			});
+			
+			$(function() {
+				$( "#startDate" ).datepicker({
+					minDate: -0,
+					changeMonth: true,
+					changeYear: true/*,
+					showOn: "button",
+					buttonImage: "images/calendar.gif",
+					buttonImageOnly: true,
+					buttonText: "Select date"*/
+				});
+				$( "#endDate" ).datepicker({
+					minDate: -0,
+					changeMonth: true,
+					changeYear: true/*,
+					showOn: "button",
+					buttonImage: "images/calendar.gif",
+					buttonImageOnly: true,
+					buttonText: "Select date"*/
+				});
+			});			
+								
+			// Set tribute/acknowledgee subsections to hidden initially
+			$("#tributeInfoSub").hide();
+			$("#acknowledgeeInfoSub").hide();
+			
+			// Event handlers for tribute/acknowledgee checkboxes
+			$("#tributeCheckbox").change(function() {
+				if(this.checked) {
+					$("#tributeInfoSub").show();
+					$('#ddlTribute').select2(select2options);
+					if (!$("#chkAcknowledge").attr("checked") && !hideack) $("#chkAcknowledge").click();						
+				} else {
+					$("#tributeCheckbox").prop("checked", false);
+					$("#tributeInfoSub").hide();
+					$("#acknowledgeeInfoSub").hide();
+				}
+			});
+			
+			$("#chkAcknowledge").change(function() {
+				if(this.checked) {
+					$("#acknowledgeeInfoSub").show();
+					$('#acknowledgeeCountry').select2(select2options);
+					$("#acknowledgeeState option[value='GA']").attr("selected","selected");
+					$('#acknowledgeeState').select2(select2options);
+				} else {
+					$("#acknowledgeeInfoSub").hide();
+				}
+			});
+			
+			$('#giftType').select2(select2options);
+			$('#donorType').select2(select2options);
+			
+			
+			$("#tributeCheckbox").change(function() {
+				if ($(this).prop("checked") == true && $("#recurringGift").prop("checked") == true) {
+					var conf = confirm("A tribute cannot be made with a recurring gift.  Do you want to change your gift to a tribute instead of a recurring gift?");
+				
+					if (conf == true) {	
+						// change to one-time gift and hide recurrence section
+						if (!hideack) $("#chkAcknowledge").click();
+						$(".gift-frequency").removeClass("selected");
+						$("#recurringGift").prop("checked", false);
+						myGift.update();
+						$("#recurrenceSection").hide();
+						$("#returnToGiftDetail").show();
+						$("#giftType").parent().show();
+						$('#giftType').select2(select2options);
+					} else {
+						// uncheck tribute checkbox and hide tribute section
+						$("#tributeCheckbox").removeAttr("checked");
+						$("#tributeCheckbox").prop("checked", false);
+						$("#returnToGiftDetail").hide();
+						$("#tributeInfoSub").hide();
+						return;
+					}
+				}
+				myGift.displayLineItems();
+			});			
+			$(".tributeDefinition .type").change(function() {
+				var typeTxt = $(this).val();
+				if (typeTxt.indexOf('pet') >= 0) {
+					$(".tributeDefinition .firstName").val("");
+					$(".tributeDefinition .tribute-fname-input").hide();
+					$(".tributeDefinition .tribute-lname-label").text("Pet's name:");
+				} else {
+					$(".tributeDefinition .tribute-fname-input").show();
+					$(".tributeDefinition .tribute-lname-label").text("Last name:");
+				}
+			});
+		
+		/* end setup */
+			
+	}(jQuery));
+</script>
+
+<script type="text/javascript">                                
+$(function() {
+        $('a[href*="#"]:not([href="#"])').click(function() {
+          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+              $('html,body').animate({
+          scrollTop: target.offset().top
+              }, 1000);
+              return false;
+            }
+          }
+        });
+      });
+</script>
+
+<script type="text/javascript">                                
+$( function() {
+    $( "#contactDialog" ).dialog({
+      autoOpen: false,
+	  resizable: false,
+	  //closeText: "CLOSE",
+	  position: { my: "center", at: "center", of: window },
+      show: {
+        effect: "fade",
+        duration: 250
+      },
+      hide: {
+        effect: "fade",
+        duration: 250
+      },
+	  buttons: [
+		{
+		  text: "OK",
+		  icons: {
+			primary: "ui-icon-close"
+		  },
+		  click: function() {
+			$( this ).dialog( "close" );
+		  }
+	 
+		  // Uncommenting the following line would hide the text,
+		  // resulting in the label being used as a tooltip
+		  //showText: false
+		}
+	  ]
+    });
+ 
+    /*$( "#contactBtn" ).on( "click", function() {
+      $( "#contactDialog" ).dialog( "open" );
+    });*/
+  } );
+</script>
