@@ -497,9 +497,9 @@
 		display: none;
 	}
 
-	#search[aria-hidden="true"] > .container {
+	/* #search[aria-hidden="true"] > .container {
     	display: none;
-	}
+	} */
 
 	#search[aria-hidden="false"] {
 		transform: translateY(60px);
@@ -1803,6 +1803,7 @@
 
 	header .SearchTextBox {
 		height: 100%;
+		border-radius: 5px;
 		border-top-right-radius: 0 !important;
 		border-bottom-right-radius: 0 !important;
 	}
@@ -2020,6 +2021,10 @@
 
 .unhide {
     display: block !important;
+}
+
+.hide {
+	display: none !important;
 }
 
 
