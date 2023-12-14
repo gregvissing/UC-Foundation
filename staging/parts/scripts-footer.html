@@ -1,0 +1,178 @@
+<script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="https://scottaohara.github.io/a11y_accordions/assets/js/aria.accordion.min.js"></script>
+
+<script src="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/config/headroom.min.js"></script>
+<script src="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/ucf-ds/js/cinci.namespace.js"></script>
+
+<script src="https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/moment.min.js" type="text/javascript"></script>
+
+<script>    
+  	$(document).ready(function() {
+    	$("link[href*='stylesheet6']").prop("disabled", true);          
+	});
+
+  	// VARIABLES
+  
+  	// ADMIN scripts
+  	$(function() {
+	  	if ($(".bb_menu").is(":visible")) {
+    	  	// console.log("menu display");
+      		$("body").addClass("admin-mode");
+    	} else {
+      		// console.log("menu hidden");
+      		$("body").removeClass("admin-mode");
+    	}
+    });
+
+	// SEARCH scripts
+  
+  	const searchLink = document.querySelector("header .search a");
+  	const searchLabel = document.querySelector("header .search .BBFieldCaption.SearchFieldCaption");
+  	const searchContainer = document.querySelector(".search-box");
+  	const searchInput = document.querySelector(".SearchTextBox");
+  	const bodyClass = document.querySelector("body");
+  	
+  	searchLink.setAttribute("aria-expanded", "false");
+  	searchLink.setAttribute("aria-controls", "search");
+  
+  	searchLink.addEventListener("click", function (e) {
+      	e.preventDefault(); 
+      
+		if (searchLink.getAttribute("aria-expanded") === "false") {
+			searchLink.setAttribute("aria-expanded", "true");
+			searchContainer.setAttribute("aria-hidden", "false");
+          	searchInput.focus();
+          	bodyClass.classList.add("search-open");
+		} else {
+			searchLink.setAttribute("aria-expanded", "false");
+			searchContainer.setAttribute("aria-hidden", "true");
+          	bodyClass.classList.remove("search-open"); 
+		}
+	});
+  	
+  	$(".BBFieldCaption.SearchFieldCaption").addClass("visually-hidden");
+  	$(".BBFieldCaption.SearchFieldCaption").parent().addClass("searchBoxLabel");
+  	$(".SearchTextBox").parent().addClass("searchBoxTD");
+  	$(".SearchTextBox").parent().parent().parent().parent().addClass("searchBoxTable");
+  	$(".BBFormSubmitButton.SearchButton").parent().addClass("searchButtonTD");
+  
+  	document.getElementById("PC25873_txtSearch").placeholder = "Enter a keyword";
+  	document.getElementById("PC25875_txtSearch").placeholder = "Enter a keyword";
+  	
+  	/*
+  	var $searchToggle = $("li.search > a, .fa.fa-times");
+
+	$searchToggle.click(function (event) {
+		event.preventDefault();	
+      	console.log("clothes it");
+		$("#PC25836_pnlSearch").toggle();
+	}); */
+  
+  	// MAIN margin-top value
+  	function headerHeight(element) {
+  		var headerHeightValue = element.outerHeight();
+      	return headerHeightValue;
+  	}
+  	
+  	$("main").css("margin-top", headerHeight($("header")) + "px");
+  
+  	// HERO video scripts
+  	// Video Play/Pause functionality
+    function initVimeoVideo() {
+        var iframe = $("#player1")[0];
+        var player = new Vimeo.Player(iframe);
+
+        // Close using the close icon
+        $(".pause").on("click", function (e) {
+          	e.preventDefault();
+            var method = "pause";
+            player[method]();
+            $(".play, .pause").toggleClass("disabled");
+        });
+
+        // Close using the modal
+        $(".play").on("click", function (e) {
+          	e.preventDefault();
+            var method = "play";
+            player[method]();
+            $(".play, .pause").toggleClass("disabled");
+        });
+    }
+
+  	if ( $(".hero").length ) {
+    	initVimeoVideo();
+    }   
+  
+  	/* STORY READ TIME SCRIPT */
+	// Get the article text
+  	var el = document.getElementById("article"); 
+  	if (el != null) {
+      	const articleText = document.getElementById("article").innerText;
+        const time = document.getElementById("time");
+
+        // Split the text into an array of words
+        const wordsArray = articleText.split(" ");
+
+        // Count the number of words in the array
+        const wordCount = wordsArray.length;
+
+        // Calculate the estimated reading time
+        const wordsPerMinute = 200;
+        const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+        // Display the estimated reading time
+        time.innerHTML = readingTime + " min read";
+  	}
+  
+  	// Gallery - Pinned image 
+
+    const details = gsap.utils.toArray(".desktopContentSection:not(:first-child)");
+    const photos = gsap.utils.toArray(".desktopPhoto:not(:first-child)");
+
+    gsap.set(photos, { yPercent: 101 });
+
+    const allPhotos = gsap.utils.toArray(".desktopPhoto");
+
+    // create
+    let mm = gsap.matchMedia();
+
+    // add a media query. When it matches, the associated function will run
+    mm.add("(min-width: 600px)", () => {
+        // this setup code only runs when viewport is at least 600px wide
+        // console.log("desktop");
+
+        ScrollTrigger.create({
+            trigger: ".gallery",
+            start: "top top",
+            end: "bottom bottom",
+            pin: ".right"
+        });
+
+        //create scrolltrigger for each details section
+        //trigger photo animation when headline of each details section
+        //reaches 80% of window height
+        details.forEach((detail, index) => {
+            let headline = detail.querySelector("h2");
+            let animation = gsap
+                .timeline()
+                .to(photos[index], { yPercent: 0 })
+                .set(allPhotos[index], { autoAlpha: 0 });
+            ScrollTrigger.create({
+                trigger: headline,
+                start: "top 80%",
+                end: "top 50%",
+                animation: animation,
+                scrub: true,
+                markers: false
+            });
+        });
+        return () => {
+            // optional
+            // custom cleanup code here (runs when it STOPS matching)
+            // console.log("mobile");
+        };
+    });
+
+</script>
