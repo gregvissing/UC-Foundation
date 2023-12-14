@@ -1,0 +1,622 @@
+<style type="text/css">
+	html {
+		padding-top: 0px;
+	}
+	body .body_section .donationForm {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+		padding: 30px;
+	}
+	@media only screen and (max-width: 450px) {
+		body .body_section .donationForm {
+		    padding-right: 15px;
+		    padding-left: 15px;
+		}
+	}
+	@media only screen and (max-width: 360px) {
+		body .body_section .donationForm {
+		    padding-right: 10px;
+		    padding-left: 10px;
+		}
+	}
+	.navbar #contactBtn .work-request {
+		font-family: "Oswald", Helvetica, Arial, sans-serif; 
+	}
+	.donationForm .gift-count {
+		font-family: "Oswald", Helvetica, Arial, sans-serif; 
+	}
+	section#donation-form {
+		background-color: #ffffff !important;
+	}
+	#donation-form .bs-box {
+		border-top: none;
+		margin-top: 0px;
+	}
+	.donationForm .confirmation {
+		display: none;
+	}
+	.donationForm .confirmation p {
+		font-family: "Merriweather Sans", Arial, Helvetica, sans-serif;
+	    color: #484848;
+	    font-size: 15px;
+	    line-height: 1.6;
+	}	
+	.donationForm .confirmation h2 {
+		font-family: "Merriweather Sans", Arial, Helvetica, sans-serif;
+		color: #484848;
+		font-size: 22px;
+		font-weight: 700;
+	    text-transform: none;
+	    font-style: normal;
+	}
+	.donationForm .designation-categories a, .donationForm .amounts a {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	.donationForm .designation-categories a.selected i {
+	    text-align: center;
+	    background-color: #ba0c2f;
+	    color: #ffffff;
+	    text-decoration: none;
+	}
+	.donationForm .designation-categories a:hover i {
+		text-align: center;
+	    background-color: inherit;
+	    color: #ffffff;
+	    text-decoration: none;
+	}	
+	.donationForm fieldset.otherDonationInformation {
+		display: block;
+	}
+	.body_section .donationForm h3 {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+		padding: 0;
+		text-transform: uppercase;
+	}
+	.body_section .donationForm .step2 h3, .body_section .donationForm .step1 h3 {
+		font-size: 28px;
+	}
+	.body_section .donationForm .gift-count-indicator {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	#donation-form .body_section {
+		width: 100% !important;
+	}
+	#donation-form .body_section .donationForm .gifts .steps #lineItems div {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	#donation-form .body_section .donationForm #lineItems div a.add-gift { 
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	#donation-form .body_section .donationForm #lineItems .line-item .line-item-amount, #donation-form .body_section .donationForm #lineItems .line-item-name {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	#donation-form .body_section .donationForm #lineItems .line-item a.line-item-remove, #donation-form .body_section .donationForm #lineItems .line-item {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	#donation-form .body_section .donationForm #lineItems h3 {
+		font-size: 1.3em;
+	}
+	.donationForm #recurrenceSection #endDateCheckbox {
+		margin-top: 5px;
+	}
+	.donationForm .input-helper {
+		font-family: "Oswald", Helvetica, Arial, sans-serif;
+	}
+	.donationForm .step-buttons .step-button {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.donationForm textarea {
+		height: auto;
+	}
+	.donationForm .chosen-container .chosen-single, .chosen-container-active.chosen-with-drop .chosen-single {
+		padding-top: 0;
+	}
+	.chosen-container-single .chosen-single div b {
+	    margin-top: 6px;
+	}
+	.donationForm #confirmation p {
+		font-family: "Merriweather Sans", Arial, Helvetica, sans-serif;
+	    color: #484848;
+	    font-size: 15px;
+	    line-height: 1.6;
+	}
+	.donationForm #confirmation h2 {		
+		font-family: "Merriweather Sans", Arial, Helvetica, sans-serif;
+		color: #484848;
+		font-size: 22px;
+		font-weight: 700;
+	    text-transform: none;
+	    font-style: normal;
+	}
+  .donationForm .Select-option.dtd-dropdown-is-selected, .donationForm .Select-option.dtd-dropdown-is-selected span, .donationForm .Select-option.dtd-dropdown-is-selected span b, .donationForm .Select-option.dtd-dropdown-is-selected span em {
+		color: #fff;
+	}
+	.donationForm #designationSearchBtn {
+		/*height: 2.3em;*/
+		height: 35px;
+	}
+/* Select2 styles */
+	.donationForm .select2 {
+		width: 100% !important;
+	}
+	.donationForm .select2-selection--single {
+		height: 35px !important;
+		border-color: #ccc !important;
+	}
+	.donationForm .select2-selection__rendered {
+		line-height: 35px !important;
+	}
+	.donationForm .select2-selection__arrow {
+		height: 35px !important;
+	}
+	.donationForm .select2-container--default .select2-selection--single {
+		border-radius: 0;
+	}
+</style>
+
+<div class="donationForm width-700">
+	<div class="breadcrumbs form-group">
+		<a href="#" class="breadcrumb bc-designation active" data-step="1">GIFT DETAILS</a><span class="divider">></span>
+		<a href="#" class="breadcrumb bc-review" data-step="2">GIFT REVIEW</a><span class="divider">></span>
+		<a href="#" class="breadcrumb bc-billing" data-step="3">YOUR INFORMATION</a><span class="divider">></span>
+		<span class="breadcrumb bc-payment">PAYMENT</span>
+	</div>	
+    <div class="validation"></div>
+    <div class="form">      
+		<div class="gift">
+		
+		<!------ STEP 1 ------>
+		<div class="steps step1 active">
+			<fieldset class="donationInformation">			
+				<div class="designations">
+					<div>
+				<div class="pull-right">
+				<span class="gift-count-indicator text-right" style="line-height:3.3em;">Your Gifts <span class="gift-count badge">0</span></span></div>
+					<div><h3 class="top-heading">For Cincinnati. For Generations.</h3></div>
+					</div>
+					<br />
+					<p>Where would you like to make your commitment?</p>
+					<div class="designation-categories form-group">
+						<a href="#" id="school" class="selected">SCHOOL OR COLLEGE</a>
+						<a href="#" id="campus" class="">OTHER AREA</a>
+						<a href="#" id="cause" class="">A CAUSE</a>
+						<a href="#" id="search" class=""><span style="color:transparent;line-height:0;font-size:0;">Search</span><i class="fa fa-search" aria-hidden="true"></i></a>
+					</div>					
+					<div class="formrow category-select foΩrm-group">
+						<label for="categoryList" id="categoryLabel" class="labelText">Which school or college?</label>
+                      	<div class="relative req-field">                          
+							<select class="chosen-select categoryList form-control select2-input" id="categoryList" name=" ">
+								<option value="" selected="selected" />Select the school or college
+							</select>
+                          	<span class="req">*</span>
+                        </div>
+					</div>					
+					<div class="formrow designation-search form-group">
+						<p><label for="designationSearch" style="width: 350px;">Find a designation by searching below:</label></p>
+						<input type="text" class="form-control" id="designationSearch" style="width:90%;margin-top:0px;" placeholder="Search for a designation" />
+                      	<button id="designationSearchBtn" style="width:10%;"><i class="fa fa-search" style="display:block;" aria-hidden="true">
+							<span style="line-height: 0;font-size: 0;color: transparent;">Search for a designation</span></i>
+                      	</button>
+					</div>					
+					<div class="formrow designation-select form-group">
+						<!-- <label for="designationId">Gift designation:</label> -->
+						<label for="designationId" class="labelText">Which designation? <span id="designationCount">&nbsp;</span></label>
+                      	<div class="relative req-field">
+                          	<select class="chosen-select designationId form-control select2-input" id="designationId" name=" ">							
+                              	<option value="" selected="selected" />Choose a designation
+							<!-- <option value="D68341C5-71E8-4362-B8AB-1ECB3B192432">Unspecified</option> -->
+							</select>
+                          	<span class="req">*</span>
+                      	</div>
+					</div>					
+					<div id="designationDescription">
+						<p id="desDescrText">&nbsp;</p>
+					</div>					
+					<div id="otherDesignation" class="otherDesignation">
+						<input type="text" maxlength="240" class="form-control" id="otherDesignationInput" class="otherDesignationInput" />
+					</div>						
+					<!-- Begin redesigned amount buttons -->
+					<br />
+					<div class="formrow form-group">
+						<p>How much would you like to give?</p>
+						<div class="amounts">							
+							<a href="#" id="amt1" class="amount" data-value="50">$50</a>
+							<a href="#" id="amt2" class="amount" data-value="100">$100</a>
+							<a href="#" id="amt3" class="amount" data-value="250">$250</a>
+							<a href="#" id="amt4" class="amount" data-value="500">$500</a>
+							<a href="#" id="amt5" class="amount" data-value="1000">$1000</a>
+							<a href="#" id="amt6" class="amount" data-value="1500">$1500</a>
+							<a href="#" id="amt7" class="amount" data-value="2500">$2500</a>
+							<a href="#" id="amt8" class="amount" data-value="5000">$5000</a>                          
+                          <label for="otherAmtInput" class="otherAmt amount" style="width: 98%;"><span class="input-group-addon" style="font-weight:bold;">$</span>
+                              <input type="text" class="form-control" id="otherAmtInput" style="font-family: Helvetica, Arial, sans-serif;font-weight:400;" placeholder="Your gift amount" autocomplete="off" />
+							</label> 	
+							<div id="otherAmtInstr" style="margin-top:5px;"><div class="input-helper" style="text-align:center;">Enter an amount in the input field above.</div></div>
+						</div>
+					</div>
+					<div class="formrow">
+					<div class="gift-frequencies form-group">
+						<input type="checkbox" id="recurringGift" class="gift-frequency" data-value="RECURRING GIFT" />
+					<label for="recurringGift" id="gift-frequency-label">I want to keep my generosity going with automatic payments.</label>
+					</div>
+				</div>
+				<div id="recurrenceSection" class="recurrence" style="display:none;">
+					<div class="formrow form-group frequency-select"><!-- "Day 1 of every month"... this will be different now that they can start on any day. -->
+						<label for="frequency" class="labelText">Installment Frequency:</label>
+                      	<div class="relative req-field">
+							<select id="frequency" class="chosen-select frequency form-control">
+								<option value="2" />Monthly
+								<option value="3" />Quarterly
+								<option value="4" />Annual
+							</select>
+                          	<span class="req">*</span>
+                      	</div>
+					</div>					
+					<div class="formrow form-group start-input"><!-- Start and end dates - use a date picker -->
+						<label for="startDate" class="labelText">Starting Date:</label>
+						<div class="relative req-field">
+                            <input type="text" maxlength="35" id="startDate" class="startDate form-control" placeholder="mm/dd/yyyy" value="" />
+                            <span class="req">*</span>
+                        </div>
+					</div>
+					<div class="formrow form-group"><!-- Start and end dates - use a date picker -->
+						<input type="checkbox" class="endDateCheckbox" id="endDateCheckbox" />
+						<label for="endDate" class="labelText">Add an ending date (optional)</label>
+						<input type="text" maxlength="35" id="endDate" class="endDate form-control" placeholder="mm/dd/yyyy" value="" />
+					</div>				
+					<div class="formrow form-group month-select">
+						<label for="month" class="labelText">Month:</label>
+                        <div class="relative req-field">
+                            <select id="month" class="chosen-select month form-control select2-input">
+                                <option value="select a value" selected="selected" />select a value
+                                <option value="1" />January
+                                <option value="2" />February
+                                <option value="3" />March
+                                <option value="4" />April
+                                <option value="5" />May
+                                <option value="6" />June
+                                <option value="7" />July
+                                <option value="8" />August
+                                <option value="9" />September
+                                <option value="10" />October
+                                <option value="11" />November
+                                <option value="12" />December
+                            </select>
+                            <span class="req">*</span>
+                        </div>
+					</div>					
+					<div class="formrow form-group">
+						<label for="dayOfMonth" class="labelText">Day of Month:</label>
+                        <div class="relative req-field">
+                            <select id="dayOfMonth" class="dayOfMonth form-control select2-input">
+                                <option value="select a value" selected="selected" />select a value
+                                <option value="1" />1
+                                <option value="2" />2
+                                <option value="3" />3
+                                <option value="4" />4
+                                <option value="5" />5
+                                <option value="6" />6
+                                <option value="7" />7
+                                <option value="8" />8
+                                <option value="9" />9
+                                <option value="10" />10
+                                <option value="11" />11
+                                <option value="12" />12
+                                <option value="13" />13
+                                <option value="14" />14
+                                <option value="15" />15
+                                <option value="16" />16
+                                <option value="17" />17
+                                <option value="18" />18
+                                <option value="19" />19
+                                <option value="20" />20
+                                <option value="21" />21
+                                <option value="22" />22
+                                <option value="23" />23
+                                <option value="24" />24
+                                <option value="25" />25
+                                <option value="26" />26
+                                <option value="27" />27
+                                <option value="28" />28
+                                <option value="29" />29
+                                <option value="30" />30
+                                <option value="31" />31
+                            </select>
+                            <span class="req">*</span>
+                        </div>
+					</div>
+				</div>
+					<!-- End redesigned amount buttons -->
+					<div class="step-buttons form-group">
+						<input id="cancelAddLineItem" class="step-button form-control btn btn-default" type="button" value="Return to review" style="display:none;" />
+						<input id="addLineItem" class="addLineItem step-button form-control btn btn-default" type="button" value="Add Gift" />						
+					</div>
+				</div>					
+			</fieldset>
+		</div>
+		
+		<!------ STEP 2 ------>
+		<div class="steps step2">		
+		<div>
+		<div class="pull-right"><span class="gift-count-indicator text-right">Your Gifts <span class="gift-count badge">0</span></span></div>
+		<div><h3 class="top-heading">Gift Review</h3></div>
+		</div>
+		<br />
+		<div id="lineItems" class="line-items form-group">
+			<h3>Gifts</h3>
+				<div class="line-item" style="text-align:center;">
+					<p style="color: #666">Your gift cart is currently empty.</p>
+					<p><a style="color:#69C;font-size:.9em;padding:5px;" href="#" class="add-gift">+ Add a gift</a></p>
+				</div>
+		</div>		
+		<fieldset class="otherDonationInformation">
+			<div>				
+				<br />				
+				<div class="attributes">
+					<div class="formrow form-group">
+						<label for="giftType" class="labelText">Gift type:</label>
+						<select id="giftType" class="chosen-select giftTypeTxt form-control">
+							<option value="New Gift" selected="selected" />New Gift
+							<option value="Pledge Payment" />Pledge Payment
+						</select>
+					</div>					
+					<div class="formrow form-group">
+						<label for="donorType" class="labelText">I am making this gift as a(n):</label>
+						<select id="donorType" class="chosen-select donorTypeTxt form-control">
+							<option value="Individual" selected="selected" />Individual
+							<option value="Business" />Business
+						</select>
+					</div>
+					
+					<!-- Business fields - will only show, and be required, if 'Business' is chosen as donor type -->
+					<div id="businessSection" style="display:none;">
+						<div class="formrow form-group business-name-input">
+							<label for="businessNameTxt" class="labelText">Business Name:</label>
+                            <div class="relative req-field">
+                                <input type="text" maxlength="60" id="businessNameTxt" class="orgNameTxt form-control" value="" />
+                                <span class="req">*</span>
+                            </div>
+						</div>						
+						<div class="formrow form-group business-rep-input">
+							<label for="repNameTxt" class="labelText">Representative Name:</label>
+                            <div class="relative req-field">
+                                <input type="text" maxlength="35" id="repNameTxt" class="orgRepTxt form-control" value="" />
+                                <span class="req">*</span>
+                            </div>
+						</div>						
+						<div class="formrow form-group business-title-input">
+							<label for="repTitleTxt" class="labelText">Representative Title:</label>
+                            <div class="relative req-field">
+                                <input type="text" maxlength="35" id="repTitleTxt" class="orgTitleTxt form-control" value="" />
+                                <span class="req">*</span>
+                            </div>
+						</div>
+					</div>
+				</div>
+				<!-- End business fields -->
+				
+				<div class="formrow form-group comments-input">
+					<label for="comments" class="labelText">Special Instructions/Comments:</label>
+					<textarea id="comments" rows="3" class="comments form-control" maxlength="255"></textarea>
+				</div>				
+			</div>
+			<br />
+        </fieldset>		
+		<fieldset class="tributeInformation">			
+			<div class="tribute">
+				<div class="BBListingHeading DonationListingHeading" style="border:none;background-color:transparent;">
+					<span id="lblTributeHeading">Tribute Information</span>
+					<span class="tributeSpan form-group">
+						<input id="tributeCheckbox" type="checkbox" />
+						<label for="tributeCheckbox" class="tributeLabel">I would like to make my gift as a tribute</label>
+					</span>
+				</div>				
+				<div id="tributeInfoSub">					
+					<div class="tributeDefinition">
+						<div class="formrow form-group tribute-type-input">
+							<label for="ddlTribute" class="labelText">Type:</label>
+                            <div class="relative req-field">
+                                <select name="ddlTribute" id="ddlTribute" class="type form-control">
+                                    <option selected="selected" value="0" />select a value
+                                    <option value="in honor of" />in honor of person
+                                    
+                                    <option value="in memory of" />in memory of person
+                                    <option value="in memory of pet" />in memory of pet
+                                </select>
+                                <span class="req">*</span>
+                            </div>
+						</div>						
+						<div class="formrow form-group tribute-fname-input">
+							<label for="txtTributeFirstName" class="labelText">First name:</label>
+							<input name="txtTributeFirstName" type="text" maxlength="30" id="txtTributeFirstName" autocomplete="nope" class="firstName form-control" />		
+						</div>
+						<div class="formrow form-group tribute-lname-input">
+							<label for="txtTributeLastName" class="tribute-lname-label labelText">Last name:</label>
+                            <div class="relative req-field">
+                                <input name="txtTributeLastName" type="text" maxlength="60" id="txtTributeLastName" autocomplete="nope" class="lastName form-control" />
+                                <span class="req">*</span>
+                            </div>
+						</div>
+						<div class="formrow form-group tribute-instr-input">
+							<label for="txtTributeDescription" class="labelText">Special Instructions:</label>
+                            <div class="relative req-field">
+                                <input name="txtTributeDescription" type="text" maxlength="255" id="txtTributeDescription" autocomplete="nope" class="description form-control" />
+                                <span class="req">*</span>
+                            </div>    
+                            <div class="input-helper" style="">If your gift honors/memorializes a pet, please indicate species and owner's names for appropriate acknowledgement.</div>
+						</div>
+					</div>
+					<div class="formrow form-group">
+						<input id="chkAcknowledge" type="checkbox" name="chkAcknowledge" />
+						<label for="chkAcknowledge" class="labelText">Provide contact information for honoree or next of kin. Please note address information is required if you would like to specify a contact.</label>
+					</div>
+					<div id="acknowledgeeInfoSub">
+						<div class="acknowledgee">							
+							<div class="formrow form-group ackn-fname-input">
+								<label for="txtAcknowledgeeFirstName" class="labelText">First name:</label>
+								<input id="txtAcknowledgeeFirstName" class="firstName form-control" type="text" maxlength="30" autocomplete="nope" name="txtAcknowledgeeFirstName" />
+							</div>
+							<div class="formrow form-group ackn-lname-input">
+								<label for="txtAcknowledgeeLastName" class="labelText">Last name:</label>
+                                <div class="relative req-field">
+                                    <input id="txtAcknowledgeeLastName" class="lastName form-control" type="text" maxlength="60" autocomplete="nope" name="txtAcknowledgeeLastName" />
+                                    <span class="req">*</span>
+                                </div>
+							</div>							
+							<div class="formrow form-group ackn-country-input">								
+								<label for="acknowledgeeCountry" class="labelText">Country:</label>
+                                <div class="relative req-field">
+                                    <select class="country form-control select2-input" autocomplete="nope" id="acknowledgeeCountry">
+                                    </select>
+                                    <span class="req">*</span>
+                                </div>
+							</div>
+							<div class="formrow form-group required ackn-address-input">								
+								<label for="acknowledgeeStreetAddress" class="labelText">Address lines:</label>
+                                <div class="relative req-field">
+                                    <textarea class="addressLines form-control" autocomplete="nope" id="acknowledgeeStreetAddress" cols="20" rows="2" maxlength="148"></textarea>
+                                    <span class="req">*</span>
+                                </div>
+							</div>
+							<div class="formrow form-group required ackn-city-input">								
+								<label for="acknowledgeeCity" class="labelText">City:</label>
+                                <div class="relative req-field">
+                                    <input type="text" class="city form-control" autocomplete="nope" id="acknowledgeeCity" maxlength="50" placeholder="enter a city" />
+                                    <span class="req">*</span>
+                                </div>
+							</div>
+							<div class="formrow form-group ackn-state-input">								
+								<label for="acknowledgeeState" class="labelText">State:</label>
+                                <div class="relative req-field">
+                                    <select class="state form-control select2-input" autocomplete="nope" id="acknowledgeeState">
+                                    </select>
+                                    <span class="req">*</span>
+                                </div>
+							</div>							
+							<div class="formrow form-group required ackn-zip-input">								
+								<label for="acknowledgeePostalCode" class="labelText">ZIP/Postal code:</label>
+                                <div class="relative req-field">
+                                    <input type="text" class="postalCode form-control" autocomplete="nope" id="acknowledgeePostalCode" maxlength="10" placeholder="enter a zip code" />
+                                    <span class="req">*</span>
+                                </div>
+							</div>
+							<div class="formrow form-group ackn-phone-input">								
+								<label for="acknowledgeePhone" class="labelText">Phone:</label>
+								<input type="text" class="phone form-control" autocomplete="nope" id="acknowledgeePhone" maxlength="50" placeholder="enter a phone" />
+							</div>
+							<div class="formrow form-group required ackn-email-input">								
+								<label for="acknowledgeeEmailAddress" class="labelText">Email:</label>
+								<input type="text" class="email form-control" autocomplete="nope" id="acknowledgeeEmailAddress" maxlength="100" placeholder="enter an email" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>		
+		<div class="step-buttons form-group">
+			<input id="returnToGiftDetail" class="step-button form-control btn btn-default" type="button" value="BACK" />
+			<input id="continueToYourInfo" class="step-button form-control btn btn-default" type="button" value="CONTINUE" />
+		</div>
+		</div>		
+		</div>		
+		
+		<!------ STEP 3 ------>
+		<div class="steps step3">
+			<fieldset class="billingInformation">				
+				<div>
+				<div class="pull-right"><span class="gift-count-indicator text-right">Your Gifts <span class="gift-count badge">0</span></span></div>
+				<div><h3 class="top-heading">Your Information</h3></div>
+				</div>
+				<br />
+				<div class="donor">					
+					<div class="formrow form-group required fname-input">						
+						<label for="firstName" class="labelText">First name:</label>
+                        <div class="relative req-field">
+                            <input type="text" class="firstName form-control" id="firstName" maxlength="30" placeholder="" />
+                            <span class="req">*</span>
+                        </div>
+					</div>
+					<div class="formrow form-group required lname-input">						
+						<label for="lastName" class="labelText">Last name:</label>
+                      	<div class="relative req-field">
+							<input type="text" class="lastName form-control" id="lastName" maxlength="60" placeholder="" />
+                            <span class="req">*</span>
+                      	</div>
+					</div>					
+					<div class="address">
+						<div class="formrow form-group required country-input">							
+							<label for="country" class="labelText">Country:</label>
+                          	<div class="relative req-field">
+								<select class="chosen-select country form-control select2-input" id="country">
+								</select>
+                                <span class="req">*</span>
+                          	</div>
+						</div>
+						<div class="formrow form-group required address-input">							
+							<label for="streetAddress" class="labelText">Address lines:</label>
+                            <div class="relative req-field">
+                                <textarea class="streetAddress form-control" id="streetAddress" cols="20" rows="2" maxlength="148"></textarea>
+                                <span class="req">*</span>
+                            </div>
+						</div>
+						<div class="formrow form-group required city-input">							
+							<label for="city" class="labelText">City:</label>
+                            <div class="relative req-field">
+                                <input type="text" class="city form-control" id="city" maxlength="50" placeholder="" />
+                                <span class="req">*</span>
+                            </div>
+						</div>
+						<div class="formrow form-group required state-input">							
+							<label for="state" class="labelText">State/Province:</label>
+                          	<div class="relative req-field">
+								<select class="chosen-select state form-control select2-input" id="state">
+								</select>
+                              	<span class="req">*</span>
+                          	</div>
+						</div>
+						<div class="formrow form-group required zip-input">							
+							<label for="postalCode" class="labelText">ZIP/Postal code:</label>
+                            <div class="relative req-field">
+                                <input type="text" class="postalCode form-control" id="postalCode" maxlength="10" placeholder="" />
+                                <span class="req">*</span>
+                            </div>
+						</div>
+					</div>					
+					<div class="formrow form-group required email-input">						
+						<label for="emailAddress" class="labelText">Email:</label>
+                      	<div class="relative req-field">
+							<input type="text" class="emailAddress form-control" id="emailAddress" maxlength="100" placeholder="" value="" />
+                          	<span class="req">*</span>
+                      	</div>
+					</div>
+					<div class="formrow form-group required phone-input">						
+						<label for="phone" class="labelText">Phone:</label>
+                      	<div class="relative req-field">
+							<input type="text" class="phone form-control" id="phone" maxlength="50" placeholder="" />
+                            <span class="req">*</span>
+                      	</div>
+					</div>
+					<div class="formrow">
+						<label class="labelText">UGA social media accounts occasionally recognize donors. Share your social media handles for possible recognition.</label>
+						<div class="input-group">
+							<span class="input-group-addon" style="height:100%;"><i class="fab fa-instagram"></i></span>
+							<input id="instagram" type="text" class="form-control" name="instagram" placeholder="Instagram Handle" autocomplete="off" style="margin: 0;" />
+							<span class="input-group-addon" style="height:100%;"><i class="fab fa-twitter"></i></span>
+							<input id="twitter" type="text" class="form-control" name="twitter" placeholder="Twitter Handle" autocomplete="off" style="margin: 0;" />
+						</div>
+					</div>
+				</div>
+			</fieldset>			
+			<div class="formrow">
+				<script>var DDCONF = {API_KEY: "42GI6s9PBStSvQRv"};</script>
+				<label for="dd-company-name-input" class="labelText">See if your employer will match your gift! (optional)</label>
+				<div id="dd-company-name-input"></div>
+			</div>			
+			<div class="step-buttons form-group">
+				<input id="returnToReview" class="step-button form-control btn btn-default" type="button" value="BACK" />
+				<input id="donate" class="step-button submit form-control btn btn-default btn-donate" type="button" value="Continue" />
+			</div>
+		</div>
+    </div>	
+    <div class="confirmation" id="confirmation"></div>	
+</div>
