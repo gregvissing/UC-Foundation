@@ -2411,7 +2411,7 @@
 	}
 
 	.donationForm .input-helper {
-    	color: #777 !important;
+    	color: var(--color-dkGray) !important;
     	font-size: 14px !important;
     	width: 100%;
     	margin: 0 0 7px 5px;
@@ -2777,7 +2777,7 @@
         vertical-align: middle;
         white-space: nowrap;
         text-align: center;
-        background-color: #777;
+        background-color: var(--color-dkGray);
         border-radius: 10px;
     }
 
@@ -2806,7 +2806,7 @@
     .list-group-item.active>.badge,
     .nav-pills>.active>a>.badge {
         color: var(--color-white);
-        background-color: #777;
+        background-color: var(--color-dkGray);
     }
 
     .list-group-item>.badge {
@@ -2930,7 +2930,7 @@
     }
 
     .donationForm .input-helper {
-        color: #777;
+        color: var(--color-dkGray);
         font-size: 14px;
         width: 100%;
         margin: 0 0 7px 5px;
@@ -3136,7 +3136,7 @@
     .line-item-amount {
         float: right;
         font-size: 1.5em;
-        color: #777;
+        color: var(--color-dkGray);
         line-height: 1.8;
     }
 
@@ -3172,7 +3172,7 @@
 
     .breadcrumbs {
         /*line-height: 1.5;*/
-        color: #777;
+        color: var(--color-dkGray);
         /*font-size: .8em;*/
         font-style: italic;
         text-align: center;
@@ -3183,7 +3183,7 @@
     }
 
     .breadcrumbs .breadcrumb {
-        color: #777;
+        color: var(--color-dkGray);
         /*background-color: none;*/
         display: inline-block;
         /*font-size: 1.3em;*/
@@ -3275,7 +3275,7 @@
     }
 
     #designationDescription #desDescrText {
-        color: #777;
+        color: var(--color-dkGray);
     }
 
     #designationCount {
@@ -3339,7 +3339,7 @@
     }
 
     #commentInstr {
-        color: #777;
+        color: var(--color-dkGray);
         margin: 3px;
     }
 
