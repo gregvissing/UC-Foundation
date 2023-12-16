@@ -2633,7 +2633,7 @@
 
 	.donationForm .designation-categories a.selected i {
 	    text-align: center;
-	    background-color: #ba0c2f;
+	    background-color: var(--color-brand-red);
 	    color: #ffffff;
 	    text-decoration: none;
 	}
@@ -2836,13 +2836,13 @@
     }
 
     h1 a {
-        color: #ba0c2f;
+        color: var(--color-brand-red);
     }
 
     h1 a:hover,
     h1 a:focus,
     h1 a:visited {
-        color: #ba0c2f;
+        color: var(--color-brand-red);
     }
 
     .BBElementBlock {
@@ -3025,7 +3025,7 @@
 
     .designation-categories a.selected {
         text-align: center;
-        background-color: #ba0c2f;
+        background-color: var(--color-brand-red);
         color: #ffffff;
         text-decoration: none;
     }
@@ -3071,7 +3071,7 @@
     }
 
     .amounts a.selected {
-        background-color: #ba0c2f;
+        background-color: var(--color-brand-red);
         color: #ffffff;
         text-decoration: none;
     }
@@ -3110,7 +3110,7 @@
     }
 
     .gift-frequencies .gift-frequency.selected {
-        background-color: #ba0c2f;
+        background-color: var(--color-brand-red);
         color: #ffffff;
     }
 
@@ -3400,7 +3400,7 @@
     }
 
     .work-request {
-        background-color: #ba0c2f;
+        background-color: var(--color-brand-red);
     }
 
     .gift-count-indicator {
@@ -3416,13 +3416,13 @@
     }
 
     #donation-form h1 a {
-        color: #ba0c2f;
+        color: var(--color-brand-red);
     }
 
     #donation-form h1 a:hover,
     #donation-form h1 a:focus,
     #donation-form h1 a:visited {
-        color: #ba0c2f;
+        color: var(--color-brand-red);
     }
 
     #donation-form h3 {
@@ -3445,7 +3445,7 @@
         letter-spacing: .5px;
         font-size: 16px;
         font-weight: 700;
-        color: #ba0c2f;
+        color: var(--color-brand-red);
         display: block;
     }
 
