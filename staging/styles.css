@@ -3128,7 +3128,7 @@
     }
 
     .line-item {
-        border-top: 1px solid #ddd;
+        border-top: 1px solid var(--color-ltGray);
         padding: 5px 0 5px 5px;
         line-height: 1.5;
     }
@@ -3326,7 +3326,7 @@
     }
 
     #designationSearchBtn:hover {
-        background-color: #ddd;
+        background-color: var(--color-ltGray);
     }
 
     #endDateCheckbox {
