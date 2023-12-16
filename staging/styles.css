@@ -576,7 +576,7 @@
             right: 0;
             bottom: 0;
             overflow-y: auto;
-            background: #fff;
+            background: var(--color-white);
             padding: 2px 1.5rem 1rem;
             display: flex;
             flex-direction: column;
@@ -1049,7 +1049,7 @@
         z-index: 101;
         outline: 0;
         text-align: center;
-        color: #fff;
+        color: var(--color-white);
         font-weight: 700;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 		text-decoration: underline !important;
@@ -1077,7 +1077,7 @@
 
     #skip-link {
         text-decoration: none;
-        background: #fff;
+        background: var(--color-white);
         color: #000;
         padding: 0.5rem 1rem;
         border: 1px solid #aaa;
@@ -2306,7 +2306,7 @@
         font-size: 14px;
         line-height: 1.42857143;
         color: #555;
-        background-color: #fff;
+        background-color: var(--color-white);
         background-image: none;
         border: 1px solid var(--color-ltGray);
         border-radius: 4px;
@@ -2381,7 +2381,7 @@
     }
 
 	.input-group-addon {
-        background-color: #FFF;
+        background-color: var(--color-white);
         outline: none;
         border: 1px solid #DDDDDD;
         border-right: 0;
@@ -2479,7 +2479,7 @@
 		align-items: flex-start;
 
 		--checked-state-bg-color: hsl(350, 95%, 58%);
-		--checked-state-check-color: #fff;
+		--checked-state-check-color: var(--color-white);
 		--outline-color: var(--checked-state-bg-color);
 		--outline-offset: 2px;
 	}
@@ -2771,7 +2771,7 @@
         padding: 3px 7px;
         font-size: 14px;
         font-weight: 700;
-        color: #fff;
+        color: var(--color-white);
         line-height: 1;
         vertical-align: middle;
         white-space: nowrap;
@@ -2797,14 +2797,14 @@
 
     a.badge:hover,
     a.badge:focus {
-        color: #fff;
+        color: var(--color-white);
         text-decoration: none;
         cursor: pointer;
     }
 
     .list-group-item.active>.badge,
     .nav-pills>.active>a>.badge {
-        color: #fff;
+        color: var(--color-white);
         background-color: #777;
     }
 
@@ -2921,7 +2921,7 @@
     }
 
     #form1 {
-        background: #fff;
+        background: var(--color-white);
     }
 
     .donationForm #amountList {
@@ -3299,7 +3299,7 @@
     .gift-count {
         border-radius: 50%;
         background-color: #c00;
-        color: #fff;
+        color: var(--color-white);
         width: 30px;
         height: 30px;
         font-size: 14px;
@@ -3354,7 +3354,7 @@
 
     /* new style for amount fields */
     .input-group-addon {
-        background-color: #FFF;
+        background-color: var(--color-white);
         outline: none;
         border: 1px solid #DDDDDD;
         border-right: 0;
@@ -3493,7 +3493,7 @@
     }
 
     .donationForm.givingTuesday18 .designations .recurrance-wrapper .chosen-single {
-        background-color: #fff;
+        background-color: var(--color-white);
     }
 
     .donationForm.givingTuesday18 .designations label.otherAmt.amount {
