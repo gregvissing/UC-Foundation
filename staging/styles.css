@@ -103,6 +103,7 @@
         --color-brand-black: #000;
         --color-white: #fff;
         --color-text: #222;
+        --color-lighterText: #333;
         --color-ltGray: #ccc;
         --color-dkGray: #666;
         --color-callout-bg: #f3f3f3;
@@ -199,7 +200,7 @@
 
 	main section:not(.pull-quote) p {
 		letter-spacing: 0.3px;
-		color: #333 !important;
+		color: var(--color-lighterText) !important;
 		line-height: 1.6;
 		font-size: 1.125em;
 		font-weight: 300 !important;
@@ -1569,7 +1570,7 @@
         line-height: 1.4;
 
 		letter-spacing: 0.3px;
-		color: #333 !important;
+		color: var(--color-lighterText) !important;
 		line-height: 1.6 !important;
 		font-size: 1.125em !important;
 		font-weight: 300 !important;
@@ -2433,7 +2434,7 @@
 
 	.donationForm .steps .step-button {
         display: inline-block;
-        background-color: #333333;
+        background-color: var(--color-lighterText);
         color: #ffffff;
         border: none;
         border-radius: none;
@@ -2990,7 +2991,7 @@
 
     .designations p {
         font-size: 15px;
-        color: #333333;
+        color: var(--color-lighterText);
         line-height: 1.5;
         margin: 15px 0;
         text-transform: none;
@@ -3241,7 +3242,7 @@
     .donationForm .steps .step-button {
         /*line-height: 3;*/
         display: inline-block;
-        background-color: #333333;
+        background-color: var(--color-lighterText);
         color: #ffffff;
         border: none;
         border-radius: none;
@@ -3425,7 +3426,7 @@
     }
 
     #donation-form h3 {
-        color: #333333;
+        color: var(--color-lighterText);
         margin-bottom: 30px;
     }
 
@@ -3475,7 +3476,7 @@
     }
 
     .donationForm.givingTuesday18 .designations .feature-masthead h3 {
-        color: #333333 !important;
+        color: var(--color-lighterText) !important;
         font-size: 28px;
         font-weight: 600;
     }
