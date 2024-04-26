@@ -1,0 +1,555 @@
+<div id="donation-form" class="donationForm width-700">
+    <script src="https://doublethedonation.com/api/js/ddplugin.js"></script> 
+    <link href="https://doublethedonation.com/api/css/ddplugin.css" rel="stylesheet"/>
+    <div class="breadcrumbs form-group flex flex-row flex-between">
+        <a href="#" class="breadcrumb bc-designation active flex flex-column" data-step="1">
+            <span class="form-step">
+                <span>1</span>
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </span>
+            <span>Gift Details</span>
+        </a>
+        <a href="#" class="breadcrumb bc-review flex flex-column" data-step="2">
+            <span class="form-step">
+                <span>2</span>
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </span>
+            <span>Gift Review</span>
+        </a>
+        <a href="#" class="breadcrumb bc-billing flex flex-column" data-step="3">
+            <span class="form-step">
+                <span>3</span>
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </span>
+            <span>Your Information</span>
+        </a>
+        <span class="breadcrumb bc-payment flex flex-column">
+            <span class="form-step">
+                <span>4</span>
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </span>
+            <span>Payment</span>	
+        </span>
+    </div>
+    <div class="validation"></div>
+    <div class="form">
+        <div class="gift">
+            <!------ STEP 1 ------>
+            <div class="steps step1 active">
+                <fieldset class="donationInformation">
+                    <div class="designations">
+                        <div class="flex flex-between">
+                            <div class="flex-grow">
+                                <h2 class="top-heading">Make an Impact Today</h2>
+                            </div>
+                            <div class="flex align-center">
+                                <span class="gift-count-indicator text-right">Your Gifts <span class="gift-count badge">0</span></span>
+                            </div>
+                        </div>
+                        <p>Where would you like to make your commitment?</p>
+                        <div class="designation-categories form-group flex flex-between">
+                            <a href="#" id="school" class="selected">School or College</a>
+                            <a href="#" id="campus" class="">Other Area</a>
+                            <a href="#" id="cause" class="">A Cause</a>
+                            <a href="#" id="search" class="">
+                                <svg class="searchIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.14 49.94" fill="#222"><g><path d="M24.46,0A21.88,21.88,0,0,1,37.87,4.66c3.72,3,5.76,6.73,5.17,11.66a24.31,24.31,0,0,0,0,4.18c.24,4.74-1.9,8.31-5.54,11.05-5,3.75-10.68,4.84-16.77,4.3a15.07,15.07,0,0,1-3.41-.62c-1.12-.37-1.59,0-2.13,1-2.21,3.87-4.5,7.7-6.79,11.53a4.37,4.37,0,0,1-4.69,2.15A4.46,4.46,0,0,1,.09,46.3a4.78,4.78,0,0,1,.73-3.54C3.06,39,5.26,35.21,7.53,31.46a1.15,1.15,0,0,0-.19-1.71,11.19,11.19,0,0,1-3.55-7.86A68.13,68.13,0,0,1,4,13.08c.5-4.4,3.26-7.41,6.89-9.68C14.74,1,19,0,24.46,0Zm-2,25.8c6.28,0,11-1.67,14.18-4.63,4-3.74,4.14-9,.26-12.87A17.26,17.26,0,0,0,26.27,3.56C21,3,16,3.81,11.59,7c-5.7,4.13-5.82,10.62-.29,15A18.58,18.58,0,0,0,22.45,25.8Zm-4.53,6.05a.58.58,0,0,0,.22.12c6.27,1.39,12.17.65,17.45-3.22a9.58,9.58,0,0,0,3.76-5.42C33.09,28.81,25.9,30,18.24,28.74ZM15,29.78c-.29-.32-.61-.92-.89-.9a2,2,0,0,0-1.4.71c-3,4.91-5.88,9.85-8.81,14.78-.41.7-.72,1.45.14,2s1.35-.17,1.76-.85l8.64-14.6C14.65,30.6,14.79,30.27,15,29.78Zm-4-3.78L7.53,23.26l-.29.2,2.37,4.09Z"></path></g></svg>
+                            </a>
+                        </div>
+                        <div class="formrow category-select form-group">
+                            <label for="categoryList" id="categoryLabel" class="labelText">Which school or college?</label>
+                            <div class="relative req-field">
+                                <select class="chosen-select categoryList form-control select2-input" id="categoryList" name=" ">
+                                    <option>Select school or college</option>
+                                </select>
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                        <div class="formrow designation-search form-group">
+                            <label for="designationSearch" class="labelText">Find a fund by searching below:</label>
+                            <div class="flex align-stretch">
+                                <input type="text" class="form-control" id="designationSearch" style="width: 90%; margin-top: 0px; border-top-right-radius: 0; border-bottom-right-radius: 0;" placeholder="Search for a fund" />
+                                <button id="designationSearchBtn">
+                                    <svg class="searchIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.14 49.94" fill="#fff"><g><path d="M24.46,0A21.88,21.88,0,0,1,37.87,4.66c3.72,3,5.76,6.73,5.17,11.66a24.31,24.31,0,0,0,0,4.18c.24,4.74-1.9,8.31-5.54,11.05-5,3.75-10.68,4.84-16.77,4.3a15.07,15.07,0,0,1-3.41-.62c-1.12-.37-1.59,0-2.13,1-2.21,3.87-4.5,7.7-6.79,11.53a4.37,4.37,0,0,1-4.69,2.15A4.46,4.46,0,0,1,.09,46.3a4.78,4.78,0,0,1,.73-3.54C3.06,39,5.26,35.21,7.53,31.46a1.15,1.15,0,0,0-.19-1.71,11.19,11.19,0,0,1-3.55-7.86A68.13,68.13,0,0,1,4,13.08c.5-4.4,3.26-7.41,6.89-9.68C14.74,1,19,0,24.46,0Zm-2,25.8c6.28,0,11-1.67,14.18-4.63,4-3.74,4.14-9,.26-12.87A17.26,17.26,0,0,0,26.27,3.56C21,3,16,3.81,11.59,7c-5.7,4.13-5.82,10.62-.29,15A18.58,18.58,0,0,0,22.45,25.8Zm-4.53,6.05a.58.58,0,0,0,.22.12c6.27,1.39,12.17.65,17.45-3.22a9.58,9.58,0,0,0,3.76-5.42C33.09,28.81,25.9,30,18.24,28.74ZM15,29.78c-.29-.32-.61-.92-.89-.9a2,2,0,0,0-1.4.71c-3,4.91-5.88,9.85-8.81,14.78-.41.7-.72,1.45.14,2s1.35-.17,1.76-.85l8.64-14.6C14.65,30.6,14.79,30.27,15,29.78Zm-4-3.78L7.53,23.26l-.29.2,2.37,4.09Z"></path></g></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="formrow designation-select form-group">
+                            <label for="designationId" class="labelText">Which fund? <span id="designationCount">&nbsp;</span></label>
+                            <div class="relative req-field">
+                                <select class="chosen-select designationId form-control select2-input" id="designationId" name=" ">
+                                  	<option value="" selected="selected">Choose a fund</option>
+                                </select>
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                        <div id="designationDescription">
+                            <p id="desDescrText">&nbsp;</p>
+                        </div>
+                        <div id="otherDesignation" class="otherDesignation">
+                            <input type="text" maxlength="240" class="form-control" id="otherDesignationInput" class="otherDesignationInput" />
+                        </div>
+                        <!-- Begin redesigned amount buttons -->
+                        <div class="formrow form-group relative">
+                            <p>How much would you like to give?</p>
+                            <div class="amounts">
+                                <a href="#" id="amt1" class="amount" data-value="50">$50</a>
+                                <a href="#" id="amt2" class="amount" data-value="100">$100</a>
+                                <a href="#" id="amt3" class="amount" data-value="250">$250</a>
+                                <a href="#" id="amt4" class="amount" data-value="500">$500</a>
+                                <a href="#" id="amt5" class="amount" data-value="1000">$1000</a>
+                                <a href="#" id="amt6" class="amount" data-value="1500">$1500</a>
+                                <a href="#" id="amt7" class="amount" data-value="2500">$2500</a>
+                                <a href="#" id="amt8" class="amount" data-value="5000">$5000</a>		
+                                <label for="otherAmtInput" class="otherAmt amount relative">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" id="otherAmtInput" placeholder="Your gift amount" autocomplete="off" />
+                                </label> 	                                
+                            </div>
+                          	<div id="otherAmtInstr">
+                            	<div class="input-helper text-center">Enter an amount in the input field above.</div>
+                             </div>
+                        </div>
+                      
+                      	<div class="formrow form-group flex gap-1">
+                          	<input id="anonymousCheckbox" type="checkbox" name="anonymousCheckbox">
+                            <label for="anonymousCheckbox" class="labelText">Make my gift anonymous.</label>
+                      	</div>
+                      
+                        <!--
+                            <div class="formrow">
+                              <div class="gift-frequencies form-group">
+                                  <input type="checkbox" id="recurringGift" class="gift-frequency" data-value="RECURRING GIFT" />
+                                  <label for="recurringGift" id="gift-frequency-label">I want to keep my generosity going with automatic payments.</label>
+                              </div>
+                            </div>
+                            -->
+                        <!-- #recurrenceSection moved below Gift Type field -->
+                        <!--<div id="recurrenceSection" class="recurrence" style="display: none;">-->
+                        <!-- End redesigned amount buttons -->
+                        <div class="step-buttons form-group">
+                            <input id="cancelAddLineItem" class="step-button form-control btn btn-default" type="button" value="Gift Review" style="display:none;" />
+                            <input id="addLineItem" class="addLineItem step-button form-control btn btn-default" type="button" value="Add Gift" />						
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!------ STEP 2 ------>
+            <div class="steps step2">
+                <div class="flex flex-between">
+                    <div class="flex-grow">
+                        <h2 class="top-heading">Gift Review</h2>
+                    </div>
+                    <div class="flex align-center">
+                        <span class="gift-count-indicator text-right">Your Gifts <span class="gift-count badge">0</span></span>
+                    </div>
+                </div>
+                <div id="lineItems" class="line-items form-group">
+                    <h3>Gifts</h3>
+                    <div class="line-item total-amount">
+                        <p>Your gift cart is currently empty.</p>
+                        <p class="p-1"><a href="#" class="add-gift">+ Add a gift</a></p>
+                    </div>
+                </div>
+                <fieldset class="otherDonationInformation">
+                    <div class="flow">
+                        <div class="attributes flow">
+                            <div>
+                                <div class="formrow form-group one-half">
+                                    <label for="giftType" class="labelText">Gift type (Required):</label>
+                                    <select id="giftType" class="chosen-select giftTypeTxt form-control add-arrow">
+                                        <!--<option value="New Gift" selected="selected" />New Gift -->
+                                        <option value="One-Time" selected="selected" />One-Time Gift
+                                        <option value="Monthly" />Monthly Gift
+                                        <option value="Pledge" />Pledge Payment
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- #recurrenceSection moved from Step 1 -->
+                            <div id="recurrenceSection" class="recurrence flow" style="display: none;">
+                                <div>
+                                    <div class="formrow form-group frequency-select one-half">
+                                        <!-- "Day 1 of every month"... this will be different now that they can start on any day. -->
+                                        <label for="frequency" class="labelText">Installment Frequency</label>
+                                        <div class="relative req-field">
+                                            <select id="frequency" class="chosen-select frequency form-control add-arrow">
+                                                <option value="2" />Monthly
+                                                <option value="3" />Quarterly
+                                            </select>
+                                            <span class="req">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-1">
+                                    <div class="formrow form-group start-input flex flex-column flex-between one-half">
+                                        <!-- Start and end dates - use a date picker -->
+                                        <label for="startDate" class="labelText">Starting Date</label>
+                                        <div class="relative req-field">
+                                            <input type="text" maxlength="35" id="startDate" class="startDate form-control" placeholder="mm/dd/yyyy" value="" />
+                                            <span class="req">*</span>
+                                        </div>
+                                    </div>
+                                    <div class="formrow form-group end-input flex flex-column flex-between flex-wrap one-half">
+                                        <!-- Start and end dates - use a date picker -->
+                                        <div class="flex flex-row flex-end align-center">
+                                            <input type="checkbox" class="endDateCheckbox" id="endDateCheckbox" style="margin-bottom: 0;" />
+                                            <label for="endDateCheckbox" class="labelText m-0">Add an ending date (optional)</label>
+                                        </div>
+                                        <input type="text" maxlength="35" id="endDate" class="endDate form-control" placeholder="mm/dd/yyyy" value="" />
+                                    </div>
+                                </div>
+                                <div class="formrow form-group month-select" style="display: none;">
+                                    <label for="month" class="labelText">Month:</label>
+                                    <div class="relative req-field">
+                                        <select id="month" class="chosen-select month form-control select2-input">
+                                            <option value="select a value" selected="selected" />select a value
+                                            <option value="1" />January
+                                            <option value="2" />February
+                                            <option value="3" />March
+                                            <option value="4" />April
+                                            <option value="5" />May
+                                            <option value="6" />June
+                                            <option value="7" />July
+                                            <option value="8" />August
+                                            <option value="9" />September
+                                            <option value="10" />October
+                                            <option value="11" />November
+                                            <option value="12" />December
+                                        </select>
+                                        <span class="req">*</span>
+                                    </div>
+                                </div>
+                                <div class="formrow form-group" style="display: none;">
+                                    <label for="dayOfMonth" class="labelText">Day of Month:</label>
+                                    <div class="relative req-field">
+                                        <select id="dayOfMonth" class="dayOfMonth form-control select2-input">
+                                            <option value="select a value" selected="selected" />select a value
+                                            <option value="1" />1
+                                            <option value="2" />2
+                                            <option value="3" />3
+                                            <option value="4" />4
+                                            <option value="5" />5
+                                            <option value="6" />6
+                                            <option value="7" />7
+                                            <option value="8" />8
+                                            <option value="9" />9
+                                            <option value="10" />10
+                                            <option value="11" />11
+                                            <option value="12" />12
+                                            <option value="13" />13
+                                            <option value="14" />14
+                                            <option value="15" />15
+                                            <option value="16" />16
+                                            <option value="17" />17
+                                            <option value="18" />18
+                                            <option value="19" />19
+                                            <option value="20" />20
+                                            <option value="21" />21
+                                            <option value="22" />22
+                                            <option value="23" />23
+                                            <option value="24" />24
+                                            <option value="25" />25
+                                            <option value="26" />26
+                                            <option value="27" />27
+                                            <option value="28" />28
+                                            <option value="29" />29
+                                            <option value="30" />30
+                                            <option value="31" />31
+                                        </select>
+                                        <span class="req">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="formrow form-group">
+                                <label for="donorType" class="labelText">I am making this gift as a(n):</label>
+                                <select id="donorType" class="chosen-select donorTypeTxt form-control">
+                                    <option value="Individual" selected="selected" />Individual
+                                    <option value="Business" />Business
+                                </select>
+                                </div>-->
+                            <!-- Business fields - will only show, and be required, if 'Business' is chosen as donor type -->
+                            <!--<div id="businessSection" style="display:none;">
+                                <div class="formrow form-group business-name-input">
+                                    <label for="businessNameTxt" class="labelText">Business Name:</label>
+                                    <div class="relative req-field">
+                                        <input type="text" maxlength="60" id="businessNameTxt" class="orgNameTxt form-control" value="" />
+                                        <span class="req">*</span>
+                                    </div>
+                                </div>
+                                <div class="formrow form-group business-rep-input">
+                                    <label for="repNameTxt" class="labelText">Representative Name:</label>
+                                    <div class="relative req-field">
+                                        <input type="text" maxlength="35" id="repNameTxt" class="orgRepTxt form-control" value="" />
+                                        <span class="req">*</span>
+                                    </div>
+                                </div>
+                                <div class="formrow form-group business-title-input">
+                                    <label for="repTitleTxt" class="labelText">Representative Title:</label>
+                                    <div class="relative req-field">
+                                        <input type="text" maxlength="35" id="repTitleTxt" class="orgTitleTxt form-control" value="" />
+                                        <span class="req">*</span>
+                                    </div>
+                                </div>
+                          	</div>-->
+                        </div>
+                        <!-- End business fields -->
+                        <div class="formrow form-group comments-input">
+                            <label for="comments" class="labelText">Special Instructions/Comments (Optional):</label>
+                            <input type="text" class="comments form-control" id="comments" maxlength="255" placeholder="Enter any special instructions/comments regarding this gift." />
+                            <!--<textarea id="comments" rows="3" class="comments form-control" maxlength="255"></textarea>-->
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="tributeInformation">
+                    <div class="tribute flow">
+                        <div class="BBListingHeading DonationListingHeading flow" style="border:none;background-color:transparent;">
+                            <span id="lblTributeHeading">Tribute Information</span>
+                            <span class="tributeSpan form-group">
+                            	<input id="tributeCheckbox" type="checkbox" />
+                            	<label for="tributeCheckbox" class="tributeLabel labelText">I would like to make my gift as a tribute</label>
+                            </span>
+                        </div>
+                        <div id="tributeInfoSub" class="flow">
+                            <div class="tributeDefinition flow">
+                                <div class="formrow formrow form-group tribute-type-input one-half">
+                                  	<label for="ddlTribute" class="labelText">Type:</label>
+                                    <div class="relative req-field">
+                                        <select name="ddlTribute" id="ddlTribute" class="type form-control">
+                                            <option selected="selected" value="0" />Select a value
+                                            <option value="in honor of" />In honor of person
+                                            <option value="in memory of" />In memory of person
+                                            <option value="in memory of pet" />In memory of pet
+                                        </select>
+                                        <span class="req">*</span>
+                                    </div>
+                                </div>
+                              
+                                <div class="flex gap-1">
+                                    <div class="formrow form-group tribute-fname-input one-half">
+                                        <label for="txtTributeFirstName" class="labelText">First Name:</label>
+                                        <input name="txtTributeFirstName" type="text" maxlength="30" id="txtTributeFirstName" autocomplete="nope" class="firstName form-control" placeholder="Tribute First Name" />		
+                                    </div>
+                                    <div class="formrow form-group tribute-lname-input one-half">
+                                        <label for="txtTributeLastName" class="tribute-lname-label labelText">Last Name:</label>
+                                        <div class="relative req-field">
+                                            <input name="txtTributeLastName" type="text" maxlength="60" id="txtTributeLastName" autocomplete="nope" class="lastName form-control" placeholder="Tribute Last Name" />
+                                            <span class="req">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="formrow form-group tribute-instr-input">
+                                    <label for="txtTributeDescription" class="labelText">Special Instructions:</label>
+                                    <div class="relative req-field">
+                                        <input name="txtTributeDescription" type="text" maxlength="255" id="txtTributeDescription" autocomplete="nope" class="description form-control" placeholder="Special Instructions" />
+                                        <span class="req">*</span>
+                                    </div>
+                                    <div class="input-helper">If your gift honors/memorializes a pet, please indicate species and owner's names for appropriate acknowledgement.</div>
+                                </div>
+                            </div>
+                            <div class="formrow form-group flex gap-1">
+                                <input id="chkAcknowledge" type="checkbox" name="chkAcknowledge" />
+                                <label for="chkAcknowledge" class="labelText">Provide contact information for honoree or next of kin. Please note address information is required if you would like to specify a contact.</label>
+                            </div>
+                            <div id="acknowledgeeInfoSub">
+                                <div class="acknowledgee flow">
+                                    <div class="flex gap-1">
+                                        <div class="formrow form-group ackn-fname-input one-half">
+                                            <label for="txtAcknowledgeeFirstName" class="labelText">First Name</label>
+                                            <input id="txtAcknowledgeeFirstName" class="firstName form-control" type="text" maxlength="30" autocomplete="nope" name="txtAcknowledgeeFirstName" placeholder="Acknowledgee First Name" />
+                                        </div>
+                                        <div class="formrow form-group ackn-lname-input one-half">
+                                            <label for="txtAcknowledgeeLastName" class="labelText">Last Name</label>
+                                            <div class="relative req-field">
+                                                <input id="txtAcknowledgeeLastName" class="lastName form-control" type="text" maxlength="60" autocomplete="nope" name="txtAcknowledgeeLastName" placeholder="Acknowledgee Last Name" />
+                                                <span class="req">*</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="formrow form-group ackn-country-input">
+                                        <label for="acknowledgeeCountry" class="labelText">Country</label>
+                                        <div class="relative req-field">
+                                            <select class="country form-control select2-input" autocomplete="nope" id="acknowledgeeCountry">
+                                            </select>
+                                            <span class="req">*</span>
+                                        </div>
+                                    </div>
+                                    <div class="formrow form-group required ackn-address-input">
+                                        <label for="acknowledgeeStreetAddress" class="labelText">Address lines</label>
+                                        <div class="relative req-field">
+                                            <!--<textarea class="addressLines form-control" autocomplete="nope" id="acknowledgeeStreetAddress" cols="20" rows="2" maxlength="148"></textarea>-->
+                                            <input type="text" class="addressLines form-control" id="acknowledgeeStreetAddress" maxlength="148" placeholder="Address" />
+                                            <span class="req">*</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-1">
+                                        <div class="formrow form-group required ackn-city-input one-half">
+                                            <label for="acknowledgeeCity" class="labelText">City:</label>
+                                            <div class="relative req-field">
+                                                <input type="text" class="city form-control" autocomplete="nope" id="acknowledgeeCity" maxlength="50" placeholder="City" />
+                                                <span class="req">*</span>
+                                            </div>
+                                        </div>
+                                        <div class="formrow form-group ackn-state-input one-third">
+                                            <label for="acknowledgeeState" class="labelText">State</label>
+                                            <div class="relative req-field">
+                                                <select class="state form-control select2-input" autocomplete="nope" id="acknowledgeeState">
+                                                </select>
+                                                <span class="req">*</span>
+                                            </div>
+                                        </div>
+                                        <div class="formrow form-group required ackn-zip-input one-fourth">
+                                            <label for="acknowledgeePostalCode" class="labelText">ZIP/Postal code</label>
+                                            <div class="relative req-field">
+                                                <input type="text" class="postalCode form-control" autocomplete="nope" id="acknowledgeePostalCode" maxlength="10" placeholder="ZIP/Postal code" />
+                                                <span class="req">*</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-1">
+                                        <div class="formrow form-group ackn-phone-input one-half">								
+                                            <label for="acknowledgeePhone" class="labelText">Phone</label>
+                                            <input type="text" class="phone form-control" autocomplete="nope" id="acknowledgeePhone" maxlength="50" placeholder="Phone" />
+                                        </div>
+                                        <div class="formrow form-group required ackn-email-input one-half">								
+                                            <label for="acknowledgeeEmailAddress" class="labelText">Email</label>
+                                            <input type="text" class="email form-control" autocomplete="nope" id="acknowledgeeEmailAddress" maxlength="100" placeholder="Email" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="step-buttons form-group">
+                    <input id="returnToGiftDetail" class="step-button form-control btn btn-default" type="button" value="BACK" />
+                    <input id="continueToYourInfo" class="step-button form-control btn btn-default" type="button" value="CONTINUE" />
+                </div>
+            </div>
+        </div>
+        <!------ STEP 3 ------>
+        <div class="steps step3">
+            <fieldset class="billingInformation flow">
+                <div class="flex flex-between">
+                    <div class="flex-grow">
+                        <h2 class="top-heading">Your Information</h2>
+                    </div>
+                    <div class="flex align-center">
+                        <span class="gift-count-indicator text-right">Your Gifts <span class="gift-count badge">0</span></span>
+                    </div>
+                </div>
+                <div class="donor flow">
+                    <div class="flex gap-1">
+                        <div class="formrow form-group required fname-input flex flex-column flex-between one-half">
+                            <label for="firstName" class="labelText">First Name (Required)</label>
+                            <div class="relative req-field">
+                                <input type="text" class="firstName form-control" id="firstName" maxlength="30" placeholder="First Name" />
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                        <div class="formrow form-group required lname-input flex flex-column flex-between one-half">
+                            <label for="lastName" class="labelText">Last Name (Required)</label>
+                            <div class="relative req-field">
+                                <input type="text" class="lastName form-control" id="lastName" maxlength="60" placeholder="Last Name" />
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="address full-width flow">
+                        <div class="flex gap-1">
+                            <div class="formrow form-group required country-input flex flex-column flex-between one-half">
+                                <label for="country" class="labelText">Country (Required)</label>
+                                <div class="relative req-field">
+                                    <select class="chosen-select country form-control select2-input" id="country">
+                                    </select>
+                                    <span class="req">*</span>
+                                </div>
+                            </div>
+                            <div class="formrow form-group required zip-input flex flex-column flex-between one-half">
+                                <label for="postalCode" class="labelText">ZIP/Postal code (Required)</label>
+                                <div class="relative req-field">
+                                    <input type="text" class="postalCode form-control" id="postalCode" maxlength="10" placeholder="ZIP/Postal code" />
+                                    <span class="req">*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formrow form-group required address-input">
+                            <label for="streetAddress" class="labelText">Address (Required)</label>
+                            <div class="relative req-field">
+                                <!--<textarea class="streetAddress form-control" id="streetAddress" cols="20" rows="2" maxlength="148"></textarea>-->
+                                <input type="text" class="streetAddress form-control" id="streetAddress" maxlength="100" placeholder="Address" />
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="formrow form-group required city-input flex flex-column flex-between one-half">
+                                <label for="city" class="labelText">City (Required)</label>
+                                <div class="relative req-field">
+                                    <input type="text" class="city form-control" id="city" maxlength="50" placeholder="City" />
+                                    <span class="req">*</span>
+                                </div>
+                            </div>
+                            <div class="formrow form-group required state-input flex flex-column flex-between one-half">
+                                <label for="state" class="labelText">State (Required)</label>
+                                <div class="relative req-field">
+                                    <select class="chosen-select state form-control select2-input" id="state">
+                                    </select>
+                                    <span class="req">*</span>
+                                </div>
+                            </div>
+                            <div class="formrow form-group required province-input flex-column flex-between one-half hide">
+                                <label for="province" class="labelText">Province (Required)</label>
+                                <div class="relative req-field">
+                                    <select class="chosen-select province form-control select2-input" id="province">
+                                    </select>
+                                    <span class="req">*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="formrow form-group required email-input flex flex-column flex-between one-half">
+                            <label for="emailAddress" class="labelText">Email (Required)</label>
+                            <div class="relative req-field">
+                                <input type="text" class="emailAddress form-control" id="emailAddress" maxlength="100" placeholder="Email" value="" />
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                        <div class="formrow form-group required phone-input flex flex-column flex-between one-half">
+                            <label for="phone" class="labelText">Phone (Required)</label>
+                            <div class="relative req-field">
+                                <input type="text" class="phone form-control" id="phone" maxlength="50" placeholder="Phone" />
+                                <span class="req">*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="formrow">
+                    <script>var DDCONF = {API_KEY: "N6tBG3KcsjhTlVVR"};</script>
+                    <label for="dd-company-name-input" class="labelText">See if your employer will match your gift! (optional)</label>
+                    <div id="dd-company-name-input"></div>
+                </div>
+            </fieldset>
+            <!--<div class="formrow">
+                <script>var DDCONF = {API_KEY: "N6tBG3KcsjhTlVVR"};</script>
+                <label for="dd-company-name-input" class="labelText">See if your employer will match your gift! (optional)</label>
+                <div id="dd-company-name-input"></div>
+                </div>-->
+            <div class="step-buttons form-group">
+                <input id="returnToReview" class="step-button form-control btn btn-default" type="button" value="BACK" />
+                <input id="donate" class="step-button submit form-control btn btn-default btn-donate" type="button" value="Continue" />
+            </div>
+        </div>
+    </div>
+    <div class="confirmation" id="confirmation"></div>
+</div>
