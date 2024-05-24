@@ -2220,7 +2220,8 @@
                 /* Begin GiftSession functions */
                 GiftSession.prototype.update = function() {
                     // if ($("#recurringGift").prop("checked") == true) {
-                    if ($("#giftType").val() == "Monthly") {
+                    // if ($("#giftType").val() == "Monthly") {
+                    if ($(".gift-type a#Monthly").hasClass("selected")) {
                         this.donation.giftRecurrence = true;
                     } else {
                         this.donation.giftRecurrence = false;
@@ -2912,7 +2913,8 @@
                     // Put "add another gift" link at the bottom, which can probably just go to previous step
                     if (
                         // $("#recurringGift").prop("checked") != true &&
-                        $("#giftType").val() != "Monthly" &&
+                        // $("#giftType").val() != "Monthly" &&
+                        $(".gift-type a#Monthly:not(.selected)") && 
                         this.donation.Gift.Designations.length > 0
                     ) {
                         $("#lineItems").append(
@@ -2945,7 +2947,8 @@
                         giftSession.removeLineItem(e.target.getAttribute("data-index"));
                         if (
                             // $("#recurringGift").prop("checked") == true &&
-                            $("#giftType").val() == "Monthly" &&
+                            // $("#giftType").val() == "Monthly" &&
+                            $(".gift-type a#Monthly").hasClass("selected") &&
                             myGift.donation.Gift.Designations.length < 1
                         ) {
                             $("#returnToGiftDetail").show();
@@ -3062,8 +3065,10 @@
                     */
   
                     if (recurring) {
-                        $("#recurringGift").prop("checked", true);
-                        //recurringHandler();
+                        // $("#recurringGift").prop("checked", true);
+                        // $("#giftType").val("Monthly");
+                        $(".gift-type a#Monthly").addClass("selected");
+                        recurringHandler();
                     }
                     if (hideack) {
                         $("#chkAcknowledge").parent().css("display", "none");
@@ -3764,6 +3769,19 @@
                             break;
                     }
                 }
+
+                function giftTypeUpdate(e) {
+                    $(".gift-type a").removeClass("selected");
+
+                    if (typeof e == "object") {
+                        var groupId = e.target.id;
+                    } else {
+                        var groupId = e;
+                    }
+
+                    $(".gift-type a[id='" + groupId + "']").addClass("selected");
+                    recurringHandler();
+                }
   
                 // check recurring box when page loads, run recurring handler
                 function recurringHandler() {
@@ -3771,7 +3789,9 @@
                     // $("#recurringGift").addClass("selected");
   
                     // if ($("#recurringGift").prop("checked") == true) {
-                    if ($("#giftType").val() == "Monthly") {
+                    // if ($("#giftType").val() == "Monthly") {
+
+                    if ($(".gift-type a#Monthly").hasClass("selected")) {
                         $("#returnToGiftDetail").hide();
   
                         if ($("#tributeCheckbox").prop("checked") == true) {
@@ -3788,7 +3808,9 @@
                             } else {
                                 // check "one time gift" and hide recurrence section
                                 // $("#recurringGift").prop("checked", false);
-                                document.getElementById("giftType").value = "One-Time";
+                                // document.getElementById("giftType").value = "One-Time";
+                                $(".gift-type a#One-Time").addClass("selected");
+
                                 //$("#chkAcknowledge").click();
                                 $(".gift-frequency").removeClass("selected");
                                 $("#oneTimeGift").addClass("selected");
@@ -4509,8 +4531,13 @@
                 updateAmountInputs();
   
                 // $("#recurringGift").on("change", function (e) {
-                $("#giftType").on("change", function(e) {
-                    recurringHandler();
+                // $("#giftType").on("change", function(e) {
+                //     recurringHandler();
+                // });
+
+                $(".gift-type a").on("click", function(e) {
+                    e.preventDefault();
+                    giftTypeUpdate(e);
                 });
   
                 $("#frequency").change(function() {
@@ -4655,7 +4682,8 @@
                 $("#tributeCheckbox").change(function() {
                     if (
                         $(this).prop("checked") == true &&
-                        $("#giftType").val() == "Monthly"
+                        $(".gift-type a#Monthly").hasClass("selected")
+                        // $("#giftType").val() == "Monthly"
                         // $("#recurringGift").prop("checked") == true
                     ) {
                         var conf = confirm(
@@ -4666,7 +4694,10 @@
                             // change to one-time gift and hide recurrence section
                             if (!hideack) $("#chkAcknowledge").click();
                             $(".gift-frequency").removeClass("selected");
-                            document.getElementById("giftType").value = "One-Time";
+
+                            $(".gift-type a#Monthly").removeClass("selected");
+                            $(".gift-type a#One-Time").addClass("selected");
+                            // document.getElementById("giftType").value = "One-Time";
                             // $("#recurringGift").prop("checked", false);
                             myGift.update();
                             $("#recurrenceSection").hide();
