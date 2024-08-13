@@ -1471,11 +1471,13 @@ p.intro-text {
 	}
 
 	.byline .story {
-		display: grid !important;
-        grid-template-columns: repeat(2, 1fr);
+		display: flex !important;
+		flex-direction: column;
+        /*
+		grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 0px;
-        grid-row-gap: 0px;
+        grid-row-gap: 0px; */
 	}
 
 	.byline .story .dateline,
@@ -1489,15 +1491,20 @@ p.intro-text {
 		margin-top: 10px;
 	}
 
-	.read-time { grid-area: 1 / 1 / 2 / 2; }
+	.read-time { 
+		width: 100%;
+		/* grid-area: 1 / 1 / 2 / 2; */
+	}
     
 	.dateline { 
-		grid-area: 1 / 2 / 2 / 3; 
-		text-align: right;
+		width: 100%;
+		/* grid-area: 1 / 2 / 2 / 3; 
+		text-align: right; */
 	}
 
     .sharing { 
-		grid-area: 2 / 1 / 3 / 3; 
+		/* grid-area: 2 / 1 / 3 / 3; */
+		width: 100%;
 		display: flex;
 		justify-content: space-around;
 	}
@@ -1526,6 +1533,12 @@ p.intro-text {
 	text-align: center;
 }
 
+@media (max-width: 850px) {
+	.story .l-container > .content {
+		margin-top: 0;
+	}
+}
+
 @media (max-width: 768px) {
 	.icon-text-container .icon-text {
 		border: none !important;
@@ -1533,11 +1546,7 @@ p.intro-text {
 
 	.story .story-image:after {
 		display: none;
-	}
-
-	.story .l-container > .content {
-		margin-top: 0;
-	}
+	}	
 }
 
 @media (max-width: 600px) {
@@ -1616,6 +1625,7 @@ blockquote:after {
     font-weight: 600;
     font-size: 0.8em;
     line-height: 1.25;
+	text-wrap: pretty;
 }
 
 .pull-quote-attribution span.headshot {
@@ -1630,7 +1640,7 @@ blockquote:after {
     border-radius: 50%;
     width: 100px;
     height: 100px;
-    opacity: 0;
+    opacity: 1;
 }
 
 .pull-quote-attribution:before {
@@ -1710,10 +1720,8 @@ blockquote:after {
 
     blockquote:after {
         content: "”";
-        position: absolute;
-        top: unset;
-        right: -5px;
-        bottom: 0.5em;
+		top: 0;
+        right: 0;
     }
 
 	blockquote:before,
@@ -1822,14 +1830,14 @@ pre[class*=language-] {
     position: relative;
     z-index: 1;
     overflow: visible;
-    height: 75px;
+    min-height: 75px;
     line-height: 70px;
     margin: 10px 0 0;
 }
 
 .page-title h1:before {
     content: "";
-    height: 75px;
+    min-height: 75px;
     width: 100px;
     position: absolute;
     top: 0;
@@ -1843,7 +1851,7 @@ pre[class*=language-] {
 
 .page-title h1:after {
     content: "";
-    height: 75px;
+    min-height: 75px;
     width: 500px;
     position: absolute;
     top: 0;
@@ -1852,6 +1860,23 @@ pre[class*=language-] {
     margin: auto;
     z-index: -1;
     background-color: var(--color-brand-red);
+}
+
+.page-title.multi-line h1 {
+	line-height: 55px;
+}
+
+@media (max-width: 1000px) {
+	.page-title.multi-line h1 {
+        text-wrap: pretty;
+		line-height: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+	.page-title.multi-line h1 {
+        line-height: 40px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -1874,6 +1899,10 @@ pre[class*=language-] {
 
 	.page-title .l-container {
         padding: 0;
+    }
+
+	.page-title.multi-line h1 {
+        line-height: 30px;
     }
 }
 
@@ -2164,15 +2193,15 @@ pre[class*=language-] {
     content: "";
     position: absolute;
     right: 0;
-    top: 20%;
+    top: 10%;
     margin: auto;
     /* background-image: url(https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/image/UC-logo-lockup-bg.png); */
     background-image: url(https://foundation.uc.edu/image/transparent-monogram-forty-percent_cropped.png);
     background-repeat: no-repeat;
     background-size: cover;
     /* opacity: 0.8; */
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
 }
 
 /*------------------------------------*\
@@ -2334,6 +2363,45 @@ table caption {
 
 .tab-content h4 {
     margin: 0;
+}
+
+.tab-content.bg-img-content {
+	padding-top: 6em !important;
+	padding-bottom: 6em !important;
+	background-size: 75% !important;
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+.tab-content.bg-img-content:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -10%;
+	right: 0;
+	width: 120%;
+	height: 101%;
+	transform: skew(-30deg);
+	/* background: rgba(255, 255, 255, 0.75); */
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+60,ffffff+100&0.9+0,0.9+60,0+100 */
+	background: linear-gradient(to right, rgba(255,255,255,0.95) 0%,rgba(255,255,255,0.95) 50%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+	background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.tab-content.bg-img-content:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -1px;
+	right: 0;
+	width: 101%;
+	height: 100%;
+	z-index: 2;
+	border: 1px solid var(--color-ltGray);
+	border-top: none;
 }
 
 .tab-content figure {
@@ -2615,7 +2683,7 @@ table caption {
  */
 .l-container {
     /* max-width: 80rem; */
-    max-width: 1024px;
+    max-width: 100%;
     width: 1024px;
     padding: 0 0.5rem;
     /* padding: 0 1rem; */
@@ -2684,6 +2752,10 @@ table caption {
     max-width: 1024px;
 }
 
+main .l-container.flow:first-child > p:not(.large):first-child {
+	margin-top: 2em !important;
+}
+
 /**
  *
  * 1) This caps the width of text passages
@@ -2738,6 +2810,10 @@ table caption {
         order: 1;
         margin-bottom: 0;
     }
+}
+
+iframe {
+	max-width: 100% !important;
 }
 
 /*------------------------------------*\
@@ -3736,7 +3812,6 @@ footer .social-media li a.twitterx:focus,
 
 #share-print {
     border-radius: 50%;
-    border: 1px solid var(--color-brand-red) !important;
     padding: 10px !important;
     background-size: 75%;
     background-image: url(https://foundation.uc.edu/file/icons/print-icon-red.svg);
@@ -3744,8 +3819,7 @@ footer .social-media li a.twitterx:focus,
 
 #share-print:hover,
 #share-print:focus {
-    border-color: var(--color-brand-black) !important;
-    background-image: url(https://foundation.uc.edu/file/icons/print-icon-black.svg);
+    background-image: url(https://ucfnd-stg-bbisfoun.ucfnd.concourse.host/file/icons/print-icon-black.svg);
 }
 
 @media (max-width: 700px) {
@@ -4129,7 +4203,7 @@ nav .search a {
 
 .social-media-icons {
     list-style: none;
-    display: flex;
+    display: inline-flex;
     gap: 10px;
     padding: 0;
 }
@@ -4144,6 +4218,11 @@ nav .search a {
     display: block;
     width: 40px;
     height: 40px;
+}
+
+.social-media-icons > li > img {
+    width: 100%;
+    height: 100%;
 }
 
 /*------------------------------------*\
@@ -4196,6 +4275,7 @@ nav .search a {
 
 .c-pagination__item {
     border-right: 1px solid #ddd;
+    list-style: none;
 }
 
 .c-pagination__item:last-child {
@@ -4427,6 +4507,50 @@ ul.nav.main>li.search>a:after {
         background: var(--color-grey);
    		box-shadow: inset 0 0 5px var(--color-steger-silver);
     }
+}
+   
+/*------------------------------------*\
+    #ANCHOR NAVIGATION
+\*------------------------------------*/
+
+.anchor-scroll-nav {
+   	background: var(--color-white);
+   	position: -webkit-sticky;
+    position: sticky;
+    top: 62px;
+    z-index: 98;
+   	border-bottom: 1px solid var(--color-bearcats-black);
+}
+   
+.anchor-scroll-nav ul {
+    width: 1024px;
+    max-width: 100%;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 0;
+}
+
+.anchor-scroll-nav ul li {
+ list-style: none;
+ display: list-item;
+}
+
+.anchor-scroll-nav ul li a {
+    padding: 0px 15px;
+    display: block;
+    border: none !important;
+    font-weight: normal;
+    line-height: 30px;
+    color: var(--color-uc-dark-red) !important;
+    transition: all 0.4s ease-in-out;
+}
+
+.anchor-scroll-nav ul li a:hover {
+    background: var(--color-uc-dark-red);
+    text-decoration: underline !important;;
+    color: var(--color-white) !important;
 }
 
 /*------------------------------------*\
@@ -4966,6 +5090,7 @@ strong * {
 
 .callout-card h2 {
     color: var(--color-brand-black);
+    margin-top: unset !important;
 }
    
 @media (max-width: 500px) {
@@ -5025,7 +5150,7 @@ strong * {
     main .one-half,
     main .one-third,
     main .one-fourth {
-        width: 90vw !important;
+        /* width: 90vw !important; */
    		margin-left: auto;
 		margin-right: auto;
     }
@@ -5769,7 +5894,8 @@ main p > a:hover {
 
 /*------------------------------------*\
     #EXCEPTIONS
-\*------------------------------------*/
+\*------------------------------------*/  
+
 .related-stories.red-bg .p-1 {
     padding: 1em !important;
 }
@@ -5954,6 +6080,136 @@ main p > a:hover {
         margin-top: 2em;
     }
 }
+   
+.pillar-cards {
+	padding: 0.5em 0 !important;   
+}
+   
+.pillar-cards > a:after {
+   	content: "";
+   	position: absolute;
+   	top: 0;
+   	bottom: 0;
+   	left: 0;
+   	right: 0;
+   	margin: auto;
+   	width: 100%;
+   	height: 100%;
+	border: 2px solid var(--color-brand-red);   
+}
+   
+.pillar-cards > a .bg-image:before {
+   	content: "";
+   	position: absolute;
+   	top: 0;
+   	bottom: 0;
+   	left: 0;
+   	right: 0;
+   	margin: auto;
+   	width: 100%;
+   	height: 100%;
+   	background: rgba(255, 255, 255, 0.35);
+}
+   
+.pillar-cards * {
+	color: var(--color-brand-black) !important;   
+}
+   
+.pillar-cards {
+	gap: 1em !important;   
+}
+   
+.pillar-cards > a {
+   	overflow: hidden;
+	text-shadow: 1px 1px var(--color-white);
+}
+  
+.pillar-cards > a div {
+    transition: transform 1s ease-in-out;
+}
+   
+.pillar-cards > a:hover div {
+    transform: scale(1.1);
+}
+
+.pillar-cards .bg-image {
+    padding: 2.25em 2em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+   	width: 100%
+}
+
+.pillar-cards .bg-image p {
+    z-index: 5;
+    font-size: 2em;
+   	text-align: center;
+}
+   
+@media (max-width: 768px) {
+   	.pillar-cards .bg-image {
+   		padding: 1.75em 1em;
+   	}
+   
+   	.pillar-cards > a:hover div {
+        transform: none;
+    }
+}
+   
+.pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+   	overflow: visible;
+}
+   
+.pillars > * {
+	width: 100% !important;   
+}
+
+.pillar1 { grid-area: 1 / 1 / 2 / 2; }
+.pillar2 { grid-area: 1 / 2 / 2 / 3; }
+.pillar3 { grid-area: 1 / 3 / 2 / 4; }
+.pillar4 { grid-area: 2 / 1 / 3 / 2; }
+.pillar5 { grid-area: 2 / 2 / 3 / 3; }
+.pillar6 { grid-area: 2 / 3 / 3 / 4; }
+   
+@media (max-width: 800px) {
+   	.pillars {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+  	}
+
+   	.pillar1 { grid-area: 1 / 1 / 2 / 2; }
+   	.pillar2 { grid-area: 1 / 2 / 2 / 3; }
+   	.pillar3 { grid-area: 2 / 1 / 3 / 2; }
+   	.pillar4 { grid-area: 2 / 2 / 3 / 3; }
+   	.pillar5 { grid-area: 3 / 1 / 4 / 2; }
+   	.pillar6 { grid-area: 3 / 2 / 4 / 3; }
+}
+   
+@media (max-width: 750px) {
+   	.pillars {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+  	}
+
+   	.pillar1 { grid-area: 1 / 1 / 2 / 2; }
+   	.pillar2 { grid-area: 2 / 1 / 3 / 2; }
+   	.pillar3 { grid-area: 3 / 1 / 4 / 2; }
+   	.pillar4 { grid-area: 4 / 1 / 5 / 2; }
+   	.pillar5 { grid-area: 5 / 1 / 6 / 2; }
+   	.pillar6 { grid-area: 6 / 1 / 7 / 2; }
+}  
    
 /* Horizontal slider */   
 .categoriesBar {
@@ -6255,7 +6511,6 @@ div[id*="_UpdatePanel"] {
     padding: 10px;
     margin: 0 auto 1.5em;
     max-width: 800px;
-   	overflow: hidden;
 }
 
 div[id*="_UpdatePanel"] .BBFormRequiredFieldMarker.DonationRequiredFieldMarker {
@@ -6288,20 +6543,92 @@ tbody[id*="_TB_pnlDonation"] tr {
     gap: 10px;
 }
 
-table[id*="_tblAmount"]>tbody {
+/* table[id*="_tblAmount"]>tbody {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 10px;
+} */
+
+/* Standard Donation Form - Amount width */
+/* table[id*="_tblAmount"] > tbody tr:not(:last-child), */
+/* table[id*="_rdoGiftType"] > tbody > tr {
+    width: 18%;
+} */
+   
+/* one item * /
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(1) {
+   width: 100%;
+} 
+
+/* two items * /
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(2),
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(2) ~ tr {
+   width: 50%;
+} 
+
+/* three items * /
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(3),
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(3) ~ tr {
+   width: 33.3333%;
 }
 
-table[id*="_tblAmount"]>tbody tr:not(:last-child),
-table[id*="_rdoGiftType"]>tbody>tr {
-    width: 18%;
+/* four items * /
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(4),
+table[id*="_tblAmount"] > tbody > tr:not([id*="_trOther"]):first-child:nth-last-child(4) ~ tr {
+   width: 25%;
+}
+   
+/* five items * /
+table[id*="_tblAmount"] > tbody > tr:first-child:nth-last-child(5),
+table[id*="_tblAmount"] > tbody > tr:first-child:nth-last-child(5) ~ tr {
+   width: 20%;
+} */
+
+@media (min-width: 600px) {
+   
+   table[id*="_tblAmount"] > tbody {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        /* grid-template-rows: repeat(2, 1fr); */
+        grid-template-rows: auto;
+        grid-column-gap: 10px !important;
+        grid-row-gap: 0px !important;
+    }
+
+    /* First amount */
+    table[id*="_tblAmount"] > tbody > tr:first-child { grid-area: 1 / 1 / 2 / 2; }
+
+    /* Second amount */
+    table[id*="_tblAmount"] > tbody > tr:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+
+    /* Third amount */
+    table[id*="_tblAmount"] > tbody > tr:nth-child(3) { grid-area: 1 / 3 / 2 / 4; }
+
+    /* Fourth amount */
+    table[id*="_tblAmount"] > tbody > tr:nth-child(4) { grid-area: 1 / 4 / 2 / 5; }
+
+    /* Fifth amount */
+    table[id*="_tblAmount"] > tbody > tr:nth-child(5) { grid-area: 1 / 5 / 2 / 6; }
+
+    /* Other amount */
+    table[id*="_tblAmount"] > tbody > tr:last-child { grid-area: 2 / 1 / 3 / 6; }
+    table[id*="_tblAmount"] > tbody > tr:last-child > td:first-child { 
+        grid-area: 2 / 1 / 3 / 2; 
+        min-width: 148px;
+    }
+    table[id*="_tblAmount"] > tbody > tr:last-child > td:last-child { grid-area: 2 / 2 / 3 / 4; }
+   
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+    table[id*="_tblAmount"]>tbody>tr:last-child>td:last-child {
+        flex-grow: 1;
+    }
 }
 
 table[id*="_tblAmount"]>tbody tr:last-child {
-    width: 100%;
+    /* width: 100%; */
    	display: flex;
    	gap: 10px;
 }
@@ -6343,9 +6670,9 @@ tr[id*="_trOther"] {
     gap: 10px !important;
 }
 
-tr[id*="_trOther"] td[id*="_tdOther"] {
-    width: 18%;
-}
+/* tr[id*="_trOther"] td[id*="_tdOther"] {
+    width: 20%;
+} */
 
 tr[id*="_trOther"] td[id*="_tdOther"] label {
     display: block;
@@ -6389,7 +6716,7 @@ tr[id*="_trOther"] .wsNowrap.BBFieldControlCell.DonationFieldControlCell>table>t
     display: flex;
     justify-content: center;
     align-items: center;
-   	width: 98%;
+   	width: 100%;
 }
 
 tr[id*="_trOther"] .wsNowrap.BBFieldControlCell.DonationFieldControlCell>table>tbody>tr>td:nth-child(2) input {
@@ -6406,9 +6733,10 @@ div[id*="_pnlDonationForm"] td input[type="radio"]:checked+label {
     transition: all 250ms ease-in-out;
 }
    
-@media (max-width: 600px) {
+/* @media (max-width: 600px) { */
    	tr[id*="_trOther"] .wsNowrap.BBFieldControlCell.DonationFieldControlCell > table > tbody > tr > td:nth-child(2) {
         position: relative;
+        min-width: 306px;
         height: 45px;
    		width: 100% !important;
     }
@@ -6416,7 +6744,7 @@ div[id*="_pnlDonationForm"] td input[type="radio"]:checked+label {
    	tr[id*="_trOther"] .wsNowrap.BBFieldControlCell.DonationFieldControlCell > table > tbody > tr > td:nth-child(2) input {
         position: absolute;
     }
-}
+/* } */
 
 /* RADIO BUTTON PILLS */
 table[id*="_tblAmount"],
@@ -6424,13 +6752,14 @@ table[id*="_rdoGiftType"] {
     padding: 1rem;
 }
 
-table[id*="_tblAmount"]>tbody,
+/* table[id*="_tblAmount"]>tbody, */
 table[id*="_rdoGiftType"]>tbody {
     gap: 10px !important;
 }
 
 table[id*="_tblAmount"]>tbody tr:not(:last-child) {
-    width: 18%;
+    /* width: 18%; */
+    height: 45px;
     padding: 0;
 }
 
@@ -6439,7 +6768,7 @@ tr[id*="_trOther"] {
 }
 
 tr[id*="_trOther"]>td {
-    width: 18% !important;
+    /* width: 18% !important; */
     padding: 0 !important;
 }
 
@@ -6447,9 +6776,9 @@ tr[id*="_trOther"]>td:first-child span {
     width: 100% !important;
 }
 
-tr[id*="_trOther"]>td:last-child {
-    width: 40% !important;
-}
+/* tr[id*="_trOther"]>td:last-child {
+    width: 39% !important;
+} */
 
 table[id*="_tblAmount"] .vaBottom.BBFieldControlCell.DonationFieldControlCell {
     display: none;
@@ -6463,7 +6792,7 @@ table[id*="_rdoGiftType"]>tbody>tr {
     padding: 0;
 }
 
-table[id*="_tblAmount"]>tbody>tr>td,
+table[id*="_tblAmount"]>tbody>tr:not(:last-child)>td,
 table[id*="_rdoGiftType"]>tbody>tr>td {
     width: 100%;
     display: block;
@@ -6844,6 +7173,7 @@ div.ui-datepicker.ui-widget {
 
 @media (max-width: 600px) {
     table[id*="_tblAmount"]>tbody {
+        display: flex;
         flex-direction: column;
         gap: 10px !important;
     }
@@ -8870,6 +9200,12 @@ div[id*="_UpdatePanel"] * {
 div[id*="_UpdatePanel"]>.EventTable {
     width: 100%;
 }
+   
+.BBFormTable.EventTable tr[id*="_trProgress"] {
+   	display: inline-table;
+	margin: 1em 0 !important;
+   	width: 100%;
+}
 
 .BBFormTable.EventTable tr[id*="_trProgress"] table[id*="_tblProgress"] tr {
     position: relative;
@@ -8942,6 +9278,7 @@ div[id*="_UpdatePanel"]>.EventTable {
     margin-top: 6px;
     margin-bottom: 6px;
     border: 1px solid var(--color-grey);
+   	padding: 10px !important;
 }
 
 .EventItemsSelectionGrid .BBFormTable.EventItemsTable>tbody>tr>td {
@@ -8990,6 +9327,10 @@ table[id$="Wizard1_dgEventItems2_dgPriceList_0"]>tbody>tr>td {
     align-items: center;
 }
 
+.w100p.BBFormTable.EventItemRegistrationsTable>tbody>tr>td.BBFieldControlCell.EventItemRegistrationControlCellDescription {
+	width: 33%;   
+}
+   
 .BBFormTitle.EventItemTitleName {
     font-weight: bold;
 }
@@ -9246,7 +9587,7 @@ span[id*="Wizard1_dgAttendeesSummary_lblEventName_0"] {
     div[id*="_UpdatePanel"] .BBFieldControlCell.DonationFieldControlCell>table>tbody>tr,
     tr[id*="trOther"]>td,
     div[id*="_UpdatePanel"] div[id*="_pnlDonationForm"]>.BBFormTable.DonationFormTable>tbody:last-child:not([id*="_tbdCart"])>tr>td:last-child,
-    BBFormButtonCell DonationButtonCell {
+    .BBFormButtonCell.DonationButtonCell {
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
@@ -9364,16 +9705,101 @@ span[id*="Wizard1_dgAttendeesSummary_lblEventName_0"] {
     #REGISTRATION FORM
 \*------------------------------------*/
    
-.BBEventRegSequenceMapCurrentStepItem {
-	background-color: var(--color-brand-black);
-    color: #ffffff;
+/* Layout */
+   
+.skyContainer.EventContainer {
+   	padding: 10px;
+    margin: 0 auto;
+    max-width: 800px;
+    overflow: hidden;
+} 
+   
+.skyContainer.EventContainer[role=main] {
+   	margin-bottom: 1.5em;
+   	margin-top: 0 !important;
+}
+   
+.skyContainer.EventContainer[role=main] > div {
+   	width: 100% !important;
+   	padding: 0 !important;
+}
+   
+.skyContainer.EventContainer > .hidden-xs.col-xs-1.col-sm-1.col-md-2.col-lg-2 {
+   	float: none;
+   	width: 100% !important;
+   	padding: 0 !important;
+}
+   
+.skyContainer.EventContainer > .hidden-xs {
+	display: none;   
+}
+   
+.BBSequenceMapContainer {
+    max-height: unset;
+}
+   
+/* Top Content for Event */
+   
+div.skyContainer.EventContainer[role=banner] > div {
+   	width: 100% !important;
+   	padding: 0 !important;
+}
+   
+div.skyContainer.EventContainer[role=banner] > div > p:empty {
+   	display: none;
+}
+   
+/* Steps */
+   
+ol.BBSequenceMap.BBEventRegSequenceMap.list-inline > li > * {
+	background-color: transparent;
+   	color: var(--color-brand-black);
+   	border-bottom: none !important;
+}
+   
+ol.BBSequenceMap.BBEventRegSequenceMap.list-inline {
+   	position: relative;
+}
+   
+ol.BBSequenceMap.BBEventRegSequenceMap.list-inline:before {
+   	content: "";
+    position: absolute;
+    z-index: 0;
+    top: 1.9em;
+    left: 2em;
+    right: 2em;
+    width: 80%;
+    height: 10px;
+    background-color: #ccc;
+    margin: auto;
+}
+   
+.BBSequenceMapStepItem > span.mob-content {
+   	display: block !important;
+   	width: 45px;
+    height: 45px;
+    position: relative;
+    display: block;
+    margin: 0 auto 5px;
+    background: var(--color-white);
+    color: var(--color-brand-black);
+    text-align: center;
+    border: 1px solid var(--color-brand-black);
+    line-height: 40px;
+    border-radius: 50%;
+    font-style: italic;
+}
+   
+.BBSequenceMapStepItem.BBSequenceMapCurrentStepItem > span.mob-content {
+   	background-color: var(--color-brand-black);
+    color: var(--color-white);
 }
 
 .BBSequenceMap.BBEventRegSequenceMap.list-inline {
 	display: flex;
 	justify-content: space-between;
 	padding: 0 !important;
-	margin: 1em 0 !important;
+	margin: 0 !important;
 	gap: 10px;
 	flex-direction: row;
 }
@@ -9390,10 +9816,6 @@ span[id*="Wizard1_dgAttendeesSummary_lblEventName_0"] {
 	display: block;
 	height: 100% !important;
 	margin: 0 !important;
-}
-
-.BBSequenceMapStepItem.BBEventRegSequenceMapStepItem.BBSequenceMapStepLink.BBEventRegSequenceMapStepLink {
-	background-color: #EEEEEE;
 }
 
 .BBEventRegSequenceMapStepItem {
@@ -9521,6 +9943,14 @@ div[class*="Ev3_DivLaterChk"] label[class*="_RegisterLaterText"] {
 .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons {
 	padding: 1em;  
 }
+   
+/* Event Dialog Popup */
+   
+div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons[role=dialog] {
+	top: 0 !important;
+   	max-width: 100% !important;
+   	width: 800px !important;
+}
  
 /* Event Popup Headings */
    
@@ -9530,7 +9960,8 @@ div[class*="Ev3_DivLaterChk"] label[class*="_RegisterLaterText"] {
    
 .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons h2.EventPopUpHeading,
 .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons h3.EventTicketTypeHeading {
-	font-family: "Jost", sans-serif !important;   
+	font-family: "Jost", sans-serif !important;
+   	margin: 0 !important;
 }
    
 .EventPopUpHeaderCell.EventPopUpDivThirdColumnHeader .EventTicketTypeHeading {
@@ -9602,6 +10033,12 @@ div[class*="Ev3_DivLaterChk"] label[class*="_RegisterLaterText"] {
     letter-spacing: 1px;
     width: unset;
     float: right;   
+}
+   
+.BBSequenceMapNavigationContainer.BBEventRegSequenceMapNavigationContainer.container.fullWidth input:hover, .BBSequenceMapNavigationContainer.BBEventRegSequenceMapNavigationContainer.container.fullWidth input:focus {
+   	background-color: var(--color-uc-dark-red) !important;
+    border-color: var(--color-uc-dark-red) !important;
+    outline: 0;
 }
    
 /* Fields */
