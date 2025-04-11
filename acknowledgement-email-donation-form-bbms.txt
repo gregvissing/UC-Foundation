@@ -1,0 +1,294 @@
+<!--[if mso]>
+<xml><w:WordDocument xmlns:w="urn:schemas-microsoft-com:office:word"><w:DontUseAdvancedTypographyReadingMail/></w:WordDocument>
+<o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml>
+<![endif]--><!--[if !mso]><!-->
+<!--<![endif]-->
+<style>                
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: inherit !important;
+    }
+
+    #MessageViewBody a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    p {
+        line-height: inherit
+    }
+
+    .desktop_hide,
+    .desktop_hide table {
+        mso-hide: all;
+        display: none;
+        max-height: 0px;
+        overflow: hidden;
+    }
+
+    .image_block img+div {
+        display: none;
+    }
+
+    sup,
+    sub {
+        font-size: 75%;
+        line-height: 0;
+    }
+
+    @media (max-width:720px) {
+        .mobile_hide {
+            display: none;
+        }
+
+        .row-content {
+            width: 100% !important;
+        }
+
+        .stack .column {
+            width: 100%;
+            display: block;
+        }
+
+        .mobile_hide {
+            min-height: 0;
+            max-height: 0;
+            max-width: 0;
+            overflow: hidden;
+            font-size: 0px;
+        }
+
+        .desktop_hide,
+        .desktop_hide table {
+            display: table !important;
+            max-height: none !important;
+        }
+    }
+</style>
+<!--[if mso ]><style>                sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% } sub { mso-text-raise:-10% }</style> <![endif]-->
+<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f3f3;">
+<tbody>
+<tr>
+<td>
+<table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f3f3;">
+<tbody>
+<tr>
+<td>
+<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 700px; margin: 0 auto;" width="700">
+<tbody>
+<tr>
+<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;" width="100%">
+<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<tbody>
+<tr>
+<td class="pad" style="width: 100%;">
+<div class="alignment" align="center">
+<div style="max-width: 700px;"><a style="outline: none;" tabindex="-1" href="https://foundation.uc.edu" target="_blank" rel="noopener"><img alt="University of Cincinnati Foundation email header" height="auto" src="https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/lt5qrr7n/xmc/hus/mb3/UCF-Emails-HTML-Breakthrough-700X200-UCF%20%281%29.png" style="display: block; height: auto; border: 0; width: 100%;" title="University of Cincinnati Foundation email header" width="700"></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f3f3;">
+<tbody>
+<tr>
+<td>
+<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; border-radius: 0; color: #000000; width: 700px; margin: 0 auto;" width="700">
+<tbody>
+<tr>
+<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;" width="100%">
+<table class="heading_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<tbody>
+<tr>
+<td class="pad" style="text-align: center; width: 100%; padding: 10px 30px 10px 30px;">
+<h1 style="margin: 0; color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; letter-spacing: normal; line-height: 1.5; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 30px;"><span class="tinyMce-placeholder" style="word-break: break-word;">Thank You</span></h1>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="row row-3" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f3f3;">
+<tbody>
+<tr>
+<td>
+<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; border-radius: 0; color: #000000; width: 700px; margin: 0 auto;" width="700">
+<tbody>
+<tr>
+<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;" width="100%">
+<table class="html_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<tbody>
+<tr>
+<td class="pad">
+<div style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center;" align="center">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 0px; line-height: 150%; text-align: left; mso-line-height-alt: 24px; padding: 10px 30px 5px;">
+<p>Dear <img src="https://foundation.uc.edu/insertField.field?id=30&amp;nmode=0&amp;name=Individual.Begin+Section&amp;type=4" style="cursor: move;" title="Begins individual content" data-runat="server" data-fieldid="30" data-attribid="0" data-searchable="0" data-fieldname="Individual.Begin Section" data-fieldtype="4" data-htmlencode="True" data-isloop="False"><img src="https://foundation.uc.edu/insertField.field?id=3&amp;nmode=0&amp;name=First+Name&amp;type=4" style="cursor: move;" title="Individual first name" data-runat="server" data-fieldid="3" data-attribid="0" data-searchable="0" data-fieldname="First Name" data-fieldtype="4" data-htmlencode="True" data-isloop="False">,<img src="https://foundation.uc.edu/insertField.field?id=31&amp;nmode=0&amp;name=Individual.End+Section&amp;type=4" style="cursor: move;" title="Ends individual content" data-runat="server" data-fieldid="31" data-attribid="0" data-searchable="0" data-fieldname="Individual.End Section" data-fieldtype="4" data-htmlencode="True" data-isloop="False"></p>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="paragraph_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+<tbody>
+<tr>
+<td class="pad" style="padding-bottom: 10px; padding-left: 30px; padding-right: 30px;">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 0px; line-height: 1.5; text-align: left; mso-line-height-alt: 24px;">
+<p style="margin: 0; margin-bottom: 16px;">Thank you for your gift. The University of Cincinnati and UC Health are driving life-changing impact across our campuses, our region and our world, thanks to the generosity of donors like <em><strong>you</strong></em>.</p>
+<p style="margin: 0;"><span style="word-break: break-word; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif background-color: transparent;">Below is a summary of your contribution:</span></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="html_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<tbody>
+<tr>
+<td class="pad">
+<div style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center;" align="center">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 0px; line-height: 150%; text-align: left; mso-line-height-alt: 24px; padding: 10px 30px;">
+<p><strong>Total: <img src="https://foundation.uc.edu/insertField.field?id=12&amp;nmode=0&amp;name=Gift+Amount&amp;type=4" style="cursor: move;" title="Gift amount given" data-runat="server" data-fieldid="12" data-attribid="0" data-searchable="0" data-fieldname="Gift Amount" data-fieldtype="4" data-htmlencode="True" data-isloop="False"></strong></p>
+<p><strong>Date: <img src="https://foundation.uc.edu/insertField.field?id=13&amp;nmode=0&amp;name=Gift+Date&amp;type=4" style="cursor: move;" title="Date gift was given" data-runat="server" data-fieldid="13" data-attribid="0" data-searchable="0" data-fieldname="Gift Date" data-fieldtype="4" data-htmlencode="True" data-isloop="False"></strong></p>
+<p><strong>Summary:</strong> <img src="https://foundation.uc.edu/insertField.field?id=17&amp;nmode=0&amp;name=Designation&amp;type=4" style="cursor: move;" title="Selected designation" data-runat="server" data-fieldid="17" data-attribid="0" data-searchable="0" data-fieldname="Designation" data-fieldtype="4" data-htmlencode="True" data-isloop="False"></p>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="paragraph_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+<tbody>
+<tr>
+<td class="pad" style="padding: 10px 30px 10px 30px;">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0px; line-height: 1.5; text-align: left; mso-line-height-alt: 21px;">
+<p style="margin: 0;"><em>No goods or services were provided in exchange for this contribution, to the extent known at the time of issuance. If it is later determined that any benefit was received, a revised receipt will be issued accordingly.</em></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="paragraph_block block-5" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+<tbody>
+<tr>
+<td class="pad" style="padding: 10px 30px 10px 30px;">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 0px; line-height: 1.5; text-align: left; mso-line-height-alt: 24px;">
+<p style="margin: 0;">On behalf of our university community, <em><strong>thank you</strong></em> for your meaningful support.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="html_block block-6" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<tbody>
+<tr>
+<td class="pad">
+<div style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center;" align="center">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 0px; line-height: 150%; text-align: center; mso-line-height-alt: 24px;">&nbsp;</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="paragraph_block block-7" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+<tbody>
+<tr>
+<td class="pad" style="padding: 10px 30px 10px 30px;">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 0px; line-height: 1.5; text-align: center; mso-line-height-alt: 24px;">
+<p style="margin: 0;"><strong>Questions?</strong><br>Contact the UC Foundation at <a style="text-decoration: underline; color: #e00122;" title="tel:513-556-6781" href="tel:513-556-6781" target="_blank" rel="noopener">513-556-6781</a>.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="row row-4" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f3f3;">
+<tbody>
+<tr>
+<td>
+<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; border-radius: 0; color: #000000; width: 700px; margin: 0 auto;" width="700">
+<tbody>
+<tr>
+<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;" width="100%">
+<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<tbody>
+<tr>
+<td class="pad" style="width: 100%;">
+<div class="alignment" align="center">
+<div style="max-width: 700px;"><a style="outline: none;" tabindex="-1" href="https://foundation.uc.edu" target="_blank" rel="noopener"><img alt="University of Cincinnati | UC Health email footer" height="auto" src="https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/lt5qrr7n/yjs/532/mrb/HTML%20Breakthrough%20650px%20Footers%20UC%20UCH.png" style="display: block; height: auto; border: 0; width: 100%;" title="University of Cincinnati | UC Health email footer" width="700"></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="row row-5" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f3f3;">
+<tbody>
+<tr>
+<td>
+<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; border-radius: 0; color: #000000; width: 700px; margin: 0 auto;" width="700">
+<tbody>
+<tr>
+<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;" width="100%">
+<table class="paragraph_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+<tbody>
+<tr>
+<td class="pad">
+<div style="color: #000000; direction: ltr; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0px; line-height: 1.5; text-align: center; mso-line-height-alt: 21px;">
+<p style="margin: 0; margin-bottom: 16px;"><strong>The University of Cincinnati Foundation</strong><br>PO Box 19970 | Cincinnati, OH 45219<br><a style="text-decoration: underline; color: #e00122;" title="tel:513-556-6781" href="tel:513-556-6781" target="_blank" rel="noopener">513-556-6781</a> | 888-556-8889 | <a style="text-decoration: underline; color: #e00122;" href="https://foundation.uc.edu" target="_blank" rel="noopener">foundation.uc.edu</a></p>
+<p style="margin: 0; margin-bottom: 16px;">&copy;2025 University of Cincinnati Foundation</p>
+<p style="margin: 0;"><a style="text-decoration: underline; color: #e00122;" href="target=&amp;pid=2613&amp;did=0&amp;tab=0" target="_blank" rel="noopener">Privacy Policy</a> | <a style="text-decoration: underline; color: #e00122;" href="target=_blank&amp;pid=200&amp;did=0&amp;tab=0" rel="noopener">Unsubscribe</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- End -->
