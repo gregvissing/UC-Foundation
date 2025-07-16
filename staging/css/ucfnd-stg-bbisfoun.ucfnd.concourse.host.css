@@ -8592,6 +8592,1120 @@ div[id*="_UpdatePanel"]
 }
 
 /*------------------------------------*\
+    #DONATION FORM - MINI
+\*------------------------------------*/
+/* Out of the box styles */
+
+*[hidden] {
+    display: none;
+}
+
+#dvDirectDebitContentMain #dvMaindvDDInstruction .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMaindvMainDDMessage .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMaininstructionText .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMainddAgreement .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMainddGuarantee .bbDonationSeperator {
+    font-size: 12px;
+    word-break: keep-all;
+}
+
+#dvDirectDebitContentMain .ddBSBTextBox {
+    width: 50px;
+}
+
+#dvDirectDebitContentMain .ddNZAccNoTextBox, #dvDirectDebitContentMain .ddNzAccSuffixTextBox {
+    width: 100px;
+}
+
+#dvDirectDebitContentMain .ddSortCodeTextBox {
+    width: 30px;
+}
+
+#dvDirectDebitContentMain .ddRoutingNumberTextBox {
+    width: 94%;
+    max-width: 325px;
+}
+
+#dvMainDDMessage .bbDonationInputLabelContainer, #dvMaininstructionText .bbDonationInputLabelContainer, #dvMainddAgreement .bbDonationInputLabelContainer, #dvMaindvMainDDMessage .bbDonationInputLabelContainer {
+    width: 100%;
+    max-width: 100%;
+    word-break: unset;
+}
+
+#dvDirectDebitRecaptchaContent {
+    width: 100%;
+    max-width: 350px;
+}
+
+    #dvDirectDebitRecaptchaContent .bbDonationInputFieldContainer dd {
+        margin: 0px;
+        padding: 0px;
+    }
+
+.mini-donation {
+    background-color: #FFF;
+}
+
+.validation {
+    color: #AD0000;
+    clear: both;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 320px;
+    min-width: 130px;
+    width: 130px;
+}
+
+.bbminiform-validation {
+    color: #AD0000;
+    clear: both;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 320px;
+    min-width: 130px;
+    /*width: 130px;*/
+}
+
+.wordwrap {
+    word-break: keep-all;
+}
+
+.bbminiform-container * {
+    box-sizing: border-box;
+}
+
+.bbminiform-segmented-control input[type="radio"] {
+    -webkit-appearance: radio;
+    -moz-appearance: radio;
+}
+
+.bbminiform-segmented-control {
+    margin: 0 -0.5%;
+    margin-left: 7px;
+    margin-right: 15px;
+    width: 100%;
+}
+
+    .bbminiform-segmented-control .bbminiform-list-group-item {
+        display: inline-block;
+    }
+
+    .bbminiform-segmented-control .bbminiform-list-group-item {
+        margin-bottom: 0;
+        margin-left: 14px;
+        margin-right: 10px;
+    }
+
+        .bbminiform-segmented-control .bbminiform-list-group-item:first-child {
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bbminiform-segmented-control .bbminiform-list-group-item:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-left-radius: 0;
+        }
+
+.bbminiform-lock {
+    font-size: 1.1 rem;
+}
+
+.bbminiform-amtbox, .bbminiform-button {
+    color: #1A7BB7;
+    width: 100%;
+    border: 1px solid #1A7BB7;
+    border-radius: 6px;
+    float: left;
+    margin-right: 0.3%;
+    margin-bottom: 0.3%;
+    padding: 0 5px;
+    line-height: 3em;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    min-height: 60px;
+    margin-top: -1px;
+    word-break: break-word;
+}
+
+.bbminiform-amtboxmain {
+    color: #1A7BB7;
+    font-size: 14px;
+    width: 20%;
+    padding-left: 0.8%;
+    padding-top: 0.5%;
+    padding-right: 0.5%;
+    padding-bottom: 0.5%;
+    float: left;
+    text-align: center;
+}
+
+.bbminiform-amtboxcaption {
+    color: #292A2B;
+    font-size: 1.0em;
+    font-weight: bold;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.bbminiform-amtbox:hover, .bbminiform-button:hover, #btnCompleteDDPayment:hover {
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #166699;
+}
+
+.bbminiform-amtbox-active {
+    color: #FFFFFF;
+    background-color: #1A7BB7;
+}
+
+.bbminiform-container {
+    background-color: #FFFFFF;
+    padding: 1em;
+}
+
+.bbminiform-otherbox {
+    min-width: 80px;
+    color: #1A7BB7;
+    font-size: 1em;
+}
+
+.bbminiform-giftaidcaption {
+    font-weight: bold !important;
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.bbminiform-giftaiddescription {
+    color: #292A2B;
+    font-size: 0.875em;
+}
+
+    .bbminiform-giftaiddescription input[type="checkbox"] {
+        margin-right: 2px;
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        margin-bottom: 4px;
+    }
+
+    .bbminiform-giftaiddescription label {
+        font-weight: normal;
+    }
+
+.bbminiform-donatenowplaceholder {
+    height: 15px;
+}
+
+.bbminiform-clear {
+    clear: both;
+}
+
+.bbminiform-buttonwrapper {
+    margin-left: 9px;
+}
+
+    .bbminiform-buttonwrapper button {
+        max-width: 235px;
+        width: 45%;
+        margin: 0px 5px 5px 0px;
+    }
+
+.btmMakePayment.nonWizard {
+    width: 235px;
+}
+
+.bbminiform-amttext {
+    line-height: normal !important;
+}
+
+.btn-text {
+    font-weight: bold !important;
+}
+
+.bbminiform-amtbox.bbminiform-amttext span:not(:first-child) {
+    font-weight: normal;
+}
+
+.bbminiform-otheramount {
+    color: #1A7BB7;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid #1A7BB7;
+    text-align: center;
+    cursor: pointer;
+    min-height: 60px;
+    margin-top: -1px;
+    font-weight: bold;
+    border-radius: 6px;
+    font-family: Arial;
+}
+
+.bbminiform-errorsummary {
+    background-color: #fff;
+    color: #f00;
+    text-align: left;
+    display: none;
+}
+
+    .bbminiform-errorsummary ul {
+        display: block;
+        list-style-type: disc;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 40px;
+    }
+
+.bbminiform-closeicon {
+    display: block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: darkslategray;
+    border-radius: 100%;
+    background: -moz-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -moz-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background: -webkit-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -webkit-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background: linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background-color: darkslategray !important;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    top: -25px;
+    right: -20px;
+    position: relative;
+    float: right;
+}
+
+
+.bbminiform-table {
+    display: table;
+    width: 100%;
+    border-spacing: 5px; /*cellspacing:poor IE support for  this*/
+    /* border-collapse:separate;*/
+}
+
+.bbminiform-row {
+    display: table-row;
+    width: 100%;
+}
+
+#dvGiftDetails > .bbminiform-row {
+    display: inline-table;
+}
+
+.bbminiform-row-amount {
+    display: inline-block;
+    width: 100%;
+}
+
+div.bcmsWizardFooter {
+    display: block;
+}
+
+.bbminiform-cell {
+    float: left; /*fix for  buggy browsers*/
+    display: table-column;
+}
+
+#BodyId {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.bbminiform-margingleft {
+    margin-left: 5px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.bbminiform-checkbox {
+    display: inline-block !important;
+    cursor: pointer;
+    font-size: 15px !important;
+    font-weight: normal;
+    /*margin: 0px !important;*/
+    margin-left: 0px;
+    margin-bottom: 10px !important;
+}
+
+.bbminiform-designchk input[type=checkbox] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+#chkAreYouAlumni {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    width: 20px;
+    margin-bottom: 6px;
+}
+
+.bbminiform-span {
+    font-size: 14px;
+    margin-bottom: 0.5em;
+}
+
+.bbminiform-drpdown {
+    height: 40px;
+    max-width: 280px;
+}
+
+.BBRequired {
+    color: #AD0000;
+    padding-left: 2px;
+}
+
+.bbminiform-drpdowndiv {
+    margin-bottom: 5px;
+}
+
+.bbminiform-txtbox {
+    height: 44px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    padding: 0px 4px 1px;
+}
+
+div.bbPersonalInfoInputFieldContainer {
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    padding: 1px 0px 1px 0px;
+}
+
+.bbminiform-subcaption {
+    font-size: 12px;
+    color: #666666;
+    word-wrap: break-word;
+}
+
+input::-webkit-input-placeholder {
+    color: #D8D8D8;
+    font-weight: normal;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: #D8D8D8;
+    font-weight: normal;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: #D8D8D8;
+    font-weight: normal;
+}
+
+input.bbDonationInput:-ms-input-placeholder {
+    color: #D8D8D8 !important;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount::-webkit-input-placeholder {
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount:-moz-placeholder { /* Firefox 18- */
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount::-moz-placeholder { /* Firefox 19+ */
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount:-ms-input-placeholder {
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+/*Donation 2.0 Recurring Gift Changes*/
+#dvRecurringFrequencyOptions > .bbMarginBottom5px {
+    margin-bottom: 12px;
+}
+
+.dvGifTypButtonsspacer {
+    margin-bottom: 12px;
+}
+
+.giftTypeHeading, .giftAmountHeading {
+    margin-left: 0.6%;
+    padding-bottom: 0.5%;
+}
+
+#dvRecurringFrequencyOptions {
+    max-width: 600px;
+}
+
+.mdfEndDateOptionMain {
+    float: left;
+    margin-right: 0.5%;
+}
+
+    .mdfEndDateOptionMain div {
+        float: left;
+    }
+
+.mdfEndDateOption {
+    min-width: 100px;
+    max-width: 150px;
+}
+
+.mdfEndDateOptionMain input[type="radio"] {
+    margin-top: 0px;
+    margin-right: 5px;
+}
+
+div.mdfEndDateOption.bbSecondaryInfo {
+    line-height: 14px;
+}
+
+.bbMarginBottom5px {
+    margin-bottom: 5px;
+}
+
+.bbMarginBottom12px {
+    margin-bottom: 12px;
+}
+
+.bbDonationInput.bbminiform-txtbox.bbDonationDatePicker.hasDatepicker {
+    width: 80%;
+}
+
+
+.height36px {
+    height: 36px;
+}
+
+.mdfGiftTypeBtnMain.mdfGiftTypeBtnMainSelected {
+    background-color: #1A7BB7;
+}
+
+.mdfGiftTypeBtnMain {
+    width: 140px;
+    float: left;
+    margin-left: 0.8%;
+    border-radius: 3px;
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+}
+
+.mdfGiftTypeBtn {
+    width: 140px;
+    min-height: 36px;
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-break: break-word;
+    cursor: pointer;
+}
+
+.mdfGiftTypeBtn-selected {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.mdfGiftTypeBtn-unselected {
+    color: #666666;
+}
+
+.mdfFrequencyBtnMain {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 1%;
+    border-radius: 3px;
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    width: 23%;
+}
+
+    .mdfFrequencyBtnMain.mdfFrequencyBtnMainSelected {
+        background-color: #1A7BB7;
+    }
+
+        .mdfFrequencyBtnMain.mdfFrequencyBtnMainSelected .mdfFrequencyBtn {
+            color: #FFFFFF;
+        }
+
+.mdfFrequencyBtn {
+    width: 100%;
+    min-height: 36px;
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-break: break-word;
+    color: #666666;
+}
+
+/*Donation 2.0 Changes*/
+.bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps {
+    position: relative;
+    display: block;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep {
+        margin: 0 .5em .5em;
+        /*padding: 0.5em 0.5em; */
+        float: left;
+    }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn {
+            width: 160px;
+            height: 50px;
+            font-family: "Arial";
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed {
+            background-color: #D9F0FF;
+            color: #186FA5;
+        }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected {
+            background-color: #1A7BB7;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected {
+            background-color: #EEEEEE;
+            color: #666666;
+        }
+
+hiddenStep {
+    display: none;
+}
+
+hiddenContent {
+    display: none;
+}
+
+.largeScreenStepTitle {
+    display: block;
+}
+
+.smallScreenStepTitle {
+    display: none;
+}
+
+.btnStepButton > .fa-check {
+    display: none;
+}
+
+div#wizardFooter div#buttonWrapper button#btnWizardBack, #btnCancelDDPayment, div#dvPaymentButtons button#btnWizardBack {
+    background-color: #FFFFFF;
+    border: 1Px solid #CCCCCC;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+}
+
+.btnWizardFinish.btnPaymentMethod {
+    background-color: #FFFFFF;
+    border: 1Px solid #CCCCCC;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+}
+
+button.btnWizardContinue {
+    background-color: #1A7BB7;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+    border: 1px solid #1A7BB7;
+}
+
+button.btnWizardFinish, #btnCompleteDDPayment {
+    background-color: #1A7BB7;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+}
+
+.zeroOpacity {
+    opacity: 0;
+}
+
+.bbspLoadingOverlay {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 9999999;
+    background-color: grey;
+    opacity: 0.8;
+    display: none;
+}
+
+.bbspLoadingImage {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    z-index: 101;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+.bbDonationInputLabelContainer {
+    width: 100%;
+    max-width: 350px;
+    word-break: break-all;
+}
+
+.bbDonationInputFieldContainer {
+    width: 100%;
+}
+
+#dvPersonalInfoContent, #dvDirectDebitContent {
+    margin: 0px 0px 0px 15px;
+}
+
+.bbDonationCheckBoxList input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    margin-bottom: 5px;
+    margin-right: 4px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField .bbDonationTextBox {
+    height: 44px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    padding: 0px 4px 1px;
+}
+
+#txtComments {
+    height: 88px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    padding: 0px 4px 1px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField textarea.bbDonationTextBox {
+    height: 88px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField input.bbDonationDatePicker {
+    height: 44px;
+    border: 1px solid #D8D8D8;
+    width: 80%;
+    max-width: 325px;
+    border-radius: 0px 0px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField .bbDonationSelectList, select.bbminiform-drpdown {
+    height: 44px;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+}
+
+.bbFormFieldMainContainer {
+    margin-bottom: 12px;
+}
+
+label.bbDonationRequired, span.BBRequired {
+    color: #df0000;
+    font-size: medium;
+    font-weight: bolder;
+    vertical-align: middle;
+    margin-bottom: 0px;
+}
+
+div.bbDonationFieldMessage, div.bbminiform-validation, div.validation {
+    color: #DF0000;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+
+.validationWidth100Percent {
+    width: 100%;
+}
+
+.bbDonationInputField label.bbminiform-checkbox {
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+
+label.bbDonationInputLabel, div.bbDonationSeperator {
+    color: #666666;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    line-height: 20px;
+}
+
+.bbTributeConatiner span.bbDonationInputLabel {
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    line-height: 20px;
+}
+
+h2 .bbSectionHeader {
+    color: #666666;
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+label.bbSecondaryInfo, div.bbSecondaryInfo, span.bbSecondaryInfo {
+    color: #666666;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+label.paddedLeft {
+    padding-left: 15px;
+}
+
+.bbminiform-amtbox {
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 5px 8px 5px;
+}
+
+.ui-datepicker-trigger {
+    border: none;
+    background: none;
+    min-height: 22px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField input.bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField.bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField .bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField textarea.bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField select.bbDonation_ValidationErrorField {
+    border: 1px solid #DF0000;
+}
+
+.bbminiform-txtbox.bbDonation_ValidationErrorField,
+.bbminiform-otheramount.bbDonation_ValidationErrorField {
+    border: 1px solid #DF0000;
+}
+
+.height100Percent {
+    height: 100%;
+}
+
+.height60px {
+    height: 60px;
+}
+
+.btn {
+    border: 1px solid;
+}
+
+/**************************************************************For True Pledge Installments*********************************************/
+
+input#txtTruePledgeNoOfInstallmentFieldDetails {
+    width: 90%;
+}
+
+div#dvMaintxtTruePledgeNoOfInstallmentFieldDetails .bbDonationInputField {
+    float: left;
+    width: 100%;
+}
+
+#dvPledgeFrequencyOptions {
+    max-width: 600px;
+}
+
+#dvMaintxtTruePledgeNoOfInstallmentFieldDetails {
+    max-width: 600px;
+}
+
+.maxWidth600px {
+    max-width: 600px;
+}
+
+/**************************************************************************************************************************************/
+@media(max-width:479px) {
+    .CaptchaImageContainerNew div {
+        margin: 0 auto;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        padding-left: 7px;
+    }
+
+    .mdfFrequencyBtnMain {
+        float: left;
+        margin-right: 2%;
+        margin-top: 0.5%;
+        border-radius: 3px;
+        border: 1px solid #CCCCCC;
+        background-color: #FFFFFF;
+        width: 48%;
+    }
+
+    .mdfFrequencyBtn {
+        width: 100%;
+    }
+
+    .mdfGiftTypeBtnMain {
+        width: 49%;
+    }
+
+    .mdfGiftTypeBtn {
+        width: 100%;
+    }
+
+    button.btnWizardBack {
+        width: 48%;
+    }
+
+    button.btnWizardContinue {
+        width: 48%;
+    }
+
+    button#btmMakePayment, button#btnDirectDebit {
+        width: 48%;
+        padding: 0px 0px 0px 0px;
+        border: 0px;
+    }
+
+    button#btnDirectDebit {
+        float: right;
+        margin-right: 0px;
+    }
+
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps {
+        text-align: justify;
+        position: relative;
+        z-index: 1;
+    }
+
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep {
+            display: inline-block;
+            z-index: -1;
+            margin: 0;
+            width: 33.3%;
+        }
+
+    .bcmsWizardSteps:after {
+        content: '';
+        width: 100%; /* Ensures justification for single lines */
+        display: inline-block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected {
+        background-color: #FFFFFF;
+        color: #1A7BB7;
+        border-color: #1A7BB7;
+        font-weight: bold;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btnStepButton {
+        z-index: 9999999;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected {
+        background-color: #FFFFFF;
+        color: #666666;
+        border-color: #666666;
+    }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected.btn-disabled {
+            color: #CCCCCC;
+            border-color: #CCCCCC;
+        }
+
+    .largeScreenStepTitle {
+        display: none;
+    }
+
+    .smallScreenStepTitle {
+        display: block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-family: "Arial";
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        z-index: 1;
+        position: relative;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected > .smallScreenStepTitle {
+        display: block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected > .smallScreenStepTitle {
+        display: block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed > .smallScreenStepTitle {
+        display: none;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected > .fa-check {
+        display: none;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected > .fa-check {
+        display: none;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed > .fa-check {
+        display: block;
+        color: white;
+        background-color: #1A7BB7;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed {
+        background-color: #1A7BB7;
+    }
+
+    .bcmsWizardSteps .bcmsWizardStep:not(:last-child):after {
+        position: absolute;
+        content: '';
+        top: 0%;
+        margin-left: 25px;
+        width: 33.33%;
+        height: 50%;
+        border-bottom: 2px solid black;
+    }
+
+    .bbminiform-amtboxmain {
+        width: 100%;
+    }
+
+    .bbminiform-otheramount {
+        width: 100%;
+    }
+}
+
+/* Custom styles to match design system */
+.bbminiform-amtbox,
+.bbminiform-otheramount {
+	border: none !important;
+	border-radius: 0;
+	background-color: #e5e5e5 !important;	
+}
+
+.bbminiform-otheramount::placeholder {
+	font-weight: 700 !important;
+}
+
+.mini-donation .bbminiform-amtbox-active {
+	background-color: var(--color-brand-red) !important;
+}
+
+.mini-donation .btn.btn-primary {
+	padding: 7px 32px !important;
+	line-height: 1 !important;
+	min-height: 46.8px !important;
+}
+
+.btmMakePayment.nonWizard {
+    width: max-content !important;
+}
+
+/*------------------------------------*\
     #ADVANCED DONATION FORM
 \*------------------------------------*/
 
