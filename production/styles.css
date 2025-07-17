@@ -1600,13 +1600,16 @@ p.intro-text a {
  * Blockquote base styles
  */
 .pull-quote {
-	padding-right: 70px;
-	margin-bottom: 0;
+	/* padding-right: 70px; */
+	padding: 16% 6% 5%;
+    margin-bottom: 20px;
+	position: relative;
+	font-family: "Gentium Book Plus", serif !important;
 	/* margin-bottom: var(--flow-space, 1em) !important; */
 }
 
 div.pull-quote {
-	margin-bottom: 40px !important;
+	margin-bottom: 20px !important;
 }
 
 .pull-quote.with-headshot {
@@ -1614,31 +1617,54 @@ div.pull-quote {
 }
 
 blockquote {
-	font-style: italic;
-	color: #808080;
+	/* font-style: italic; */
+	/* color: #808080; */
 	/* padding-left: 1rem; */
 	/* margin-bottom: 1rem; */
 
 	border-left: 0;
-	font-weight: 300;
-	text-indent: -32px;
-	margin-left: 50px;
-	line-height: 1.2;
+	/* font-weight: 300; */
+	/* text-indent: -32px; */
+	/* margin-left: 50px; */
+	/* line-height: 1.2; */
 	/* padding: 0 !important; */
-	color: var(--color-brand-red);
-	padding: 40px 50px 20px 20px;
+	/* color: var(--color-brand-red); */
+	/* padding: 40px 50px 20px 20px; */
 	position: relative;
+	font: inherit;
 }
 
 blockquote p {
-	font-size: calc(1.75em * var(--text-multiplier, 1)) !important;
-	line-height: normal !important;
-	color: var(--color-brand-red);
-	/* font-family: "Gentium Book Basic", serif; */
-	display: inline;
-	font-style: normal;
+	/* font-size: calc(1.75em * var(--text-multiplier, 1)) !important; */
+	/* line-height: normal !important; */
+	/* color: var(--color-brand-red); */
+	font: inherit;
+	/* display: inline; */
+	/* font-style: normal; */
+	
+	color: var(--color-brand-black);
+	font-size: calc(2.6em);
+    font-weight: 600;
+    line-height: 1.2em;
+    letter-spacing: 0.95px;
+    margin-bottom: 30px;
+    text-wrap: pretty;
 }
 
+.pull-quote .pull-quote-background {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(https://foundation.uc.edu/image/pull-quote-black.svg);
+    background-size: 40%;
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+/*
 blockquote:before,
 blockquote:after {
 	color: transparent;
@@ -1657,20 +1683,34 @@ blockquote:before {
 blockquote:after {
 	content: "”";
 }
+*/
 
 .pull-quote-attribution {
-	color: var(--color-brand-red);
+	color: var(--color-brand-black);
 	text-align: left;
-	padding: 0px 50px 0px 20px;
-	margin-left: 50px;
+	/* padding: 0px 50px 0px 20px; */
+	/* margin-left: 50px; */
 	position: relative;
+
+	padding: 1.5% 2%;
+    margin-left: 15px;
+    border-left: 2px solid #333;
+    font-family: Jost, sans-serif;
+    font-size: 1.45em;
+    font-weight: 700;
+    line-height: 1.05em;
 }
 
 .pull-quote-attribution span {
-	font-weight: 600;
+	/* font-weight: 600;
 	font-size: 0.8em;
-	line-height: 1.25;
+	line-height: 1.25; */
 	text-wrap: pretty;
+
+	font-family: Jost, sans-serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.05em;
 }
 
 .pull-quote-attribution span.headshot {
@@ -1688,11 +1728,11 @@ blockquote:after {
 	opacity: 1;
 }
 
-.pull-quote-attribution:before {
+/* .pull-quote-attribution:before {
 	content: "–";
 	left: 5px;
 	position: absolute;
-}
+} */
 
 .pull-quote-attribution.flex:before {
 	content: "";
@@ -2610,7 +2650,8 @@ table caption {
 .tabbed [type="radio"]:nth-of-type(2):checked ~ .tabs .tab:nth-of-type(2) label,
 .tabbed [type="radio"]:nth-of-type(3):checked ~ .tabs .tab:nth-of-type(3) label,
 .tabbed [type="radio"]:nth-of-type(4):checked ~ .tabs .tab:nth-of-type(4) label,
-.tabbed [type="radio"]:nth-of-type(5):checked ~ .tabs .tab:nth-of-type(5) label {
+.tabbed [type="radio"]:nth-of-type(5):checked ~ .tabs .tab:nth-of-type(5) label,
+.tabbed [type="radio"]:nth-of-type(6):checked ~ .tabs .tab:nth-of-type(6) label {
 	border-bottom-color: var(--color-white);
 	/* border-top-color: var(--color-brand-black); */
 	background: var(--color-white);
@@ -2622,7 +2663,8 @@ table caption {
 .tabbed [type="radio"]:nth-of-type(2):checked ~ .tab-content:nth-of-type(2),
 .tabbed [type="radio"]:nth-of-type(3):checked ~ .tab-content:nth-of-type(3),
 .tabbed [type="radio"]:nth-of-type(4):checked ~ .tab-content:nth-of-type(4),
-.tabbed [type="radio"]:nth-of-type(5):checked ~ .tab-content:nth-of-type(5) {
+.tabbed [type="radio"]:nth-of-type(5):checked ~ .tab-content:nth-of-type(5),
+.tabbed [type="radio"]:nth-of-type(6):checked ~ .tab-content:nth-of-type(6) {
 	opacity: 1;
 	height: auto;
 	/* transition: all 0.3s; */
@@ -2632,7 +2674,8 @@ table caption {
 .tabbed [type="radio"]:nth-of-type(2):checked ~ .tab-content:nth-of-type(2) h4,
 .tabbed [type="radio"]:nth-of-type(3):checked ~ .tab-content:nth-of-type(3) h4,
 .tabbed [type="radio"]:nth-of-type(4):checked ~ .tab-content:nth-of-type(4) h4,
-.tabbed [type="radio"]:nth-of-type(5):checked ~ .tab-content:nth-of-type(5) h4 {
+.tabbed [type="radio"]:nth-of-type(5):checked ~ .tab-content:nth-of-type(5) h4,
+.tabbed [type="radio"]:nth-of-type(6):checked ~ .tab-content:nth-of-type(6) h4 {
 	margin-top: 1rem 0;
 }
 
@@ -2640,7 +2683,8 @@ table caption {
 .tabbed [type="radio"]:nth-of-type(2):not(:checked) ~ .tab-content:nth-of-type(2),
 .tabbed [type="radio"]:nth-of-type(3):not(:checked) ~ .tab-content:nth-of-type(3),
 .tabbed [type="radio"]:nth-of-type(4):not(:checked) ~ .tab-content:nth-of-type(4),
-.tabbed [type="radio"]:nth-of-type(5):not(:checked) ~ .tab-content:nth-of-type(5) {
+.tabbed [type="radio"]:nth-of-type(5):not(:checked) ~ .tab-content:nth-of-type(5),
+.tabbed [type="radio"]:nth-of-type(6):not(:checked) ~ .tab-content:nth-of-type(6) {
 	opacity: 0;
 	height: 0;
 	/* transition: all 0.3s; */
@@ -2653,7 +2697,8 @@ table caption {
 .tabbed [type="radio"]:nth-of-type(2):not(:checked) ~ .tab-content:nth-of-type(2) h4,
 .tabbed [type="radio"]:nth-of-type(3):not(:checked) ~ .tab-content:nth-of-type(3) h4,
 .tabbed [type="radio"]:nth-of-type(4):not(:checked) ~ .tab-content:nth-of-type(4) h4,
-.tabbed [type="radio"]:nth-of-type(5):not(:checked) ~ .tab-content:nth-of-type(5) h4 {
+.tabbed [type="radio"]:nth-of-type(5):not(:checked) ~ .tab-content:nth-of-type(5) h4,
+.tabbed [type="radio"]:nth-of-type(6):not(:checked) ~ .tab-content:nth-of-type(6) h4 {
 	margin: 0;
 }
 
@@ -2678,6 +2723,101 @@ table caption {
 	.tab-content,
 	.tab > label {
 		padding: 0.5rem;
+	}
+}
+
+.tabbed.vertical {
+	display: flex;
+}
+
+.tabbed.vertical .tabs {
+	flex-direction: column;
+	display: block;
+	width: 30%;
+}
+
+.tabbed.vertical .tab-content {
+	width: 70%;
+	border: 0;
+	border-radius: 0;
+}
+
+.tabbed.vertical .tabs .tab {
+	width: 100%;
+}
+
+.tabbed.vertical .tabs .tab label {
+	height: unset;
+	border: none;
+	margin: 0;
+	border-radius: 0;
+	border-bottom: 1px solid var(--color-brand-black);
+	background: transparent;
+	position: relative;
+	padding: 1rem 40px 1rem 30px;
+}
+
+.tabbed.vertical .tabs h3 {
+	padding: 10px 30px;
+	margin: 0;
+	border-bottom: 1px solid var(--color-brand-black);
+}
+
+.tabbed.vertical [type="radio"]:nth-of-type(1):checked ~ .tabs .tab:nth-of-type(1) label, 
+.tabbed.vertical [type="radio"]:nth-of-type(2):checked ~ .tabs .tab:nth-of-type(2) label, 
+.tabbed.vertical [type="radio"]:nth-of-type(3):checked ~ .tabs .tab:nth-of-type(3) label, 
+.tabbed.vertical [type="radio"]:nth-of-type(4):checked ~ .tabs .tab:nth-of-type(4) label, 
+.tabbed.vertical [type="radio"]:nth-of-type(5):checked ~ .tabs .tab:nth-of-type(5) label,
+.tabbed.vertical [type="radio"]:nth-of-type(6):checked ~ .tabs .tab:nth-of-type(6) label {
+	border-bottom-color: var(--color-brand-black);
+	background-color: var(--color-brand-black);
+	color: var(--color-white);
+}
+
+.tabbed.vertical .tabs .tab label:after {
+	content: "→";
+	position: absolute;
+	right: 10px;
+	top: 0;
+	bottom: 0;
+	height: 25px;
+	margin: auto;
+	color: var(--color-brand-black);
+}
+
+.tabbed.vertical [type="radio"]:nth-of-type(1):checked ~ .tabs .tab:nth-of-type(1) label:after, 
+.tabbed.vertical [type="radio"]:nth-of-type(2):checked ~ .tabs .tab:nth-of-type(2) label:after, 
+.tabbed.vertical [type="radio"]:nth-of-type(3):checked ~ .tabs .tab:nth-of-type(3) label:after, 
+.tabbed.vertical [type="radio"]:nth-of-type(4):checked ~ .tabs .tab:nth-of-type(4) label:after, 
+.tabbed.vertical [type="radio"]:nth-of-type(5):checked ~ .tabs .tab:nth-of-type(5) label:after, 
+.tabbed.vertical [type="radio"]:nth-of-type(6):checked ~ .tabs .tab:nth-of-type(6) label:after {
+	color: var(--color-white);
+}
+
+@media (max-width: 600px) { 
+	.vertical.tabbed {
+		flex-direction: column;
+	}
+
+	.tabbed.vertical .tabs,
+	.tabbed.vertical .tab-content {
+		width: 100%;
+	}
+
+	.tabbed.vertical .tabs .tab label:after {
+		display: none;
+	}
+	
+	.tabbed.vertical .tabs .tab label {
+	    padding: 0.5rem 20px;
+	}
+
+	.tabbed.vertical .tabs ul {
+		padding: 0;
+	}
+
+	.tabbed.vertical .tabs .tab {
+		list-style: none;
 	}
 }
 
@@ -8492,6 +8632,1158 @@ div[id*="_UpdatePanel"]
 }
 
 /*------------------------------------*\
+    #DONATION FORM - MINI
+\*------------------------------------*/
+/* Out of the box styles */
+
+*[hidden] {
+    display: none;
+}
+
+#dvDirectDebitContentMain #dvMaindvDDInstruction .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMaindvMainDDMessage .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMaininstructionText .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMainddAgreement .bbDonationSeperator,
+#dvDirectDebitContentMain #dvMainddGuarantee .bbDonationSeperator {
+    font-size: 12px;
+    word-break: keep-all;
+}
+
+#dvDirectDebitContentMain .ddBSBTextBox {
+    width: 50px;
+}
+
+#dvDirectDebitContentMain .ddNZAccNoTextBox, #dvDirectDebitContentMain .ddNzAccSuffixTextBox {
+    width: 100px;
+}
+
+#dvDirectDebitContentMain .ddSortCodeTextBox {
+    width: 30px;
+}
+
+#dvDirectDebitContentMain .ddRoutingNumberTextBox {
+    width: 94%;
+    max-width: 325px;
+}
+
+#dvMainDDMessage .bbDonationInputLabelContainer, #dvMaininstructionText .bbDonationInputLabelContainer, #dvMainddAgreement .bbDonationInputLabelContainer, #dvMaindvMainDDMessage .bbDonationInputLabelContainer {
+    width: 100%;
+    max-width: 100%;
+    word-break: unset;
+}
+
+#dvDirectDebitRecaptchaContent {
+    width: 100%;
+    max-width: 350px;
+}
+
+    #dvDirectDebitRecaptchaContent .bbDonationInputFieldContainer dd {
+        margin: 0px;
+        padding: 0px;
+    }
+
+.mini-donation {
+    background-color: #FFF;
+}
+
+.validation {
+    color: #AD0000;
+    clear: both;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 320px;
+    min-width: 130px;
+    width: 130px;
+}
+
+.bbminiform-validation {
+    color: #AD0000;
+    clear: both;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 320px;
+    min-width: 130px;
+    /*width: 130px;*/
+}
+
+.wordwrap {
+    word-break: keep-all;
+}
+
+.bbminiform-container * {
+    box-sizing: border-box;
+}
+
+.bbminiform-segmented-control input[type="radio"] {
+    -webkit-appearance: radio;
+    -moz-appearance: radio;
+}
+
+.bbminiform-segmented-control {
+    margin: 0 -0.5%;
+    margin-left: 7px;
+    margin-right: 15px;
+    width: 100%;
+}
+
+    .bbminiform-segmented-control .bbminiform-list-group-item {
+        display: inline-block;
+    }
+
+    .bbminiform-segmented-control .bbminiform-list-group-item {
+        margin-bottom: 0;
+        margin-left: 14px;
+        margin-right: 10px;
+    }
+
+        .bbminiform-segmented-control .bbminiform-list-group-item:first-child {
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bbminiform-segmented-control .bbminiform-list-group-item:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-left-radius: 0;
+        }
+
+.bbminiform-lock {
+    font-size: 1.1 rem;
+}
+
+.bbminiform-amtbox, .bbminiform-button {
+    color: #1A7BB7;
+    width: 100%;
+    border: 1px solid #1A7BB7;
+    border-radius: 6px;
+    float: left;
+    margin-right: 0.3%;
+    margin-bottom: 0.3%;
+    padding: 0 5px;
+    line-height: 3em;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    min-height: 60px;
+    margin-top: -1px;
+    word-break: break-word;
+}
+
+.bbminiform-amtboxmain {
+    color: #1A7BB7;
+    font-size: 14px;
+    width: 20%;
+    padding-left: 0.8%;
+    padding-top: 0.5%;
+    padding-right: 0.5%;
+    padding-bottom: 0.5%;
+    float: left;
+    text-align: center;
+}
+
+.bbminiform-amtboxcaption {
+    color: #292A2B;
+    font-size: 1.0em;
+    font-weight: bold;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.bbminiform-amtbox:hover, .bbminiform-button:hover, #btnCompleteDDPayment:hover {
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #166699;
+}
+
+.bbminiform-amtbox-active {
+    color: #FFFFFF;
+    background-color: #1A7BB7;
+}
+
+.bbminiform-container {
+    background-color: #FFFFFF;
+    padding: 1em;
+}
+
+.bbminiform-otherbox {
+    min-width: 80px;
+    color: #1A7BB7;
+    font-size: 1em;
+}
+
+.bbminiform-giftaidcaption {
+    font-weight: bold !important;
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.bbminiform-giftaiddescription {
+    color: #292A2B;
+    font-size: 0.875em;
+}
+
+    .bbminiform-giftaiddescription input[type="checkbox"] {
+        margin-right: 2px;
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        margin-bottom: 4px;
+    }
+
+    .bbminiform-giftaiddescription label {
+        font-weight: normal;
+    }
+
+.bbminiform-donatenowplaceholder {
+    height: 15px;
+}
+
+.bbminiform-clear {
+    clear: both;
+}
+
+.bbminiform-buttonwrapper {
+    margin-left: 9px;
+}
+
+    .bbminiform-buttonwrapper button {
+        max-width: 235px;
+        width: 45%;
+        margin: 0px 5px 5px 0px;
+    }
+
+.btmMakePayment.nonWizard {
+    width: 235px;
+}
+
+.bbminiform-amttext {
+    line-height: normal !important;
+}
+
+.btn-text {
+    font-weight: bold !important;
+}
+
+.bbminiform-amtbox.bbminiform-amttext span:not(:first-child) {
+    font-weight: normal;
+}
+
+.bbminiform-otheramount {
+    color: #1A7BB7;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid #1A7BB7;
+    text-align: center;
+    cursor: pointer;
+    min-height: 60px;
+    margin-top: -1px;
+    font-weight: bold;
+    border-radius: 6px;
+    font-family: Arial;
+}
+
+.bbminiform-errorsummary {
+    background-color: #fff;
+    color: #f00;
+    text-align: left;
+    display: none;
+}
+
+    .bbminiform-errorsummary ul {
+        display: block;
+        list-style-type: disc;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 40px;
+    }
+
+.bbminiform-closeicon {
+    display: block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: darkslategray;
+    border-radius: 100%;
+    background: -moz-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -moz-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background: -webkit-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -webkit-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background: linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
+    background-color: darkslategray !important;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    top: -25px;
+    right: -20px;
+    position: relative;
+    float: right;
+}
+
+
+.bbminiform-table {
+    display: table;
+    width: 100%;
+    border-spacing: 5px; /*cellspacing:poor IE support for  this*/
+    /* border-collapse:separate;*/
+}
+
+.bbminiform-row {
+    display: table-row;
+    width: 100%;
+}
+
+#dvGiftDetails > .bbminiform-row {
+    display: inline-table;
+}
+
+.bbminiform-row-amount {
+    display: inline-block;
+    width: 100%;
+}
+
+div.bcmsWizardFooter {
+    display: block;
+}
+
+.bbminiform-cell {
+    float: left; /*fix for  buggy browsers*/
+    display: table-column;
+}
+
+#BodyId {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.bbminiform-margingleft {
+    margin-left: 5px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.bbminiform-checkbox {
+    display: inline-block !important;
+    cursor: pointer;
+    font-size: 15px !important;
+    font-weight: normal;
+    /*margin: 0px !important;*/
+    margin-left: 0px;
+    margin-bottom: 10px !important;
+}
+
+.bbminiform-designchk input[type=checkbox] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+#chkAreYouAlumni {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    width: 20px;
+    margin-bottom: 6px;
+}
+
+.bbminiform-span {
+    font-size: 14px;
+    margin-bottom: 0.5em;
+}
+
+.bbminiform-drpdown {
+    height: 40px;
+    max-width: 280px;
+}
+
+.BBRequired {
+    color: #AD0000;
+    padding-left: 2px;
+}
+
+.bbminiform-drpdowndiv {
+    margin-bottom: 5px;
+}
+
+.bbminiform-txtbox {
+    height: 44px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    padding: 0px 4px 1px;
+}
+
+div.bbPersonalInfoInputFieldContainer {
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    padding: 1px 0px 1px 0px;
+}
+
+.bbminiform-subcaption {
+    font-size: 12px;
+    color: #666666;
+    word-wrap: break-word;
+}
+
+input::-webkit-input-placeholder {
+    color: #D8D8D8;
+    font-weight: normal;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: #D8D8D8;
+    font-weight: normal;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: #D8D8D8;
+    font-weight: normal;
+}
+
+input.bbDonationInput:-ms-input-placeholder {
+    color: #D8D8D8 !important;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount::-webkit-input-placeholder {
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount:-moz-placeholder { /* Firefox 18- */
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount::-moz-placeholder { /* Firefox 19+ */
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+input.bbminiform-otheramount:-ms-input-placeholder {
+    color: #1A7BB7;
+    font-weight: normal;
+}
+
+/*Donation 2.0 Recurring Gift Changes*/
+#dvRecurringFrequencyOptions > .bbMarginBottom5px {
+    margin-bottom: 12px;
+}
+
+.dvGifTypButtonsspacer {
+    margin-bottom: 12px;
+}
+
+.giftTypeHeading, .giftAmountHeading {
+    margin-left: 0.6%;
+    padding-bottom: 0.5%;
+}
+
+#dvRecurringFrequencyOptions {
+    max-width: 600px;
+}
+
+.mdfEndDateOptionMain {
+    float: left;
+    margin-right: 0.5%;
+}
+
+    .mdfEndDateOptionMain div {
+        float: left;
+    }
+
+.mdfEndDateOption {
+    min-width: 100px;
+    max-width: 150px;
+}
+
+.mdfEndDateOptionMain input[type="radio"] {
+    margin-top: 0px;
+    margin-right: 5px;
+}
+
+div.mdfEndDateOption.bbSecondaryInfo {
+    line-height: 14px;
+}
+
+.bbMarginBottom5px {
+    margin-bottom: 5px;
+}
+
+.bbMarginBottom12px {
+    margin-bottom: 12px;
+}
+
+.bbDonationInput.bbminiform-txtbox.bbDonationDatePicker.hasDatepicker {
+    width: 80%;
+}
+
+
+.height36px {
+    height: 36px;
+}
+
+.mdfGiftTypeBtnMain.mdfGiftTypeBtnMainSelected {
+    background-color: #1A7BB7;
+}
+
+.mdfGiftTypeBtnMain {
+    width: 140px;
+    float: left;
+    margin-left: 0.8%;
+    border-radius: 3px;
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+}
+
+.mdfGiftTypeBtn {
+    width: 140px;
+    min-height: 36px;
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-break: break-word;
+    cursor: pointer;
+}
+
+.mdfGiftTypeBtn-selected {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.mdfGiftTypeBtn-unselected {
+    color: #666666;
+}
+
+.mdfFrequencyBtnMain {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 1%;
+    border-radius: 3px;
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    width: 23%;
+}
+
+    .mdfFrequencyBtnMain.mdfFrequencyBtnMainSelected {
+        background-color: #1A7BB7;
+    }
+
+        .mdfFrequencyBtnMain.mdfFrequencyBtnMainSelected .mdfFrequencyBtn {
+            color: #FFFFFF;
+        }
+
+.mdfFrequencyBtn {
+    width: 100%;
+    min-height: 36px;
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-break: break-word;
+    color: #666666;
+}
+
+/*Donation 2.0 Changes*/
+.bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps {
+    position: relative;
+    display: block;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep {
+        margin: 0 .5em .5em;
+        /*padding: 0.5em 0.5em; */
+        float: left;
+    }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn {
+            width: 160px;
+            height: 50px;
+            font-family: "Arial";
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed {
+            background-color: #D9F0FF;
+            color: #186FA5;
+        }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected {
+            background-color: #1A7BB7;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected {
+            background-color: #EEEEEE;
+            color: #666666;
+        }
+
+hiddenStep {
+    display: none;
+}
+
+hiddenContent {
+    display: none;
+}
+
+.largeScreenStepTitle {
+    display: block;
+}
+
+.smallScreenStepTitle {
+    display: none;
+}
+
+.btnStepButton > .fa-check {
+    display: none;
+}
+
+div#wizardFooter div#buttonWrapper button#btnWizardBack, #btnCancelDDPayment, div#dvPaymentButtons button#btnWizardBack {
+    background-color: #FFFFFF;
+    border: 1Px solid #CCCCCC;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+}
+
+.btnWizardFinish.btnPaymentMethod {
+    background-color: #FFFFFF;
+    border: 1Px solid #CCCCCC;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+}
+
+button.btnWizardContinue {
+    background-color: #1A7BB7;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+    border: 1px solid #1A7BB7;
+}
+
+button.btnWizardFinish, #btnCompleteDDPayment {
+    background-color: #1A7BB7;
+    height: 50px;
+    border-radius: 6px;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+}
+
+.zeroOpacity {
+    opacity: 0;
+}
+
+.bbspLoadingOverlay {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 9999999;
+    background-color: grey;
+    opacity: 0.8;
+    display: none;
+}
+
+.bbspLoadingImage {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    z-index: 101;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+.bbDonationInputLabelContainer {
+    width: 100%;
+    max-width: 350px;
+    word-break: break-all;
+}
+
+.bbDonationInputFieldContainer {
+    width: 100%;
+}
+
+#dvPersonalInfoContent, #dvDirectDebitContent {
+    margin: 0px 0px 0px 15px;
+}
+
+.bbDonationCheckBoxList input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    margin-bottom: 5px;
+    margin-right: 4px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField .bbDonationTextBox {
+    height: 44px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    padding: 0px 4px 1px;
+}
+
+#txtComments {
+    height: 88px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    padding: 0px 4px 1px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField textarea.bbDonationTextBox {
+    height: 88px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField input.bbDonationDatePicker {
+    height: 44px;
+    border: 1px solid #D8D8D8;
+    width: 80%;
+    max-width: 325px;
+    border-radius: 0px 0px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField .bbDonationSelectList, select.bbminiform-drpdown {
+    height: 44px;
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 0px 0px;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    color: #666666;
+}
+
+.bbFormFieldMainContainer {
+    margin-bottom: 12px;
+}
+
+label.bbDonationRequired, span.BBRequired {
+    color: #df0000;
+    font-size: medium;
+    font-weight: bolder;
+    vertical-align: middle;
+    margin-bottom: 0px;
+}
+
+div.bbDonationFieldMessage, div.bbminiform-validation, div.validation {
+    color: #DF0000;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+
+.validationWidth100Percent {
+    width: 100%;
+}
+
+.bbDonationInputField label.bbminiform-checkbox {
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+
+label.bbDonationInputLabel, div.bbDonationSeperator {
+    color: #666666;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    line-height: 20px;
+}
+
+.bbTributeConatiner span.bbDonationInputLabel {
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    line-height: 20px;
+}
+
+h2 .bbSectionHeader {
+    color: #666666;
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+label.bbSecondaryInfo, div.bbSecondaryInfo, span.bbSecondaryInfo {
+    color: #666666;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+label.paddedLeft {
+    padding-left: 15px;
+}
+
+.bbminiform-amtbox {
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 5px 8px 5px;
+}
+
+.ui-datepicker-trigger {
+    border: none;
+    background: none;
+    min-height: 22px;
+}
+
+.bbDonationInputFieldContainer .bbDonationInputField input.bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField.bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField .bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField textarea.bbDonation_ValidationErrorField,
+.bbDonationInputFieldContainer .bbDonationInputField select.bbDonation_ValidationErrorField {
+    border: 1px solid #DF0000;
+}
+
+.bbminiform-txtbox.bbDonation_ValidationErrorField,
+.bbminiform-otheramount.bbDonation_ValidationErrorField {
+    border: 1px solid #DF0000;
+}
+
+.height100Percent {
+    height: 100%;
+}
+
+.height60px {
+    height: 60px;
+}
+
+.btn {
+    border: 1px solid;
+}
+
+/**************************************************************For True Pledge Installments*********************************************/
+
+input#txtTruePledgeNoOfInstallmentFieldDetails {
+    width: 90%;
+}
+
+div#dvMaintxtTruePledgeNoOfInstallmentFieldDetails .bbDonationInputField {
+    float: left;
+    width: 100%;
+}
+
+#dvPledgeFrequencyOptions {
+    max-width: 600px;
+}
+
+#dvMaintxtTruePledgeNoOfInstallmentFieldDetails {
+    max-width: 600px;
+}
+
+.maxWidth600px {
+    max-width: 600px;
+}
+
+/**************************************************************************************************************************************/
+@media(max-width:479px) {
+    .CaptchaImageContainerNew div {
+        margin: 0 auto;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        padding-left: 7px;
+    }
+
+    .mdfFrequencyBtnMain {
+        float: left;
+        margin-right: 2%;
+        margin-top: 0.5%;
+        border-radius: 3px;
+        border: 1px solid #CCCCCC;
+        background-color: #FFFFFF;
+        width: 48%;
+    }
+
+    .mdfFrequencyBtn {
+        width: 100%;
+    }
+
+    .mdfGiftTypeBtnMain {
+        width: 49%;
+    }
+
+    .mdfGiftTypeBtn {
+        width: 100%;
+    }
+
+    button.btnWizardBack {
+        width: 48%;
+    }
+
+    button.btnWizardContinue {
+        width: 48%;
+    }
+
+    button#btmMakePayment, button#btnDirectDebit {
+        width: 48%;
+        padding: 0px 0px 0px 0px;
+        border: 0px;
+    }
+
+    button#btnDirectDebit {
+        float: right;
+        margin-right: 0px;
+    }
+
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps {
+        text-align: justify;
+        position: relative;
+        z-index: 1;
+    }
+
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep {
+            display: inline-block;
+            z-index: -1;
+            margin: 0;
+            width: 33.3%;
+        }
+
+    .bcmsWizardSteps:after {
+        content: '';
+        width: 100%; /* Ensures justification for single lines */
+        display: inline-block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected {
+        background-color: #FFFFFF;
+        color: #1A7BB7;
+        border-color: #1A7BB7;
+        font-weight: bold;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btnStepButton {
+        z-index: 9999999;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected {
+        background-color: #FFFFFF;
+        color: #666666;
+        border-color: #666666;
+    }
+
+        .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected.btn-disabled {
+            color: #CCCCCC;
+            border-color: #CCCCCC;
+        }
+
+    .largeScreenStepTitle {
+        display: none;
+    }
+
+    .smallScreenStepTitle {
+        display: block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-family: "Arial";
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        z-index: 1;
+        position: relative;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected > .smallScreenStepTitle {
+        display: block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected > .smallScreenStepTitle {
+        display: block;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed > .smallScreenStepTitle {
+        display: none;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-selected > .fa-check {
+        display: none;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-unselected > .fa-check {
+        display: none;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed > .fa-check {
+        display: block;
+        color: white;
+        background-color: #1A7BB7;
+    }
+
+    .bcmsWizard > .bcmsWizardStepsContainer > .bcmsWizardSteps > .bcmsWizardStep > .btn-completed {
+        background-color: #1A7BB7;
+    }
+
+    .bcmsWizardSteps .bcmsWizardStep:not(:last-child):after {
+        position: absolute;
+        content: '';
+        top: 0%;
+        margin-left: 25px;
+        width: 33.33%;
+        height: 50%;
+        border-bottom: 2px solid black;
+    }
+
+    .bbminiform-amtboxmain {
+        width: 100%;
+    }
+
+    .bbminiform-otheramount {
+        width: 100%;
+    }
+}
+
+/* Custom styles to match design system */
+.mini-donation.skyContainer,
+.bbminiform-container.bbminiform-table,
+.bbminiform-row > div[class*="col-"] {
+	padding: 0 !important;
+}
+
+.bbminiform-row {
+	margin-bottom: 1em;
+}
+
+.bbminiform-segmented-control {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.bbminiform-segmented-control {
+	display: flex;
+	flex-direction: row;
+	gap: 1em;
+}
+
+.bbminiform-amtboxmain {
+	padding: 0 !important;
+	float: none !important
+}
+
+.bbminiform-amtbox,
+.bbminiform-otheramount {
+	border: none !important;
+	border-radius: 0 !important;
+	background-color: #e5e5e5 !important;	
+}
+
+.bbminiform-otheramount::placeholder {
+	font-weight: 700 !important;
+}
+
+.mini-donation .bbminiform-amtbox-active {
+	background-color: var(--color-brand-red) !important;
+}
+
+.mini-donation .btn.btn-primary {
+	padding: 7px 32px !important;
+	line-height: 1 !important;
+	min-height: 46.8px !important;
+}
+
+.btmMakePayment.nonWizard {
+    width: max-content !important;
+}
+
+@media (max-width: 500px) {
+	.bbminiform-segmented-control {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.bbminiform-segmented-control > .bbminiform-amtboxmain:last-child {
+		width: 100%;
+	}
+} 
+
+/*------------------------------------*\
     #ADVANCED DONATION FORM
 \*------------------------------------*/
 
@@ -12487,10 +13779,50 @@ div[id*="_DesignPanePanel"] {
    		width: 100%;
    		background-color: var(--color-brand-red);
    	}
+   
+   
+   	.mega-menu .nccUlMenuSub1 > li.parent > button {
+   		appearance: none;
+   		border: none;
+   		background-color: transparent;
+   		font-weight: bold;
+   		cursor: default;
+   	}
+   
+   	.mega-menu .nccUlMenuSub1 > li.parent > button:focus {
+   		outline: unset !important;
+   		outline-offset: unset !important;
+   	}
+   
+   	.mega-menu .nccUlMenuSub1 > li.parent > button > svg {
+   		display: none;
+   	}
 
 }
    
 @media (max-width: 980px) {
+   	.mega-menu .nccUlMenuSub1 > li.parent > .nccUlMenuSub2 {
+   		display: block !important;
+   		background-color: var(--color-white);
+   		border: 1px solid var(--color-brand-black) !important;
+   	}
+   
+   	.mega-menu .nccUlMenuSub1 > li.parent > .nccUlMenuSub2 > li > a {
+   		display: block;
+   		padding: 10px !important;
+   		color: var(--color-brand-black) !important;
+   		border-bottom: none !important;
+   	}
+   
+   	.mega-menu .nccUlMenuSub1 > li.parent > .nccUlMenuSub2 > li:not(.last) > a {
+   		border-bottom: 1px solid rgb(239, 239, 239) !important;
+   	}
+   
+   	.mega-menu .nccUlMenuSub1 > li.parent > .nccUlMenuSub2[hidden] {
+   		display: none !important;
+   	}
+   
+   
    	/*
    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"%3E%3Cpath fill="currentColor" d="M5.293 9.707l6 6c0.391 0.391 1.024 0.391 1.414 0l6-6c0.391-0.391 0.391-1.024 0-1.414s-1.024-0.391-1.414 0l-5.293 5.293-5.293-5.293c-0.391-0.391-1.024-0.391-1.414 0s-0.391 1.024 0 1.414z"%3E%3C/path%3E%3C/svg%3E'); 
    */
